@@ -48,3 +48,28 @@ brain graphs:
 * Check that the hypothesis underlying the network-based statistics
   actually hold by doing a proper permutation test
 
+Tentative outline
+===================
+
+ Comparing Connectomes Between Populations
+
+ 1. estimating connectome
+    a. defining regions
+    b. estimating connections
+ 2. Comparing connections
+    a. mass univariate
+    b. more rational methods?
+ 3. Comparing Network Statistics
+ 4. Predictive Modelling
+ 5. Functional and Effective
+    a. Link w/ SEM
+    b. Diatribe
+
+Some ref
+==========
+
+    Marralec - partial correlation to SEM - a theoretical investigation of the
+r elationship between structural equation modeling and partial correlation in
+functional MRI e ffective connectivity computational intelligenecns and
+Neuroscience
+
