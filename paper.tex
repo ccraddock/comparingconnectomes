@@ -1,0 +1,112 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Neuroimage-like layout
+\documentclass[5p]{elsarticle}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{url}
+\usepackage[breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
+\usepackage[table]{xcolor}
+
+\definecolor{deep_blue}{rgb}{0,.2,.5}
+\definecolor{dark_blue}{rgb}{0,.15,.5}
+
+\hypersetup{pdftex,  % needed for pdflatex
+  breaklinks=true,  % so long urls are correctly broken across lines
+  colorlinks=true,
+  linkcolor=dark_blue,
+  citecolor=deep_blue,
+  }
+
+
+% Float parameters, for more full pages.
+\renewcommand{\topfraction}{0.9}        % max fraction of floats at top
+\renewcommand{\bottomfraction}{0.8}     % max fraction of floats at bottom
+\renewcommand{\textfraction}{0.07}      % allow minimal text w. figs
+%   Parameters for FLOAT pages (not text pages):
+\renewcommand{\floatpagefraction}{0.6}  % require fuller float pages
+%    % N.B.: floatpagefraction MUST be less than topfraction !!
+
+
+\def\B#1{\mathbf{#1}}
+%\def\B#1{\bm{#1}}
+\def\trans{^\mathsf{T}}
+% A compact fraction
+\def\slantfrac#1#2{\kern.1em^{#1}\kern-.1em/\kern-.1em_{#2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%\title{Comparing Connectomes Between Populations}
+\title{Learning and comparing functional connectomes between populations}
+
+
+\author[parietal,unicog,cea]{Ga\"el Varoquaux\corref{corresponding}}
+\author[child_institute]{Cameron Craddock}
+
+\cortext[corresponding]{Corresponding author}
+
+\address[parietal]{Parietal project-team, INRIA Saclay-\^ile de France}
+\address[unicog]{INSERM, U992}
+\address[cea]{CEA/Neurospin b\^at 145, 91191 Gif-Sur-Yvette}
+\address[child_institute]{Child Institute, New York}
+
+\begin{abstract}
+    We are the champion... of the world
+\end{abstract}
+
+\begin{keyword}
+    Functional connectivity, connectome, group study, effective
+    connectivity
+\end{keyword}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\sloppy % Fed up with messed-up line breaks
+\section{Introduction}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Estimating functional connectomes}
+
+\subsection{Defining regions}
+
+\subsection{Estimating connections}
+
+\section{Comparing connections}
+
+\subsection{Mass-univariate approaches}
+
+\subsection{Modeling between-connection dependences}
+
+\section{Comparing Network Summary Statistics}
+
+\section{Predictive Modeling}
+
+\section{Functional and effective connectivity}
+
+\subsection{From correlations to structural equation modeling}
+
+\cite{mcintosh1994}
+
+\subsection{Matching model complexity to data}
+
+Diatribe: all model are wrong, but some are useful
+
+Setting the cursor between bio-physical models 
+
+\cite{mcintosh2010}
+
+\section{Conclusion}
+
+{
+%\clearpage
+\section*{References} \small \bibliographystyle{elsarticle-num-names}
+\bibliography{biblio} }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
