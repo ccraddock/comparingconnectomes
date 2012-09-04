@@ -83,7 +83,8 @@ brain or not, hard vs soft boundaries.
 
 \paragraph{Regions from atlases}
 
-AAL, Harvard-oxford
+AAL \cite{tzourio-mazoyer2002a}, Harvard-oxford, sulci-based atlas.
+Personal bias against the AAL.
 
 \paragraph{Defining regions from the literature}
 Meta-analysis
@@ -109,9 +110,26 @@ Poldrack.
 
 Rest: importance of confounds. Filtering + and detrending.
 
+FMRI signals contributing to functional connectivity
+have been found to lie in frequencies below 0.1 Hz \cite{cordes2000}
+XXX: but cite recent work that shows that there is info at higher
+frequency. 
+
 \paragraph{Correlation and partial correlations}
 
-Correlation, shrinkage of correlation, partial correlation, sparse iCov.
+Correlation, shrinkage of correlation \cite{ledoit2004,varoquaux2012},
+
+Remark: difference between covariance and correlation matrix.
+
+partial correlation, sparse iCov. \cite{smith2011,varoquaux2010b}. 
+
+Give intuition on partial correlation/inverse covariance.
+
+Variety
+of estimation strategies for sparse iCov, that have an impact on the
+resulting network \cite{varoquaux2012}\footnote{Better estimation
+algorithm is recent Honorio paper.}. Discuss setting the regularization
+parameter.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -120,12 +138,33 @@ Correlation, shrinkage of correlation, partial correlation, sparse iCov.
 %------------------------------------------------------------------------------
 \subsection{Mass-univariate approaches}
 
+Boils down to a standard linear model => t-tests and co.
+Stress that to have Gaussian-distributed correlations, a Fisher Z
+transform is required.
+
+Multiple comparison problem is quite an issue (scales a $p^2$) =>
+permutation and max-T approach XXX: cite Ge
+"resampling-based multiple testing for microarray data analysis", and
+Nichols multiple comparison paper.
+
 %------------------------------------------------------------------------------
 \subsection{Modeling between-connection dependences}
+
+Show that correlations co-fluctuation with images.
+
+Ad-hoc model: network-based statistics \cite{zalesky2010}
+
+Discuss the 'residual' strategy?
+\cite{varoquaux2010b}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Comparing Network Summary Statistics}
+
+Small world networks, transport properties, resilient...
+
+Warning note that correlation matrices have long-tailed degree
+distribution by definition (cite recent Bullmore paper showing that).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -139,13 +178,17 @@ Correlation, shrinkage of correlation, partial correlation, sparse iCov.
 \subsection{From correlations to structural equation modeling}
 
 \cite{mcintosh1994}
+\cite{marrelec2007}
+\cite{marrelec2009}
 
 %------------------------------------------------------------------------------
 \subsection{Matching model complexity to data}
 
 Diatribe: all model are wrong, but some are useful
 
-Setting the cursor between bio-physical models 
+Setting the cursor between complex models based on a bio-physical
+description, and simple phenomenological models such as correlation
+matrices.
 
 \cite{mcintosh2010}
 
