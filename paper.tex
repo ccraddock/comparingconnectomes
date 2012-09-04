@@ -17,8 +17,7 @@
   colorlinks=true,
   linkcolor=dark_blue,
   citecolor=deep_blue,
-  }
-
+}
 
 % Float parameters, for more full pages.
 \renewcommand{\topfraction}{0.9}        % max fraction of floats at top
@@ -54,11 +53,13 @@
 
 \begin{abstract}
     We are the champion... of the world
+
+    Scope: rest and task-based studies. But focusing on fMRI.
 \end{abstract}
 
 \begin{keyword}
     Functional connectivity, connectome, group study, effective
-    connectivity
+    connectivity, fMRI, resting-state
 \end{keyword}
 
 \maketitle
@@ -67,30 +68,79 @@
 \sloppy % Fed up with messed-up line breaks
 \section{Introduction}
 
+Review paper giving technical guidelines.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Estimating functional connectomes}
 
+%------------------------------------------------------------------------------
 \subsection{Defining regions}
 
+Different strategies: 
+dense/sparse: covering a large fraction of the
+brain or not, hard vs soft boundaries.
+
+\paragraph{Regions from atlases}
+
+AAL, Harvard-oxford
+
+\paragraph{Defining regions from the literature}
+Meta-analysis
+
+\paragraph{FMRI-based function definition}
+Distinction between activation and rest.
+Activation: thresholding GLM maps, or using spheres around the activation
+peak.
+Rest: ICA-based approaches \cite{kiviniemi2009} XXX: cite Grecius paper.
+\cite{varoquaux2011}
+
+%------------------------------------------------------------------------------
 \subsection{Estimating connections}
+
+% Disclaimer: focus on correlation/second order statistics?
+
+\paragraph{Signal extraction}
+
+Once again separate task from rest
+
+Task: beta time-series, and more recent stuff, \emph{e.g.} by Mumford and
+Poldrack.
+
+Rest: importance of confounds. Filtering + and detrending.
+
+\paragraph{Correlation and partial correlations}
+
+Correlation, shrinkage of correlation, partial correlation, sparse iCov.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Comparing connections}
 
+%------------------------------------------------------------------------------
 \subsection{Mass-univariate approaches}
 
+%------------------------------------------------------------------------------
 \subsection{Modeling between-connection dependences}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Comparing Network Summary Statistics}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Predictive Modeling}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Functional and effective connectivity}
 
+%------------------------------------------------------------------------------
 \subsection{From correlations to structural equation modeling}
 
 \cite{mcintosh1994}
 
+%------------------------------------------------------------------------------
 \subsection{Matching model complexity to data}
 
 Diatribe: all model are wrong, but some are useful
@@ -98,6 +148,8 @@ Diatribe: all model are wrong, but some are useful
 Setting the cursor between bio-physical models 
 
 \cite{mcintosh2010}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conclusion}
 
