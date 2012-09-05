@@ -79,12 +79,15 @@ Review paper giving technical guidelines.
 
 Different strategies: 
 dense/sparse: covering a large fraction of the
-brain or not, hard vs soft boundaries.
+brain or not == tradeoff between functional specificity and covering the
+full brain
+, hard vs soft boundaries.
 
 \paragraph{Regions from atlases}
 
 AAL \cite{tzourio-mazoyer2002a}, Harvard-oxford, sulci-based atlas.
-Personal bias against the AAL.
+Personal bias against the AAL, but note that it is widely used because of
+SPM toolbox.
 
 \paragraph{Defining regions from the literature}
 Meta-analysis
@@ -93,8 +96,10 @@ Meta-analysis
 Distinction between activation and rest.
 Activation: thresholding GLM maps, or using spheres around the activation
 peak.
-Rest: ICA-based approaches \cite{kiviniemi2009} XXX: cite Grecius paper.
+Rest: ICA-based approaches \cite{kiviniemi2009} \cite{shirer2012}
 \cite{varoquaux2011}
+
+Clustering approaches, \cite{craddock2011}.
 
 %------------------------------------------------------------------------------
 \subsection{Estimating connections}
@@ -108,7 +113,10 @@ Once again separate task from rest
 Task: beta time-series, and more recent stuff, \emph{e.g.} by Mumford and
 Poldrack.
 
-Rest: importance of confounds. Filtering + and detrending.
+Rest: importance of confounds. Filtering + and detrending. Importance of
+preprocessing.
+Compcorr \cite{behzadi2007}
+\cite{chai2011}
 
 FMRI signals contributing to functional connectivity
 have been found to lie in frequencies below 0.1 Hz \cite{cordes2000}
@@ -124,6 +132,8 @@ Remark: difference between covariance and correlation matrix.
 partial correlation, sparse iCov. \cite{smith2011,varoquaux2010b}. 
 
 Give intuition on partial correlation/inverse covariance.
+
+Remark that partial correlations consistently have no negative values.
 
 Variety
 of estimation strategies for sparse iCov, that have an impact on the
