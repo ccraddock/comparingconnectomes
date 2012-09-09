@@ -42,14 +42,15 @@
 
 
 \author[parietal,unicog,cea]{Ga\"el Varoquaux\corref{corresponding}}
-\author[child_institute]{Cameron Craddock}
+\author[cmi,nki]{R. Cameron Craddock}
 
 \cortext[corresponding]{Corresponding author}
 
 \address[parietal]{Parietal project-team, INRIA Saclay-\^ile de France}
 \address[unicog]{INSERM, U992}
 \address[cea]{CEA/Neurospin b\^at 145, 91191 Gif-Sur-Yvette}
-\address[child_institute]{Child Institute, New York}
+\address[cmi]{Child Mind Institute, New York, New York}
+\address[nki]{Nathan Kline Institute for Psychiatric Research, Orangeburg, New York}
 
 \begin{abstract}
     We are the champion... of the world
@@ -81,7 +82,7 @@ Different strategies:
 dense/sparse: covering a large fraction of the
 brain or not == tradeoff between functional specificity and covering the
 full brain
-, hard vs soft boundaries.
+, hard vs soft boundaries (spatial regression?).
 
 \paragraph{Regions from atlases}
 
@@ -90,22 +91,24 @@ Personal bias against the AAL, but note that it is widely used because of
 SPM toolbox.
 
 \paragraph{Defining regions from the literature}
-Meta-analysis
+Meta-analysis \cite{dosenbach}, DMN/TPN ROIs (Cameron, who is that guy?)
 
 \paragraph{FMRI-based function definition}
 Distinction between activation and rest.
 Activation: thresholding GLM maps, or using spheres around the activation
 peak.
+
 Rest: ICA-based approaches \cite{kiviniemi2009} \cite{shirer2012}
-\cite{varoquaux2011}
+\cite{varoquaux2011} \cite{yeo}, cite Power?
 Maybe use the ICA from the Smith 2009 paper
 
-Clustering approaches, \cite{craddock2011}.
+Clustering approaches, \cite{craddock2011}, \cite{bellec}, \cite{flandin}, \cite{poline}, \cite{thirion}
 
 %------------------------------------------------------------------------------
 \subsection{Estimating connections}
 
 % Disclaimer: focus on correlation/second order statistics?
+Mutual information? Entropy correlation? MI as measure of integration (Marralec)
 
 \paragraph{Signal extraction}
 
@@ -119,12 +122,13 @@ Rest: importance of confounds. Filtering + and detrending. Importance of
 preprocessing.
 Compcorr \cite{behzadi2007}
 \cite{chai2011}
+power, van dijk
 \cite{satterthwaite2012}
 
 FMRI signals contributing to functional connectivity
 have been found to lie in frequencies below 0.1 Hz \cite{cordes2000}
 XXX: but cite recent work that shows that there is info at higher
-frequency. 
+frequency.  Regressing out task??
 
 \paragraph{Correlation and partial correlations}
 
@@ -160,10 +164,12 @@ permutation and max-T approach XXX: cite Ge
 "resampling-based multiple testing for microarray data analysis", and
 Nichols multiple comparison paper.
 
+Family (Cameron, is that the correct name?) FWE?
+
 %------------------------------------------------------------------------------
 \subsection{Modeling between-connection dependences}
 
-Show that correlations co-fluctuation with images.
+Show that correlations co-fluctuation with images, spatial correlations between correlations.
 
 Ad-hoc model: network-based statistics \cite{zalesky2010}
 
@@ -182,10 +188,58 @@ distribution by definition (cite recent Bullmore paper showing that).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Predictive Modeling}
+craddock 2009, Dosenbach 2010, lord 2011, deshpande, 
+
+1. importance of interpretation!
+2. the need for feature extraction
+3. the need for feature selection
+4. setting parameters.
+5. different methods have different interpretations
+
+\emph{ --- CC text from TICS paper, do not use without modification!}
+Multivariate Prediction Analysis. When applied to the study of intrinsic activity, the goal of discovery
+science is to identify models that relate measures of that activity (such as iFC) to phenotypic variables.
+Prediction analysis provides a means for measuring how well these models generalize to independent data.
+This is complementary to inferential statistics, which measure the likelihood of such relationships
+arising by chance. In the prediction analysis framework, a model relating iFC to a phenotype is learned 
+from a training dataset. This model is then applied to an independent test dataset to predict phenotypes.
+The resultant predictions are compared to the true phenotypes to estimate how well the model generalizes
+to the tese dataset. Thus, prediction analysis provides a natural framework for evaluating biomarkers [21],
+performing real-time fMRI [88], and evaluating experimental tradeoffs [89]. 
+
+Prediction analysis has been applied to functional neuroimaging data since the early 90’s [90], and more
+recently to IFC data [91]. Most, if not all, analysis methods can be applied in a predictive modeling
+framework but the majority of methods that have been applied to iFC are multivariate classification and
+regression methods (referred to as MVPA; multivariate prediction analysis). Multivariate methods are more
+sensitive to distributed patterns of iFC than their univariate counterparts. Additionally they provide a
+means for evaluating the significance of an entire pattern using a single statistic, obviating the need
+to correct for multiple comparisons. 
+
+Although there are many circumstances in which high prediction accuracy is the ultimate goal of an
+analysis (e.g. predicting treatment outcome), in general it is desirable that the model also be
+interpretable. Identifying the iFC measures (features) that are most important to the model is
+problematic and an open issue for MVPA research. Several feature selection algorithms have been proposed
+to address this issue, but there is no consensus on which is best [21]. We note that feature selection
+methods that rely on feature-by-feature statistical tests require correction for multiple comparisons. 
+
+MVPA classification has already been successfully used to identify potential iFC biomarkers of Alzheimer’s
+disease [92], major depression [93], schizophrenia [94], and autism [47], among others. MVPA
+classification and regression techniques have also been applied to identify biomarkers of age [95,96]
+and recent work has shown the utility of MVPA methods for deriving iFC models at the individual
+level [97]. An in-depth overview of the statistical pattern recognition methods underlying MVPA
+techniques can be found in [98].
+\emph{ --- END CC text from TICS paper, do not use without modification!}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Functional and effective connectivity}
+
+Effective connectivity does not have to be causal => but a precise mathematical
+definition of the relationship => BCI workshop reports
+
+Fucntional connectivity is a statistical relationship, instead of precise mathematical
+relationship
 
 %------------------------------------------------------------------------------
 \subsection{From correlations to structural equation modeling}
@@ -197,13 +251,16 @@ distribution by definition (cite recent Bullmore paper showing that).
 %------------------------------------------------------------------------------
 \subsection{Matching model complexity to data}
 
-Diatribe: all model are wrong, but some are useful
+Diatribe: all model are wrong, but some are useful => a cat is a model of a cat
 
 Setting the cursor between complex models based on a bio-physical
 description, and simple phenomenological models such as correlation
 matrices.
 
 \cite{mcintosh2010}
+
+Cross validation???
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
