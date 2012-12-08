@@ -166,6 +166,65 @@ resulting network \cite{varoquaux2012}\footnote{Better estimation
 algorithm is recent Honorio paper.}. Discuss setting the regularization
 parameter.
 
+\begin{figure}
+\newcommand{\photoframe}[1]{\setlength\fboxsep{0pt}%
+{\color{black!70}\fbox{#1}\color{black}}}%
+\begin{minipage}{.66\linewidth}%
+    \includegraphics[width=\linewidth]{group_emp_cov.pdf}%
+    \raisebox{.606\linewidth}{%
+	\hspace*{-.462\linewidth}%
+	\photoframe{%
+	%\setlength\fboxsep{1pt}%
+	\colorbox{white}{%
+	\raisebox{.003\linewidth}{%
+	    \includegraphics[width=.455\linewidth]{group_emp_cov_3d_crop}}%
+	\rule{0pt}{.387\linewidth}%
+	}}%
+    }
+\end{minipage}%
+\hspace*{1pt}%
+\begin{minipage}{.32\linewidth}%
+    \includegraphics[width=\linewidth]{group_emp_cov_no_confounds.pdf}%
+
+    \includegraphics[width=\linewidth]{group_emp_cov_global_mean.pdf}%
+\end{minipage}%
+
+\caption{
+Correlation matrices
+Note that no filter was applied. Filtering low frequencies diminishes the
+impact of some confounds that are removed ...
+}
+\end{figure}
+
+\begin{figure}
+\newcommand{\photoframe}[1]{\setlength\fboxsep{0pt}%
+{\color{black!70}\fbox{#1}\color{black}}}%
+\begin{minipage}{.66\linewidth}%
+    \includegraphics[width=\linewidth]{group_l21_prec.pdf}%
+    \raisebox{.606\linewidth}{%
+	\hspace*{-.462\linewidth}%
+	\photoframe{%
+	%\setlength\fboxsep{1pt}%
+	\colorbox{white}{%
+	\raisebox{.003\linewidth}{%
+	    \includegraphics[width=.455\linewidth]{group_l21_prec_3d_crop}}%
+	\rule{0pt}{.387\linewidth}%
+	}}%
+    }
+\end{minipage}%
+\hspace*{1pt}%
+\begin{minipage}{.32\linewidth}%
+    \includegraphics[width=\linewidth]{group_emp_prec.pdf}%
+
+    \includegraphics[width=\linewidth]{group_emp_prec_global_mean.pdf}%
+\end{minipage}%
+
+\caption{
+Inverse-covariance matrices
+}
+\end{figure}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Comparing connections}

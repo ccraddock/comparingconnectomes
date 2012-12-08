@@ -4,4 +4,6 @@
 *.log
 *.spl
 *~
+*.swo
+*.swp
 
