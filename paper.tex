@@ -71,38 +71,92 @@
 
 Review paper giving technical guidelines.
 
+Define what we call a functional connectome, and the term \emph{graph},
+as well as its relation with an adjacency matrix.
+
+Define a functional network
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Estimating functional connectomes}
 
+Here we discuss strategies to infer connectomes from functional brain
+imaging data. We start with the choice of nodes \emph{i.e.} regions,
+followed by signal extraction, and the estimation of graphs.
+
 %------------------------------------------------------------------------------
 \subsection{Defining regions}
 
-Different strategies: 
-dense/sparse: covering a large fraction of the
-brain or not == tradeoff between functional specificity and covering the
-full brain
-, hard vs soft boundaries (spatial regression?).
+The choice of regions of interests (ROIs) that defines the nodes of the
+graphs can be very important both in the estimation of connectomes and
+for group comparison \cite{wang2009}. Unsurprisingly, simulations have
+shown that extracting signal from ROIs that did not match functional
+units would lead to incorrect graph extraction \cite{smith2011}.
+%
+Different strategies coexist. While dense parcellations approaches cover
+a large fraction of the brain \cite{achard2006, varoquaux2010c,
+wang2009}, this coverage can be traded off to focus on some specific
+regions, in favor of increased functional specificity and thus better
+differentiation across networks \cite{greicius2003, fair2009,
+varoquaux2010b, lewis2009, fransson2008, shirer2012}. In addition, while
+ROIs and most often defined as a hard selection of voxels, it is also
+possible to use a \emph{soft} definition, attributing weights as with
+probabilistic atlases, or spatial maps of functional networks extracted
+from techniques such as independent component analysis (ICA).
 
 \paragraph{Regions from atlases}
+%
+Atlases can be used to define full-brain parcellations. The most popular
+choice is probably the AAL atlas \cite{tzourio-mazoyer2002a}, that
+benefits from an SPM toolbox. However, it suffers from major
+shortcomings; namely that \emph{i)} it was defined on a single subject
+and thus does does not reflect inter-subject variability and \emph{ii)}
+focuses on labeling large anatomical structures and does not match
+functional layout --for instance only two regions describe the medial
+part of the frontal lobe. Multi-subject probabilistic altases such as the
+Harvard-Oxford atlas distributed with FSL \cite{smith2004} or the
+sulci-based structural atlas used in \cite{varoquaux2010c} mitigate the
+first problem, and the high number of regions defined using sulci also
+somewhat circumvent the second problem (see
+fig.\,\ref{fig:parcellations}).
 
-AAL \cite{tzourio-mazoyer2002a}, Harvard-oxford, sulci-based atlas.
-Personal bias against the AAL, but note that it is widely used because of
-SPM toolbox.
 
 \paragraph{Defining regions from the literature}
-Meta-analysis \cite{dosenbach}, DMN/TPN ROIs (Cameron, who is that guy?)
+%
+Regions can be defined from previous studies, informally or with
+systematic meta-analysis. This strategy is used to define the main
+resting-state networks, such as the default mode network, but may also be
+useful to study connectivity in task-specific networks
+\cite{grillon2012}. The common practice is to place balls of a given
+radius, 5 or 10\,mm, centered at the coordinates of interest. Given that
+functional networks are tightly interleaved in some parts of the cortex,
+such as the parietal lobe, care must be taken not to define too many
+regions that would overlap and lead to mixing of the signal.
 
 \paragraph{FMRI-based function definition}
-Distinction between activation and rest.
-Activation: thresholding GLM maps, or using spheres around the activation
-peak.
-
-Rest: ICA-based approaches \cite{kiviniemi2009} \cite{shirer2012}
-\cite{varoquaux2011} \cite{yeo}, cite Power?
-Maybe use the ICA from the Smith 2009 paper
-
-Clustering approaches, \cite{craddock2011}, \cite{bellec}, \cite{flandin}, \cite{poline}, \cite{thirion}
+%
+Defining regions directly from the fMRI signal brings many benefits.
+First, it can capture subject-specific functional information. Second, it
+also adapts to the signal at hand and it's limitations, such as
+EPI-specific warps or vascular and movement artifacts that are isolated
+in ICA-like approaches. The simplest approach to define task-specific
+regions is to use activation maps derived from standard GLM-based
+analysis in a task-driven study (see for instance \cite{poldrack2011}).
+Regions are extracted by thresholding the maps, or using balls around the
+activation peaks. For resting-state studies, unsupervised multivariate
+analysis techniques are necessary. Clustering approaches extract
+full-brain parcellations \cite{craddock2011, bellec2010, yeo2011,
+thirion2006}, and have been shown to extract well-known functional
+structures from rest data \cite{yeo2011}. Alternatively, decompositions
+methods, such as ICA \cite{beckmann2004}, can unmixing linear
+combinations of multiple effects and separate out multiple spatial maps
+capturing functional networks or confounding effects. At high model
+order, ICA maps define a functional parcellation \cite{kiviniemi2009}.
+Extracting regions from these maps requires additional effort as they can
+display fragmented spatial features and structured background noise, but
+incorporating sparsity and spatial constraints in the decomposition
+techniques leads to contrasted maps that outline many different
+structures \cite{varoquaux2012} (see fig.\,\ref{fig:parcellations}).
 
 \begin{figure}
 \includegraphics[width=.5\linewidth]{aal_atlas.pdf}%
@@ -118,7 +172,13 @@ Clustering approaches, \cite{craddock2011}, \cite{bellec}, \cite{flandin}, \cite
 \includegraphics[width=.5\linewidth]{msdl_atlas.pdf}%
 
 \caption{
-Different regions
+Different full-brain parcellation: the AAL atlas
+\cite{tzourio-mazoyer2002a}, regions extracted by Ncuts
+\cite{craddock2011}, the Harvard-Oxford atlas, the sucli atlas used in
+\cite{varoquaux2010c}, the resting-state networks extracted in
+\cite{smith2009} by ICA, and in \cite{varoquaux2011} by sparse dictionary
+learning.
+\label{fig:parcellations}
 }
 \end{figure}
 
@@ -126,7 +186,6 @@ Different regions
 \subsection{Estimating connections}
 
 % Disclaimer: focus on correlation/second order statistics?
-Mutual information? Entropy correlation? MI as measure of integration (Marralec)
 
 \paragraph{Signal extraction}
 
@@ -261,6 +320,8 @@ Small world networks, transport properties, resilient...
 
 Warning note that correlation matrices have long-tailed degree
 distribution by definition (cite recent Bullmore paper showing that).
+
+Mutual information? Entropy correlation? MI as measure of integration (Marralec)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
