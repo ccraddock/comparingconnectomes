@@ -71,10 +71,16 @@
 
 Review paper giving technical guidelines.
 
+BOLD signal during rest is typically just 5-10\% lower than during task-based
+experiments (cite Raichle,  Mintun, Annu. Rev. Neurosci. 29, 449–476 (2006).)
+
 Define what we call a functional connectome, and the term \emph{graph},
 as well as its relation with an adjacency matrix.
 
 Define a functional network
+
+Define on-going vs evoked activity
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -103,6 +109,8 @@ ROIs and most often defined as a hard selection of voxels, it is also
 possible to use a \emph{soft} definition, attributing weights as with
 probabilistic atlases, or spatial maps of functional networks extracted
 from techniques such as independent component analysis (ICA).
+
+% XXX: discuss tradeoffs in the number of regions
 
 \paragraph{Regions from atlases}
 %
@@ -158,73 +166,45 @@ incorporating sparsity and spatial constraints in the decomposition
 techniques leads to contrasted maps that outline many different
 structures \cite{varoquaux2012} (see fig.\,\ref{fig:parcellations}).
 
+%{{{------ Parcellation figure -----------------------------------------------
 \begin{figure}
 \includegraphics[width=.5\linewidth]{aal_atlas.pdf}%
 \hfill%
-\includegraphics[width=.5\linewidth]{ncuts_atlas.pdf}%
-
 \includegraphics[width=.5\linewidth]{ho_atlas.pdf}%
-\hfill%
+
 \includegraphics[width=.5\linewidth]{sulci_atlas.pdf}%
+\hfill%
+\includegraphics[width=.5\linewidth]{ncuts_atlas.pdf}%
 
 \includegraphics[width=.5\linewidth]{smith_atlas.pdf}%
 \hfill%
 \includegraphics[width=.5\linewidth]{msdl_atlas.pdf}%
 
 \caption{
-Different full-brain parcellation: the AAL atlas
-\cite{tzourio-mazoyer2002a}, regions extracted by Ncuts
-\cite{craddock2011}, the Harvard-Oxford atlas, the sucli atlas used in
-\cite{varoquaux2010c}, the resting-state networks extracted in
+Different full-brain parcellations: the AAL atlas
+\cite{tzourio-mazoyer2002a}, the Harvard-Oxford atlas, the sucli atlas used in
+\cite{varoquaux2010c}, regions extracted by Ncuts
+\cite{craddock2011}, the resting-state networks extracted in
 \cite{smith2009} by ICA, and in \cite{varoquaux2011} by sparse dictionary
 learning.
 \label{fig:parcellations}
 }
 \end{figure}
+%---------------------------------------------------------------------------}}}
 
 %------------------------------------------------------------------------------
 \subsection{Estimating connections}
 
-% Disclaimer: focus on correlation/second order statistics?
+The concept of functional connectivity has be called elusive
+\cite{horwitz2003}: it has many mathematical instantiations although in
+essence they all strive to extract simple statistics from functional
+imaging to characterize synchrony and communication between large
+ensembles of neurons. Here we choose to focus on second order statistics
+that can be related to Gaussian models, the simplest of which being the
+correlation matrix of the signals of the different ROIs.
 
-\paragraph{Signal extraction}
 
-Once again separate task from rest (explain the difference between
-\emph{ongoing} and \emph{evoked} activity at some point (intro?)
-
-Task: beta time-series, and more recent stuff, \emph{e.g.} by Mumford and
-Poldrack.
-
-Rest: importance of confounds. Filtering + and detrending. Importance of
-preprocessing.
-Compcorr \cite{behzadi2007}
-\cite{chai2011}
-power, van dijk
-\cite{satterthwaite2012}
-
-FMRI signals contributing to functional connectivity
-have been found to lie in frequencies below 0.1 Hz \cite{cordes2000}
-XXX: but cite recent work that shows that there is info at higher
-frequency.  Regressing out task??
-
-\paragraph{Correlation and partial correlations}
-
-Correlation, shrinkage of correlation \cite{ledoit2004,varoquaux2012},
-
-Remark: difference between covariance and correlation matrix.
-
-partial correlation, sparse iCov. \cite{smith2011,varoquaux2010b}. 
-
-Give intuition on partial correlation/inverse covariance.
-
-Remark that partial correlations consistently have no negative values.
-
-Variety
-of estimation strategies for sparse iCov, that have an impact on the
-resulting network \cite{varoquaux2012}\footnote{Better estimation
-algorithm is recent Honorio paper.}. Discuss setting the regularization
-parameter.
-
+%{{{------ Correlation matrices figure ---------------------------------------
 \begin{figure}
 \newcommand{\photoframe}[1]{\setlength\fboxsep{0pt}%
 {\color{black!70}\fbox{#1}\color{black}}}%
@@ -248,13 +228,95 @@ parameter.
     \includegraphics[width=\linewidth]{group_emp_cov_global_mean.pdf}%
 \end{minipage}%
 
+% XXX: need to give details on the dataset used here
+
 \caption{
-Correlation matrices
-Note that no filter was applied. Filtering low frequencies diminishes the
-impact of some confounds that are removed ...
+Correlation matrices of rest time-series extracted from the 39 main
+regions of the Varoquaux 2011 \cite{varoquaux2011} parcellation -- 
+Upper left: regressing out CompCorr signals, as well as white matter and
+CSF average signals and movement parameters. The insert shows the
+connections restricted to the default mode network.
+% XXX: should I outline the default mode network on the main matrix?
+-- Upper right: regressing out only movement parameters. -- Lower right:
+regressing out movement parameters and global signal mean.
+% XXX: should this remark go here?
+No frequency filtering was applied here.
+\label{fig:correlation_matrices}
 }
 \end{figure}
+%---------------------------------------------------------------------------}}}
 
+% The following paragraph is convoluted: we start to say that rest is
+% from time-series, and task from beta, we go on discussing about beta
+% maps, and then we move back to rest. It might need restructuring
+
+% Horrible sentence below
+
+\paragraph{Signal extraction}
+%
+Given ROIs, the next step is to extract from them a summary measure. To
+study \emph{on-going} activity, \emph{e.g.} with rest data, signal
+extraction is performed from the EPI time series; however, to study
+\emph{evoked} activity with task-driven studies it can be beneficial to
+run a first-level analysis, enforcing specificity of the measure
+extracted to the task. With slow event-related design, task-specific
+functional connectivity can be captured in trial-to-trial fluctuations in
+the BOLD response, estimated using a GLM analysis with one regressor per
+trial \cite{grillon2012,rissman2004}. This approach, known as beta-series
+regression, has been adapted for rapid event-related designs, using
+multiple GLMs to optimize deconvolution of each trial \cite{mumford2012}.
+With rest datasets, it is important to regress out time series capturing
+movement and other sources of structured noise, to separate on-going
+activity from confounding signals. In addition to removing movement
+parameters estimated during preprocessing, removing linear trends, signal
+extracted from the white matter and the CSF \cite{chang2009}, as well as
+using the CompCor \cite{behzadi2007} procedure gives more contrasted
+correlation matrices that outline functional structures better
+(fig.\,\ref{fig:correlation_matrices}). Filtering high frequencies is
+often recommended, based on the initial observation that neural-related
+signal are observed below 0.1\,Hz \cite{cordes2001,biswal1995}. While
+high-pass and low-pass filtering decrease the impact of some confounds,
+recent studies have shown that information on neural processes is present
+in the full spectrum of frequencies observed
+\cite{smith2012,vanoort2012}. Regressing out a good choice of confound
+signals is more specific than frequency filter, and in our experience
+gives more contrasted correlation matrices\footnote{Note that naive use
+of filtering can induce spurious correlations \cite{davey2012}.}.
+
+Finally, it is important to keep in mind that using resting-state to
+study on-going activity is fragile to confounds such as movement
+\cite{vandijk2012,power2011} or scanner noise, probably more so than
+activation studies as it is harder to control the specificity of the
+signal extracted. Special care must be taken in preprocessing strategies
+\cite{vandijk2010,satterthwaite2012}.
+%
+In addition, improved specificity to BOLD signal can be enforced by
+summarizing the signal in an ROI by a mean of the different voxels
+weighted by the subject-specific grey matter probabilistic segmentation,
+as output by \emph{e.g.} SPM's segmentation tool \cite{ashburner2005}, .
+
+% Regressing out task?? Skipping for lack of space
+
+\paragraph{Correlation and partial correlations}
+
+Correlation, shrinkage of correlation \cite{ledoit2004,varoquaux2012},
+
+Remark: difference between covariance and correlation matrix.
+
+partial correlation, sparse iCov. \cite{smith2011,varoquaux2010b}. 
+
+Give intuition on partial correlation/inverse covariance.
+
+Remark that partial correlations consistently have no negative values.
+
+Variety
+of estimation strategies for sparse iCov, that have an impact on the
+resulting network \cite{varoquaux2012}\footnote{Better estimation
+algorithm is recent Honorio paper.}. Discuss setting the regularization
+parameter.
+
+
+%{{{------ Precision matrices figure -----------------------------------------
 \begin{figure}
 \newcommand{\photoframe}[1]{\setlength\fboxsep{0pt}%
 {\color{black!70}\fbox{#1}\color{black}}}%
@@ -282,7 +344,13 @@ impact of some confounds that are removed ...
 Inverse-covariance matrices
 }
 \end{figure}
+%---------------------------------------------------------------------------}}}
 
+% XXX: should we have a summary paragraph commenting on the structure of
+% the graphs and correlation matrices extracted.
+% And also commenting on the meaning of regressions and sign of
+% correlation coefficients (the whole global mean debate).
+\cite{chai2011} (note: chai2011 used compcor)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
