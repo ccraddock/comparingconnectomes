@@ -233,11 +233,12 @@ correlation matrix of the signals of the different ROIs.
 \caption{
 Correlation matrices of rest time-series extracted from the 39 main
 regions of the Varoquaux 2011 \cite{varoquaux2011} parcellation -- 
-Upper left: regressing out CompCor signals, as well as white matter and
+\textbf{Upper left}: regressing out CompCor signals, as well as white matter and
 CSF average signals and movement parameters. The insert shows the
 connections restricted to the default mode network.
 % XXX: should I outline the default mode network on the main matrix?
--- Upper right: regressing out only movement parameters. -- Lower right:
+-- \textbf{Upper right}: regressing out only movement parameters. -- 
+\textbf{Lower right}:
 regressing out movement parameters and global signal mean.
 % XXX: should this remark go here?
 No frequency filtering was applied here.
@@ -309,37 +310,22 @@ correlation matrix formula, is not the population correlation matrix,
 number of measurements was infinite, the two would coincide, however if
 this number is not large compared to the number of connection (that
 scales as the square of the number of ROIs), the sample correlation
-matrix is a poor estimate of the underlying population correlation matrix.
-In other words, the sample correlation matrix captures a lot of sampling
-noise, intrinsic randomness that arises in the estimation of correlations
-from short time series. Conclusions drawn from the sample correlation
-matrix can easily reflect this estimation error.
-
-Varoquaux \emph{et al.} \cite{varoquaux2010c} and Smith \emph{et al.}
-\cite{smith2011} have shown respectively on rest fMRI and on realistic
-simulations that a good choice of correlation matrix estimator could
-recover the connectivity structure, where the sample correlation matrix
-would fail. In general, the choice of a better estimate depends on the
-settings and the end goals \cite{varoquaux2012,varoquaux2010b}, however
-the Ledoit-Wolf shrinkage estimate \cite{ledoit2004} is a simple,
+matrix is a poor estimate of the underlying population correlation
+matrix. In other words, the sample correlation matrix captures a lot of
+sampling noise, intrinsic randomness that arises in the estimation of
+correlations from short time series. Conclusions drawn from the sample
+correlation matrix can easily reflect this estimation error.
+%
+Varoquaux \emph{et al.}~\cite{varoquaux2010c} and Smith \emph{et
+al.}~\cite{smith2011} have shown respectively on rest fMRI and on
+realistic simulations that a good choice of correlation matrix estimator
+could recover the connectivity structure, where the sample correlation
+matrix would fail. In general, the choice of a better estimate depends on
+the settings and the end goals \cite{varoquaux2012,varoquaux2010b},
+however the Ledoit-Wolf shrinkage estimate \cite{ledoit2004} is a simple,
 computationally-efficient, and parameter-less alternative that performs
 uniformly better than the sample correlation matrix
-\cite{varoquaux2012,varoquaux2010c} and should always be prefered.
-
-Remark: difference between covariance and correlation matrix.
-
-partial correlation, sparse iCov. \cite{smith2011,varoquaux2010b}. 
-
-Give intuition on partial correlation/inverse covariance.
-
-Remark that partial correlations consistently have no negative values.
-
-Variety
-of estimation strategies for sparse iCov, that have an impact on the
-resulting network \cite{varoquaux2012}\footnote{Better estimation
-algorithm is recent Honorio paper.}. Discuss setting the regularization
-parameter.
-
+\cite{varoquaux2012,varoquaux2010c} and should always be preferred.
 
 %{{{------ Precision matrices figure -----------------------------------------
 \begin{figure}
@@ -362,20 +348,59 @@ parameter.
 \begin{minipage}{.32\linewidth}%
     \includegraphics[width=\linewidth]{group_emp_prec.pdf}%
 
-    \includegraphics[width=\linewidth]{group_emp_prec_global_mean.pdf}%
+    \includegraphics[width=\linewidth]{group_l21_prec_global_mean.pdf}%
 \end{minipage}%
 
 \caption{
-Inverse-covariance matrices
+Inverse-covariance matrices:
+\label{fig:icov}
 }
 \end{figure}
 %---------------------------------------------------------------------------}}}
+
+
+For the problem of recovering the functional-connectivity
+\emph{structure}, \emph{i.e.}\ finding which region is connected to
+which, sparse inverse covariance estimators have been found to be
+efficient \cite{varoquaux2010c, smith2011}. The intuition for relying on
+inverse covariance rather than correlation stems from that fact that
+standard correlation (marginal correlation) between two variables $a$ and
+$b$ also capture the effects of other variables -- strong correlation of
+$a$ and $b$ with a third variable $c$ will induce a correlation between
+$a$ and $b$. On the opposite, the inverse covariance\footnote{Covariance
+and correlation matrices differ simply by the fact that a covariance
+matrix captures the amplitude of a signal, via its variance, while a
+correlation matrix is computed on normalized signals.}
+matrix captures
+partial correlations, removing the effect of other variables
+\cite{marrelec2006a}. In the small sample limit, this removal is
+challenging from the statistical standpoint, and assumption of sparsity,
+\emph{i.e.}\ that only few variables need to be considered at a time, is
+important to estimate a good inverse covariance. Various estimation
+strategies exist for sparse inverse covariance, and have an impact on the
+resulting networks \cite{varoquaux2012,varoquaux2010c}. The
+graphical-lasso ($\ell_1$-penalized maximum-likelihood estimator)
+\cite{friedman2008} is a good general-purpose approach. In group studies,
+the $\ell_{21}$ estimator \cite{varoquaux2010c,honorio2012} is useful to
+impose a common sparsity structure across different subjects and achieve
+better recovery of this common structure. Simply put, these approaches
+are necessary because estimation noise creates a background structure
+(see Fig\,\ref{fig:icov}); however, unlike in a univariate situation, the
+parameters are not independent, and the spurious background connections
+degrade the estimation of the actual connections. The sparse estimators
+make a compromise between imposing simpler models, \emph{i.e.}\ with less
+connections, and fitting well the data. This compromise is set via a
+regularization parameter which controls the sparsity of the estimate. A
+good rule of thumb to set this parameter is via cross-validation
+\cite{varoquaux2010c}.
 
 % XXX: should we have a summary paragraph commenting on the structure of
 % the graphs and correlation matrices extracted.
 % And also commenting on the meaning of regressions and sign of
 % correlation coefficients (the whole global mean debate).
-\cite{chai2011} (note: chai2011 used compcor)
+% \cite{chai2011} (note: chai2011 used compcor)
+% Remark that partial correlations consistently have no negative values.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
