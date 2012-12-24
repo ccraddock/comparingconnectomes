@@ -233,7 +233,7 @@ correlation matrix of the signals of the different ROIs.
 \caption{
 Correlation matrices of rest time-series extracted from the 39 main
 regions of the Varoquaux 2011 \cite{varoquaux2011} parcellation -- 
-Upper left: regressing out CompCorr signals, as well as white matter and
+Upper left: regressing out CompCor signals, as well as white matter and
 CSF average signals and movement parameters. The insert shows the
 connections restricted to the default mode network.
 % XXX: should I outline the default mode network on the main matrix?
@@ -285,21 +285,46 @@ of filtering can induce spurious correlations \cite{davey2012}.}.
 
 Finally, it is important to keep in mind that using resting-state to
 study on-going activity is fragile to confounds such as movement
-\cite{vandijk2012,power2011} or scanner noise, probably more so than
+\cite{vandijk2012,power2011} or scanner noise, and probably more so than
 activation studies as it is harder to control the specificity of the
 signal extracted. Special care must be taken in preprocessing strategies
 \cite{vandijk2010,satterthwaite2012}.
 %
 In addition, improved specificity to BOLD signal can be enforced by
-summarizing the signal in an ROI by a mean of the different voxels
-weighted by the subject-specific grey matter probabilistic segmentation,
-as output by \emph{e.g.} SPM's segmentation tool \cite{ashburner2005}, .
+using only signal in voxels near gray-matter tissues. For this purpose,
+we suggest summarizing the signal in an ROI by a mean of the different voxels
+weighted by the subject-specific gray matter probabilistic segmentation,
+as output by \emph{e.g.} SPM's segmentation tool \cite{ashburner2005}.
 
 % Regressing out task?? Skipping for lack of space
 
 \paragraph{Correlation and partial correlations}
+%
+Functional connectivity between the ROIs can be measured by computing the
+correlation matrix of the extracted signals. An important and often
+neglected point is that the sample correlation matrix, \emph{i.e.} the
+correlation matrix obtained by plugging the observed signal in the
+correlation matrix formula, is not the population correlation matrix,
+\emph{i.e.} the correlation matrix of the data-generating process. If the
+number of measurements was infinite, the two would coincide, however if
+this number is not large compared to the number of connection (that
+scales as the square of the number of ROIs), the sample correlation
+matrix is a poor estimate of the underlying population correlation matrix.
+In other words, the sample correlation matrix captures a lot of sampling
+noise, intrinsic randomness that arises in the estimation of correlations
+from short time series. Conclusions drawn from the sample correlation
+matrix can easily reflect this estimation error.
 
-Correlation, shrinkage of correlation \cite{ledoit2004,varoquaux2012},
+Varoquaux \emph{et al.} \cite{varoquaux2010c} and Smith \emph{et al.}
+\cite{smith2011} have shown respectively on rest fMRI and on realistic
+simulations that a good choice of correlation matrix estimator could
+recover the connectivity structure, where the sample correlation matrix
+would fail. In general, the choice of a better estimate depends on the
+settings and the end goals \cite{varoquaux2012,varoquaux2010b}, however
+the Ledoit-Wolf shrinkage estimate \cite{ledoit2004} is a simple,
+computationally-efficient, and parameter-less alternative that performs
+uniformly better than the sample correlation matrix
+\cite{varoquaux2012,varoquaux2010c} and should always be prefered.
 
 Remark: difference between covariance and correlation matrix.
 
