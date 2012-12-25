@@ -208,7 +208,7 @@ correlation matrix of the signals of the different ROIs.
 \begin{figure}
 \newcommand{\photoframe}[1]{\setlength\fboxsep{0pt}%
 {\color{black!70}\fbox{#1}\color{black}}}%
-\begin{minipage}{.66\linewidth}%
+\begin{minipage}{.666\linewidth}%
     \includegraphics[width=\linewidth]{group_emp_cov.pdf}%
     \raisebox{.606\linewidth}{%
 	\hspace*{-.462\linewidth}%
@@ -216,13 +216,13 @@ correlation matrix of the signals of the different ROIs.
 	%\setlength\fboxsep{1pt}%
 	\colorbox{white}{%
 	\raisebox{.003\linewidth}{%
-	    \includegraphics[width=.455\linewidth]{group_emp_cov_3d_crop}}%
+	    \includegraphics[width=.455\linewidth]{group_emp_cov_3d_labels}}%
 	\rule{0pt}{.387\linewidth}%
 	}}%
     }
 \end{minipage}%
 \hspace*{1pt}%
-\begin{minipage}{.327\linewidth}%
+\begin{minipage}{.33\linewidth}%
     \includegraphics[width=\linewidth]{group_emp_cov_no_confounds.pdf}%
 
     \includegraphics[width=\linewidth]{group_emp_cov_global_mean.pdf}%
@@ -236,14 +236,15 @@ regions of the Varoquaux 2011 \cite{varoquaux2011} parcellation with
 different choices of confound regressors -- 
 \textbf{Left}: regressing out CompCor signals, as well as white matter and
 CSF average signals and movement parameters. The insert shows the
-connections restricted to the default mode network.
-% XXX: should I outline the default mode network on the main matrix?
+connections restricted to the .
 -- \textbf{Upper right}: regressing out only movement parameters. -- 
 \textbf{Lower right}:
 regressing out movement parameters and global signal mean.
-% XXX: should this remark go here?
 No frequency filtering was applied here.
 \label{fig:correlation_matrices}
+When no confounding brain signals are regressed, all regions are heavily
+correlated. Regressing out common signal, in the form of well-identified
+confounds or a global mean, teases out the structure.
 }
 \end{figure}
 %---------------------------------------------------------------------------}}}
@@ -300,6 +301,45 @@ as output by \emph{e.g.}\ SPM's segmentation tool \cite{ashburner2005}.
 
 % Regressing out task?? Skipping for lack of space
 
+%{{{------ Precision matrices figure -----------------------------------------
+\begin{figure}
+\newcommand{\photoframe}[1]{\setlength\fboxsep{0pt}%
+{\color{black!70}\fbox{#1}\color{black}}}%
+\begin{minipage}{.666\linewidth}%
+    \includegraphics[width=\linewidth]{group_l21_prec.pdf}%
+    \raisebox{.606\linewidth}{%
+	\hspace*{-.462\linewidth}%
+	\photoframe{%
+	%\setlength\fboxsep{1pt}%
+	\colorbox{white}{%
+	\raisebox{.003\linewidth}{%
+	    \includegraphics[width=.455\linewidth]{group_l21_prec_3d_labels}}%
+	\rule{0pt}{.387\linewidth}%
+	}}%
+    }
+\end{minipage}%
+\hspace*{1pt}%
+\begin{minipage}{.33\linewidth}%
+    \includegraphics[width=\linewidth]{group_emp_prec.pdf}%
+
+    \includegraphics[width=\linewidth]{group_l1_prec.pdf}%
+\end{minipage}%
+
+\caption{
+Different inverse-covariance matrices estimates corresponding to
+Fig.\,\ref{fig:correlation_matrices} -- \textbf{Left}: group-sparse estimate
+using the $\ell_{21}$ estimator \cite{varoquaux2010c}.
+The insert shows the
+connections restricted to the default mode network. -- \textbf{Upper
+right}: non-sparse estimate: inverse of the sample correlation matrix. --
+\textbf{Lower right}: sparse estimate using the Graph Lasso
+\cite{friedman2008}.
+\label{fig:icov_estimators}
+}
+\end{figure}
+%---------------------------------------------------------------------------}}}
+
+
 \paragraph{Correlation and partial correlations}
 %
 Functional connectivity between the ROIs can be measured by computing the
@@ -329,45 +369,6 @@ uniformly better than the sample correlation matrix
 \cite{varoquaux2012,varoquaux2010c} and should always be preferred.
 
 
-%{{{------ Precision matrices figure -----------------------------------------
-\begin{figure}
-\newcommand{\photoframe}[1]{\setlength\fboxsep{0pt}%
-{\color{black!70}\fbox{#1}\color{black}}}%
-\begin{minipage}{.66\linewidth}%
-    \includegraphics[width=\linewidth]{group_l21_prec.pdf}%
-    \raisebox{.606\linewidth}{%
-	\hspace*{-.462\linewidth}%
-	\photoframe{%
-	%\setlength\fboxsep{1pt}%
-	\colorbox{white}{%
-	\raisebox{.003\linewidth}{%
-	    \includegraphics[width=.455\linewidth]{group_l21_prec_3d_crop}}%
-	\rule{0pt}{.387\linewidth}%
-	}}%
-    }
-\end{minipage}%
-\hspace*{1pt}%
-\begin{minipage}{.327\linewidth}%
-    \includegraphics[width=\linewidth]{group_emp_prec.pdf}%
-
-    \includegraphics[width=\linewidth]{group_l1_prec.pdf}%
-\end{minipage}%
-
-\caption{
-Different inverse-covariance matrices estimates corresponding to
-Fig.\,\ref{fig:correlation_matrices} -- \textbf{Left}: group-sparse estimate
-using the $\ell_{21}$ estimator \cite{varoquaux2010c}.
-The insert shows the
-connections restricted to the default mode network. -- \textbf{Upper
-right}: non-sparse estimate: inverse of the sample correlation matrix. --
-\textbf{Lower right}: sparse estimate using the Graph Lasso
-\cite{friedman2008}.
-\label{fig:icov_estimators}
-}
-\end{figure}
-%---------------------------------------------------------------------------}}}
-
-
 %{{{------ Regressor in precision matrix -------------------------------------
 \begin{figure}
 \includegraphics[height=.482\linewidth]{group_l21_prec_no_confounds.pdf}%
@@ -376,7 +377,8 @@ right}: non-sparse estimate: inverse of the sample correlation matrix. --
 \hspace*{1pt}%
 \includegraphics[height=.482\linewidth]{cmap.pdf}%
 
-\caption{Different choice of confound regressors --
+\caption{Inverse covariance matrices for different choice of
+confound regressors --
 \label{fig:icov_regressors}
 \textbf{Left}: regressing out only movement parameters --
 \textbf{Right}: removal of the global mean,
@@ -386,11 +388,6 @@ instead of the white matter, CSF, and CompCor time courses.
 %---------------------------------------------------------------------------}}}
 
 
-
-% XXX: in the figures, the inserts must be commented.
-
-% XXX: idea: use the same regions as in the Fransson/Marrelec paper on
-% the role of the PCC
 
 For the problem of recovering the functional-connectivity
 \emph{structure}, \emph{i.e.}\ finding which region is connected to
@@ -413,7 +410,7 @@ important to estimate a good inverse covariance. Various estimation
 strategies exist for sparse inverse covariance, and have an impact on the
 resulting networks \cite{varoquaux2012,varoquaux2010c}. The
 Graph Lasso ($\ell_1$-penalized maximum-likelihood estimator)
-\cite{friedman2008} is a good general-purpose approach. In group studies,
+\cite{friedman2008} is in general a good approach for structure recovery. In group studies,
 the $\ell_{21}$ estimator \cite{varoquaux2010c,honorio2012} is useful to
 impose a common sparsity structure across different subjects and achieve
 better recovery of this common structure. Simply put, these approaches
@@ -427,10 +424,51 @@ regularization parameter which controls the sparsity of the estimate. A
 good rule of thumb to set this parameter is via cross-validation
 \cite{varoquaux2010c}.
 
-% XXX: should we have a summary paragraph commenting on the structure of
-% the graphs and correlation matrices extracted.
-% And also commenting on the meaning of regressions and sign of
-% correlation coefficients (the whole global mean debate).
+% XXX: must comment on the estimator figure
+
+\paragraph{Network structure extracted}
+%
+The correlation matrices and inverse-covariance matrices that we extract
+contain a lot of information on the functional structure of the brain.
+First, the correlation matrix (Fig.\,\ref{fig:correlation_matrices})
+shows blocks of coactivating regions that can be interpreted as
+large-scale functional networks, such as the default mode network. Note
+the split in network is not straightforward. Different ordering of the
+nodes will reveal different networks. Indeed, because of the presence of
+hubs and interleaved networks the picture in terms of segregated networks
+is not sufficient to explain full-brain connectivity
+\cite{varoquaux2012}. The connectivity matrices, correlation matrix or
+inverse-covariance matrix, can be represented as graphs: nodes connected
+by weighted edges (inserts Fig.\,\ref{fig:correlation_matrices} and
+Fig.\,\ref{fig:icov_estimators}). The inverse-covariance matrix,
+capturing partial correlations, appears then as extracting a
+\emph{backbone} or \emph{core} of the graph. While such structure have
+been used as a way to summarize anatomical brain connectivity graphs
+\cite{hagmann2008}, here they have a clear-cut meaning with regards to
+the BOLD signal: they give the conditional independence structure between
+the regions \cite{varoquaux2012}. In other words, regions $a$ and $b$ are
+not connected if the signal that they have in common can be explained by
+a third region $c$. In this light, the choice of nuisance regressors to
+remove confounding common signal is less critical. Indeed, while with
+correlation matrices regressing out the global mean has a drastic
+(Fig.\,\ref{fig:correlation_matrices} upper right and lower right), on
+inverse covariance it only changes very slightly the resulting matrices
+(Fig.\,\ref{fig:icov_regressors}). There have been debates on whether to
+regress out certain signals, such as the global mean,  as it induces
+negative correlations \cite{murphy2009,chang2009}, and these may seem
+surprising: one network is doing the opposite of the other. However,
+correlation between two signals only takes its meaning with the
+definition of a baseline. A simple picture to explain anti-correlations
+between two regions is the presence of a third region, mediating the
+interactions. Using this third region as a baseline would amount to
+estimate partial correlations in the whole system. Using 
+inverse-covariance matrices or partial correlations to understand brain
+connectivity makes the interpretation in terms of interactions between
+brain regions easier and more robust to the choice of confounds.
+
+% XXX: where to insert this in the above paragraph: cite the
+% Fransson/Marrelec paper on the role of the PCC
+
 % \cite{chai2011} (note: chai2011 used compcor)
 % Remark that partial correlations consistently have no negative values.
 
@@ -438,6 +476,9 @@ good rule of thumb to set this parameter is via cross-validation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Comparing connections}
+
+Note here that using a Ledoit-Wolf is probably a good choice for this
+application
 
 %------------------------------------------------------------------------------
 \subsection{Mass-univariate approaches}
