@@ -370,9 +370,11 @@ right}: non-sparse estimate: inverse of the sample correlation matrix. --
 
 %{{{------ Regressor in precision matrix -------------------------------------
 \begin{figure}
-\includegraphics[width=.495\linewidth]{group_l21_prec_no_confounds.pdf}%
+\includegraphics[height=.482\linewidth]{group_l21_prec_no_confounds.pdf}%
 \hspace*{1pt}%
-\includegraphics[width=.495\linewidth]{group_l21_prec_global_mean.pdf}%
+\includegraphics[height=.482\linewidth]{group_l21_prec_global_mean.pdf}%
+\hspace*{1pt}%
+\includegraphics[height=.482\linewidth]{cmap.pdf}%
 
 \caption{Different choice of confound regressors --
 \label{fig:icov_regressors}
@@ -410,13 +412,13 @@ challenging from the statistical standpoint, and assumption of sparsity,
 important to estimate a good inverse covariance. Various estimation
 strategies exist for sparse inverse covariance, and have an impact on the
 resulting networks \cite{varoquaux2012,varoquaux2010c}. The
-graphical-lasso ($\ell_1$-penalized maximum-likelihood estimator)
+Graph Lasso ($\ell_1$-penalized maximum-likelihood estimator)
 \cite{friedman2008} is a good general-purpose approach. In group studies,
 the $\ell_{21}$ estimator \cite{varoquaux2010c,honorio2012} is useful to
 impose a common sparsity structure across different subjects and achieve
 better recovery of this common structure. Simply put, these approaches
 are necessary because estimation noise creates a background structure
-(see Fig\,\ref{fig:icov}); however, unlike in a univariate situation, the
+(see Fig.\,\ref{fig:icov_estimators}); however, unlike in a univariate situation, the
 parameters are not independent, and the spurious background connections
 degrade the estimation of the actual connections. The sparse estimators
 make a compromise between imposing simpler models, \emph{i.e.}\ with less
