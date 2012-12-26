@@ -540,7 +540,7 @@ controlling for multiple comparison in family-wise error rate.
     \setlength\fboxsep{1pt}%
     \raisebox{.16\linewidth}{%
 	\colorbox{black!10}{%
-	    \sffamily\small Covariance matrices}}%
+	    \sffamily\small\textbf{a}. Correlation matrices}}%
 	}%
     \hspace*{.993\linewidth}%
 }
@@ -561,7 +561,7 @@ controlling for multiple comparison in family-wise error rate.
     \includegraphics[width=.0186\linewidth]{cmap_01.pdf}%
     \llap{
 	\raisebox{.003\linewidth}{%
-	    \bfseries\tiny -\!4\hspace*{-.2ex}}%
+	    \bfseries\tiny -\!\hspace*{-.1ex}4\hspace*{-.1ex}}%
     }%
     \llap{
 	\raisebox{.168\linewidth}{%
@@ -572,10 +572,73 @@ controlling for multiple comparison in family-wise error rate.
     \setlength\fboxsep{1pt}%
     \raisebox{.16\linewidth}{%
 	\colorbox{black!10}{%
-	    \sffamily\small Z score on difference}}%
+	    \sffamily\small\textbf{b}. Z score on difference}}%
 	}%
     \hspace*{.993\linewidth}%
 }
+
+\hspace*{.5ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/prec_sub00.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/prec_sub29.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/prec_sub01.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/prec_sub07.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/prec_sub53.pdf}%
+\hspace*{.1ex}%
+\raisebox{.005\linewidth}{%
+    \includegraphics[width=.0186\linewidth]{cmap_00.pdf}%
+    \llap{
+	\raisebox{.003\linewidth}{%
+	    \bfseries\tiny\color{white} -\!1\hspace*{-.2ex}}%
+    }%
+    \llap{
+	\raisebox{.17\linewidth}{%
+	    \bfseries\tiny\color{white} 1\hspace*{.1ex}}%
+    }%
+}%
+\llap{\rlap{
+    \setlength\fboxsep{1pt}%
+    \raisebox{.16\linewidth}{%
+	\colorbox{black!10}{%
+	    \sffamily\small\textbf{c}. Inverse-covariance matrices}}%
+	}%
+    \hspace*{.993\linewidth}%
+}
+
+\hspace*{.5ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub00.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub29.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub01.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub07.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub53.pdf}%
+\hspace*{.1ex}%
+\raisebox{.005\linewidth}{%
+    \includegraphics[width=.0186\linewidth]{cmap_01.pdf}%
+    \llap{
+	\raisebox{.003\linewidth}{%
+	    \bfseries\tiny -\!\hspace*{-.1ex}4\hspace*{-.1ex}}%
+    }%
+    \llap{
+	\raisebox{.168\linewidth}{%
+	    \bfseries\tiny 4\hspace*{.1ex}}%
+    }%
+}%
+\llap{\rlap{
+    \setlength\fboxsep{1pt}%
+    \raisebox{.16\linewidth}{%
+	\colorbox{black!10}{%
+	    \sffamily\small\textbf{d}. Z score on inverse-covariance}}%
+	}%
+    \hspace*{.993\linewidth}%
+}
+
 
 
 \hspace*{.5ex}%
@@ -593,7 +656,7 @@ controlling for multiple comparison in family-wise error rate.
     \includegraphics[width=.0186\linewidth]{cmap_01.pdf}%
     \llap{
 	\raisebox{.003\linewidth}{%
-	    \bfseries\tiny -\!4\hspace*{-.2ex}}%
+	    \bfseries\tiny -\!\hspace*{-.1ex}4\hspace*{-.1ex}}%
     }%
     \llap{
 	\raisebox{.168\linewidth}{%
@@ -604,38 +667,65 @@ controlling for multiple comparison in family-wise error rate.
     \setlength\fboxsep{1pt}%
     \raisebox{.16\linewidth}{%
 	\colorbox{black!10}{%
-	    \sffamily\small Z score on residuals \scriptsize
+	    \sffamily\small\textbf{e}. Z score on residuals \scriptsize
 		\raisebox{.2ex}{\cite{varoquaux2010b}}}}%
 	}%
     \hspace*{.993\linewidth}%
 }
 
-\caption{Inter subject fluctuations
-\label{fig:icov_regressors}
-}
+\caption{Inter subject variability. Note that this is variability
+occurring in a healthy population at rest, in other words non specific
+variability -- \textbf{a}: single-subject
+correlation matrices for different subjects -- \textbf{b}:
+Corresponding Z-score (effect / standard deviation) of the difference
+between a subject and the remaining others -- \textbf{c}:
+single-subject precision matrices -- \textbf{d}: Corresponding Z-score
+for the precision matrices -- \textbf{e}:
+Corresponding Z-score for the subject residuals, as defined in 
+\cite{varoquaux2010b}.
+\label{fig:inter_subject}}
 \end{figure}
 %---------------------------------------------------------------------------}}}
 
+\paragraph{Accounting for distributed variability}
+%
+A specific challenge of connectivity analysis is that the connectivity
+between different regions tend to covary. For instance, with
+resting-state data, functional networks comprising many nodes can appear
+as more or less connected across subjects (see for instance
+Fig.\,\ref{fig:inter_subject}.a, showing variability in a control
+population at rest). In other words, non-specific variability is
+distributed accross the connectivity graph, and it is structured by the
+graph itself. This observation brings the natural question of whether
+second-level analysis should be performed on correlation matrices,
+inverse-covariance matrices, or another parametrisation that would
+disentangle effects and give unstructured (white) residuals. While
+inverse-covariance matrices show less distributed fluctuations than
+correlation matrices, they capture a lot of background noise, as partial
+correlations are intrinsically harder to estimate. Preliminary work
+\cite{varoquaux2010b} suggest to perform statistics on residuals of
+a parametrisation intermediate between correlation matrix and inverse
+covariance matrix.
 
-\paragraph{Modeling between-connection dependences}
-
-Show that correlations co-fluctuation with images, spatial correlations between correlations.
-
-Ad-hoc model: network-based statistics \cite{zalesky2010}
-
-Discuss the 'residual' strategy?
-\cite{varoquaux2010b}
+Taking a difference stance on distributed variability, the ``network-based
+statistics'' approach \cite{zalesky2010} draws from the hypothesis that
+if, in a second-level analysis, an effect is detected in a connection
+that lies in a network of strongly connected nodes, the whole network is
+likely to cary an effect. Thus, they adapt cluster-level inference to
+connectivity analysis, in order to mitigate the curse of multiple
+comparisons.
 
 %------------------------------------------------------------------------------
 
 \subsection{Comparing Network Summary Statistics}
 
+Mutual information? Entropy correlation? MI as measure of integration (Marralec)
+
 Small world networks, transport properties, resilient...
+\cite{achard2006,bullmore2009}
 
 Warning note that correlation matrices have long-tailed degree
-distribution by definition (cite recent Bullmore paper showing that).
-
-Mutual information? Entropy correlation? MI as measure of integration (Marralec)
+distribution by definition \cite{zalesky2012}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
