@@ -484,23 +484,21 @@ subjects or across conditions.
 \subsection{Detecting changing connections}
 
 First, we focus on detecting where the connectivity matrices estimated in
-the previous section differ.
-\paragraph{Mass-univariate approaches}
+the previous section differ. \paragraph{Mass-univariate approaches}
 %
 The most natural approach is to do a linear model on each coefficient of
-the connectivity matrices, as in \cite{lewis2009,grillon2012}.
-This approach is similar to the second-level
-analysis used in mass-univariate brain mapping, and will give rise to
-many of the well-known techniques used in such a context, such as the
-definition of second-level design, with possibly the inclusion of
-confounding effects, and statistical tests (T tests or F tests) on
-contrast vector. Importantly, in order to work with Gaussian-distributed
-correlations, it is necessary to apply a Fisher Z
-transform\footnote{See 
-\url{http://en.wikipedia.org/wiki/Fisher_transformation}
-or \cite{anderson1958}, section 4.2.3 for mathematical arguments}.
-Note that in these settings, the Ledoit-Wolf estimator \cite{ledoit2004}
-is probably a good choice to estimate the correlation matrix, as it is
+the connectivity matrices, as in \cite{lewis2009,grillon2012}. This
+approach is similar to the second-level analysis used in mass-univariate
+brain mapping, and will give rise to many of the well-known techniques
+used in such a context, such as the definition of second-level design,
+with possibly the inclusion of confounding effects, and statistical tests
+(T tests or F tests) on contrast vector. Importantly, in order to work
+with Gaussian-distributed correlations, it is necessary to apply a Fisher
+Z transform\footnote{See
+\url{http://en.wikipedia.org/wiki/Fisher_transformation} or
+\cite{anderson1958}, section 4.2.3 for mathematical arguments}. Note that
+in these settings, the Ledoit-Wolf estimator \cite{ledoit2004} is
+probably a good choice to estimate the correlation matrix, as it is
 parameter-less and gives good estimation performance without imposing any
 restrictions on the data.
 %
@@ -508,15 +506,11 @@ Correcting for multiple comparison can often severely limit statistical
 power, as the number of tests performed scales as the square of the
 number of regions used. Controlling for the false discovery rate (FDR)
 mitigates this problem. Alternatively, as the assumption underlying the
-Benjamini-Holchberg procedure for the FDR can easily be broken,
-non-parametric permutations-based approaches give reliable approaches. In
-particular, the max-T procedure
-% NEEDREF: FDR for neuroimaging data, check the spelling of BH
+Benjamini-Hochberg procedure \cite{benjamini1995} for the FDR can easily
+be broken, non-parametric permutations-based approaches give reliable
+approaches. In particular, the max-T procedure \cite{ge2003,nichols2001}
 is interesting to avoid the drastic Bonferroni correction when
 controlling for multiple comparison in family-wise error rate.
-
-% XXX: cite Ge "resampling-based multiple testing for microarray data
-% analysis", and Nichols multiple comparison paper.
 
 %{{{------ Inter subject fluctuations ----------------------------------------
 \begin{figure}
