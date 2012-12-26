@@ -439,7 +439,7 @@ hubs and interleaved networks the picture in terms of segregated networks
 is not sufficient to explain full-brain connectivity
 \cite{varoquaux2012}. The connectivity matrices, correlation matrix or
 inverse-covariance matrix, can be represented as graphs: nodes connected
-by weighted edges (inserts Fig.\,\ref{fig:correlation_matrices} and
+by weighted edges (inserts on Fig.\,\ref{fig:correlation_matrices} and
 Fig.\,\ref{fig:icov_estimators}). The inverse-covariance matrix,
 capturing partial correlations, appears then as extracting a
 \emph{backbone} or \emph{core} of the graph. While such structure have
@@ -455,7 +455,7 @@ correlation matrices regressing out the global mean has a drastic
 inverse covariance it only changes very slightly the resulting matrices
 (Fig.\,\ref{fig:icov_regressors}). There have been debates on whether to
 regress out certain signals, such as the global mean,  as it induces
-negative correlations \cite{murphy2009,chang2009}, and these may seem
+negative correlations \cite{murphy2009,chang2009,fox2009}, and these may seem
 surprising: one network is doing the opposite of the other. However,
 correlation between two signals only takes its meaning with the
 definition of a baseline. A simple picture to explain anti-correlations
@@ -475,27 +475,155 @@ brain regions easier and more robust to the choice of confounds.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Comparing connections}
+\section{Comparing connectivity}
 
-Note here that using a Ledoit-Wolf is probably a good choice for this
-application
-
-%------------------------------------------------------------------------------
-\subsection{Mass-univariate approaches}
-
-Boils down to a standard linear model => t-tests and co.
-Stress that to have Gaussian-distributed correlations, a Fisher Z
-transform is required.
-
-Multiple comparison problem is quite an issue (scales a $p^2$) =>
-permutation and max-T approach XXX: cite Ge
-"resampling-based multiple testing for microarray data analysis", and
-Nichols multiple comparison paper.
-
-Family (Cameron, is that the correct name?) FWE?
+Here, we consider the problem of comparing functional connectivity across
+subjects or across conditions.
 
 %------------------------------------------------------------------------------
-\subsection{Modeling between-connection dependences}
+\subsection{Detecting changing connections}
+
+First, we focus on detecting where the connectivity matrices estimated in
+the previous section differ.
+\paragraph{Mass-univariate approaches}
+%
+The most natural approach is to do a linear model on each coefficient of
+the connectivity matrices, as in \cite{lewis2009,grillon2012}.
+This approach is similar to the second-level
+analysis used in mass-univariate brain mapping, and will give rise to
+many of the well-known techniques used in such a context, such as the
+definition of second-level design, with possibly the inclusion of
+confounding effects, and statistical tests (T tests or F tests) on
+contrast vector. Importantly, in order to work with Gaussian-distributed
+correlations, it is necessary to apply a Fisher Z
+transform\footnote{See 
+\url{http://en.wikipedia.org/wiki/Fisher_transformation}
+or \cite{anderson1958}, section 4.2.3 for mathematical arguments}.
+Note that in these settings, the Ledoit-Wolf estimator \cite{ledoit2004}
+is probably a good choice to estimate the correlation matrix, as it is
+parameter-less and gives good estimation performance without imposing any
+restrictions on the data.
+%
+Correcting for multiple comparison can often severely limit statistical
+power, as the number of tests performed scales as the square of the
+number of regions used. Controlling for the false discovery rate (FDR)
+mitigates this problem. Alternatively, as the assumption underlying the
+Benjamini-Holchberg procedure for the FDR can easily be broken,
+non-parametric permutations-based approaches give reliable approaches. In
+particular, the max-T procedure
+% NEEDREF: FDR for neuroimaging data, check the spelling of BH
+is interesting to avoid the drastic Bonferroni correction when
+controlling for multiple comparison in family-wise error rate.
+
+% XXX: cite Ge "resampling-based multiple testing for microarray data
+% analysis", and Nichols multiple comparison paper.
+
+%{{{------ Inter subject fluctuations ----------------------------------------
+\begin{figure}
+\hspace*{.5ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/cov_sub00.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/cov_sub29.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/cov_sub01.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/cov_sub07.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/cov_sub53.pdf}%
+\hspace*{.1ex}%
+\raisebox{.005\linewidth}{%
+    \includegraphics[width=.0186\linewidth]{cmap_00.pdf}%
+    \llap{
+	\raisebox{.003\linewidth}{%
+	    \bfseries\tiny\color{white} -\!1\hspace*{-.2ex}}%
+    }%
+    \llap{
+	\raisebox{.17\linewidth}{%
+	    \bfseries\tiny\color{white} 1\hspace*{.1ex}}%
+    }%
+}%
+\llap{\rlap{
+    \setlength\fboxsep{1pt}%
+    \raisebox{.16\linewidth}{%
+	\colorbox{black!10}{%
+	    \sffamily\small Covariance matrices}}%
+	}%
+    \hspace*{.993\linewidth}%
+}
+
+
+\hspace*{.5ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub00.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub29.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub01.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub07.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub53.pdf}%
+\hspace*{.1ex}%
+\raisebox{.005\linewidth}{%
+    \includegraphics[width=.0186\linewidth]{cmap_01.pdf}%
+    \llap{
+	\raisebox{.003\linewidth}{%
+	    \bfseries\tiny -\!4\hspace*{-.2ex}}%
+    }%
+    \llap{
+	\raisebox{.168\linewidth}{%
+	    \bfseries\tiny 4\hspace*{.1ex}}%
+    }%
+}%
+\llap{\rlap{
+    \setlength\fboxsep{1pt}%
+    \raisebox{.16\linewidth}{%
+	\colorbox{black!10}{%
+	    \sffamily\small Z score on difference}}%
+	}%
+    \hspace*{.993\linewidth}%
+}
+
+
+\hspace*{.5ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/res_sub00.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/res_sub29.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/res_sub01.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/res_sub07.pdf}%
+\hspace*{-.2ex}%
+\includegraphics[width=.196\linewidth]{inter_subj/res_sub53.pdf}%
+\hspace*{.1ex}%
+\raisebox{.005\linewidth}{%
+    \includegraphics[width=.0186\linewidth]{cmap_01.pdf}%
+    \llap{
+	\raisebox{.003\linewidth}{%
+	    \bfseries\tiny -\!4\hspace*{-.2ex}}%
+    }%
+    \llap{
+	\raisebox{.168\linewidth}{%
+	    \bfseries\tiny 4\hspace*{.1ex}}%
+    }%
+}%
+\llap{\rlap{
+    \setlength\fboxsep{1pt}%
+    \raisebox{.16\linewidth}{%
+	\colorbox{black!10}{%
+	    \sffamily\small Z score on residuals \scriptsize
+		\raisebox{.2ex}{\cite{varoquaux2010b}}}}%
+	}%
+    \hspace*{.993\linewidth}%
+}
+
+\caption{Inter subject fluctuations
+\label{fig:icov_regressors}
+}
+\end{figure}
+%---------------------------------------------------------------------------}}}
+
+
+\paragraph{Modeling between-connection dependences}
 
 Show that correlations co-fluctuation with images, spatial correlations between correlations.
 
@@ -504,9 +632,9 @@ Ad-hoc model: network-based statistics \cite{zalesky2010}
 Discuss the 'residual' strategy?
 \cite{varoquaux2010b}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%------------------------------------------------------------------------------
 
-\section{Comparing Network Summary Statistics}
+\subsection{Comparing Network Summary Statistics}
 
 Small world networks, transport properties, resilient...
 
