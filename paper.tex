@@ -717,7 +717,7 @@ comparisons.
 
 %------------------------------------------------------------------------------
 
-\subsection{Comparing Network Summary Statistics}
+\subsection{Comparing network summary statistics}
 
 \paragraph{Network integration}
 %
@@ -732,36 +732,62 @@ Gaussian entropy can be seen as a simple metric to generalize correlation
 or variance to multiple nodes (see \cite{anderson1958} \S2.5.2 and
 \S7.5). Indeed, let us considering 3 nodes: $a$, $b$ and $c$. Their
 correlation structure is captured by three correlation coefficients:
-$\rho_{ab}$, $\rho_{bc}$ and $\rho_{ac}$.
+$\rho_{ab}$, $\rho_{bc}$ and $\rho_{ac}$. Summarizing these by their
+mean, as it might seem natural, discards the relationship between the
+signals, while using the integration tells us how much two signals can be
+combined to form the third (see Fig.\,\ref{fig:integration}). Similarly
+as Gaussian entropy can be used to measure the integration of a brain
+system or network, cross-entropy --or mutual information--
+\cite{marrelec2008} measures the amount of cross-talk between two
+systems. The functional-connectivity structure, or its representation in
+form of a correlation matrix, can thus be characterized via the
+integration and cross-talk of some of its subs-systems. This appraoch
+gives a simplified representation with a small number of metrics that can
+be compared across subjects.
 
-% Rmk average of correlations will measure the sphericity of the
-% distribution
 
 %{{{------ Integration measure -----------------------------------------------
 \begin{figure}
+\hspace*{2ex}%
 \begin{minipage}{.19\linewidth}
     \center\sffamily
     {\small Integration:}
 
-    1.513
+    0.554
 \end{minipage}%
-\begin{minipage}{.25\linewidth}
+\begin{minipage}{.2\linewidth}
     \includegraphics[width=\linewidth]{correlation_ex1.pdf}
 \end{minipage}%
 \hfill%
-\begin{minipage}{.25\linewidth}
+\begin{minipage}{.033\linewidth}
+    \includegraphics[width=\linewidth]{correlation_cmap.pdf}%
+    \llap{\raisebox{.4ex}{\scriptsize\sffamily\bfseries 0}\hspace*{.54ex}}%
+    \llap{\raisebox{10.1ex}{\scriptsize\sffamily\bfseries\color{white} 1}%
+	    \hspace*{.54ex}}
+\end{minipage}%
+\hfill%
+\begin{minipage}{.2\linewidth}
     \includegraphics[width=\linewidth]{correlation_ex2.pdf}
 \end{minipage}%
 \begin{minipage}{.19\linewidth}
     \center\sffamily
     {\small Integration:}
 
-    0.492
+    2.422
 \end{minipage}%
+\hspace*{2ex}%
 
-\caption{Two different correlation matrix with the same average
-correlation, but integration values that strongly differ.
+\caption{Two different correlation matrices with the same average
+correlation, but with very different integration values. Indeed, the
+matrix on the left was chosen to have represent three signals $a$, $b$
+and $c$ as different from each other as possible, given $\rho_{ab} +
+\rho_{bc} + \rho{ac} = 1.35$; it thus as a small integration value. On
+the opposite, for the matrix on the right, signal $b$ can almost be fully
+recovered by combining signals $a$ and $c$; the matrix thus has a large
+integration value.
 \label{fig:integration}}
+% Rmq: in this example, in the second figure, the 3 signals are more
+% independent, and thus define a wider range of acceptable signal.
 \end{figure}
 %---------------------------------------------------------------------------}}}
 
