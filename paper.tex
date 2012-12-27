@@ -719,8 +719,55 @@ comparisons.
 
 \subsection{Comparing Network Summary Statistics}
 
-Mutual information? Entropy correlation? MI as measure of integration (Marralec)
+\paragraph{Network integration}
+%
+To avoid the multiple comparison issue and to capture the network-level
+distributed variability, a possible strategy is to perform comparison and
+statistical testing at the level of the network, rather than the
+individual connection. In particular, Marrelec \emph{et al.}\
+\cite{marrelec2008} introduce the use of entropy and mutual information
+as a measure of network integration\footnote{See \cite{varoquaux2010c}
+for simplified formulas for network integration and mutual information.}.
+Gaussian entropy can be seen as a simple metric to generalize correlation
+or variance to multiple nodes (see \cite{anderson1958} \S2.5.2 and
+\S7.5). Indeed, let us considering 3 nodes: $a$, $b$ and $c$. Their
+correlation structure is captured by three correlation coefficients:
+$\rho_{ab}$, $\rho_{bc}$ and $\rho_{ac}$.
 
+% Rmk average of correlations will measure the sphericity of the
+% distribution
+
+%{{{------ Integration measure -----------------------------------------------
+\begin{figure}
+\begin{minipage}{.19\linewidth}
+    \center\sffamily
+    {\small Integration:}
+
+    1.513
+\end{minipage}%
+\begin{minipage}{.25\linewidth}
+    \includegraphics[width=\linewidth]{correlation_ex1.pdf}
+\end{minipage}%
+\hfill%
+\begin{minipage}{.25\linewidth}
+    \includegraphics[width=\linewidth]{correlation_ex2.pdf}
+\end{minipage}%
+\begin{minipage}{.19\linewidth}
+    \center\sffamily
+    {\small Integration:}
+
+    0.492
+\end{minipage}%
+
+\caption{Two different correlation matrix with the same average
+correlation, but integration values that strongly differ.
+\label{fig:integration}}
+\end{figure}
+%---------------------------------------------------------------------------}}}
+
+
+\paragraph{Graph-topology metrics}
+%
 Small world networks, transport properties, resilient...
 \cite{achard2006,bullmore2009}
 
