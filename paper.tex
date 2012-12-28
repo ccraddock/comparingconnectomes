@@ -795,9 +795,27 @@ integration value.
 \paragraph{Graph-topology metrics}
 %
 Functional connectivity graphs have been found to display specific
-topological properties that are characteristic of small-word networks
-\cite{stam2004,salvador2005,achard2006,bullmore2009}. 
-Small world networks, transport properties, resilient...
+topological properties\footnote{In the neuroscience world, these
+descriptions are group under the terms of ``graph theoretical
+approaches'', however graph theory is an entire division of mathematics
+and computer science that is concerned with much more than topology of
+random graphs.} that are characteristic of small-word networks
+\cite{stam2004,salvador2005,achard2006,bullmore2009}. These networks
+display excellent transport properties: although they display relatively
+small number of connections, any two regions of the brain are well
+connected. Another interesting consequence of their specific topology is
+the resilience it gives to the system to attacks such as resulting from
+brain lesions \cite{achard2006}. This overall structure of
+functional-connectivity graphs can be summarized by a few metrics, such
+as the average path length between any two nodes or the local clustering
+coefficients. Given that pathologies without a well-defined focus, such
+as schizophrenia, are thought to have a global impact on brain
+connectivity \cite{liu2008,bassett2008}, it is interesting to use the
+graph-topology metrics to perform inter-subject comparison. Such an
+approach is appealing as it is not subject to multiple comparison issues.
+However, it has been criticized as giving a fairly unspecific
+characterization of the brain and being fragile to noise 
+\cite{ioannides2007}.
 
 Warning note that correlation matrices have long-tailed degree
 distribution by definition \cite{zalesky2012}.
