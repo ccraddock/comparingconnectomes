@@ -891,27 +891,40 @@ that describes observed correlations in terms of an independence
 structure and conditional relations \cite{lauritzen1996,varoquaux2011}.
 In such settings, the inverse covariance graph or the partial
 correlations are a measure of influence from one node to another, albeit
-undirected.
+undirected. Inferring direction in a Gaussian model is impossible. Linear
+structural equation models (SEMs) \cite{mcintosh1994} rely on similar
+model that consists in specifying a candidate directed graphical
+structure. This structure constraints the covariance matrix of the
+signals and can thus be tested on observed data. In fact some forms of
+SEMs are known as ``covariance structure models''. Their is thus a strong
+formal link between correlation analysis in the framework of graphical
+models and SEMs: the former is undirected but fully exploratory, as it
+does not require the specification of candidate structure, while the
+latter is directory but confirmatory. The link has been exploited to
+specify candidate structures for SEMs using partial correlations
+\cite{marrelec2007}. More complex models, such as dynamical causal models
+(DCMs) \cite{friston2003a} or Granger causality \cite{goebel2003} require
+additional hypotheses such as non-linear couplings or time lags.
 
-%------------------------------------------------------------------------------
-\subsection{From correlations to structural equation modeling}
-
-\cite{mcintosh1994}
-\cite{marrelec2007}
-\cite{marrelec2009}
-
-%------------------------------------------------------------------------------
-\subsection{Matching model complexity to data}
+Most importantly, more complex models can only be estimated to model
+interactions between a smaller number of nodes. This is not only due to a
+computational difficulty, but also to fundamental roadblocks in
+statistics: the complexity of the model must match the richness of the
+data. While injecting prior information can help model estimation, the
+more informative this prior, the fragile the inference becomes. The
+ongoing debate on the impact of hemodynamic lag on Granger-causality
+inference \cite{smith2012a} is an example of such fragility.
 
 Diatribe: all model are wrong, but some are useful => a cat is a model of a cat
 
 Setting the cursor between complex models based on a bio-physical
 description, and simple phenomenological models such as correlation
-matrices.
+matrices. Cite \cite{ravikumar2011} to argue that sparse inverse
+covariance is reasonably robust to violations of the assumption of
+Gaussianity.
 
-\cite{mcintosh2010}
-
-Cross validation
+Cross validation \cite{friston2012} to destroy the argument on the
+Neyman-Pearson lemma (it is self-confirmatory).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
