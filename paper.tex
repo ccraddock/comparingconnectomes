@@ -808,17 +808,20 @@ the resilience it gives to the system to attacks such as resulting from
 brain lesions \cite{achard2006}. This overall structure of
 functional-connectivity graphs can be summarized by a few metrics, such
 as the average path length between any two nodes or the local clustering
-coefficients. Given that pathologies without a well-defined focus, such
+coefficients \cite{rubinov2010}. Given that pathologies without a well-defined focus, such
 as schizophrenia, are thought to have a global impact on brain
 connectivity \cite{liu2008,bassett2008}, it is interesting to use the
 graph-topology metrics to perform inter-subject comparison. Such an
 approach is appealing as it is not subject to multiple comparison issues.
 However, it has been criticized as giving a fairly unspecific
-characterization of the brain and being fragile to noise 
-\cite{ioannides2007}.
-
-Warning note that correlation matrices have long-tailed degree
-distribution by definition \cite{zalesky2012}.
+characterization of the brain and being fragile to noise
+\cite{ioannides2007}. Another caveat is that correlation matrices display
+small-word properties such as local clustering by construction, as if two
+nodes are strongly correlated to a third, they are highly likely to be
+correlated to each other \cite{zalesky2012}. This observation highlight
+the need for well defined null-hypothesis \cite{zalesky2012,rubinov2011},
+but also for controlled recovery of brain functional connectivity going
+beyond empirical correlation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
