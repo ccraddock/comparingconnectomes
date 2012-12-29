@@ -914,17 +914,36 @@ data. While injecting prior information can help model estimation, the
 more informative this prior, the fragile the inference becomes. The
 ongoing debate on the impact of hemodynamic lag on Granger-causality
 inference \cite{smith2012a} is an example of such fragility.
+While most of the theory underpinning correlation analysis (Gaussian
+graphical models) is based on a Gaussian assumption, the core results
+are robust to violations of this assumption \cite{ravikumar2011}.
 
-Diatribe: all model are wrong, but some are useful => a cat is a model of a cat
-
-Setting the cursor between complex models based on a bio-physical
-description, and simple phenomenological models such as correlation
-matrices. Cite \cite{ravikumar2011} to argue that sparse inverse
-covariance is reasonably robust to violations of the assumption of
-Gaussianity.
-
-Cross validation \cite{friston2012} to destroy the argument on the
-Neyman-Pearson lemma (it is self-confirmatory).
+It is tempting to favor more neurobiologically-inspired models that give
+descriptions close to our knowledge of the brain basic mechanisms,
+however, as George Box famously said, ``all models are wrong; some models
+are useful''. Depending on the question and the data at hand, the cursor
+should be set between complex models based on a bio-physical description,
+and simple phenomenological models such as correlation matrices. In
+particular to model interactions between a large number of regions, as in
+full-brain analysis, and learn a large \emph{connectome}, simple models
+are to be preferred. For more hypothesis-driven studies, such as the
+analysis of the mechanism underlying a specific task, more complex models
+can be preferred, if rich data is available. Automatic choice of model is
+a difficult problem, however, cross-validation (as used in
+\cite{varoquaux2010c,craddock2011,strother2006}) is a useful tool. The
+central principle of cross-validation is to learn (or fit) a model, and
+then test its test predictive power on unseen data. Models too complex
+for the data available while fit noise in the data, and thus generalize
+poorly. The main benefit of cross-validation is that it is a
+non-parametric method which does not rely strongly on modeling
+assumption\footnote{This is to be contrasted to Bayesian model
+comparison, which will give correct results only if the true generative
+model is in the list of models compared. \cite{friston2012} argues that,
+based on the Neyman-Pearson lemma, cross-validation is less powerful than
+likelihood ratio tests relying on the full dataset. However, it is
+important to keep in mind that these approaches only test for
+self-consistence, as they require that model likelihood to describe the
+data well.}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
