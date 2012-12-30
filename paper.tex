@@ -892,18 +892,142 @@ craddock 2009, Dosenbach 2010, lord 2011, deshpande,
 2. the need for feature extraction
 3. the need for feature selection
 4. setting parameters.
+\section{Predictive Modeling}
+craddock 2009, Dosenbach 2010, lord 2011, deshpande, 
+
+1. importance of interpretation!
+2. the need for feature extraction
+3. the need for feature selection
+4. setting parameters.
 5. different methods have different interpretations
 
+
+Predictive modeling has been an active area of research in functional
+neuroimaging since the early 90s [] that has more recently been adapted to
+comparing connectomes [].  A predictive model defines a mathematical
+relationship between a set of data features and a categorical or continuous
+variable of interest (target) that is capable of decoding or \emph{predicting}
+the target variable from the data.  In the context of comparing connectomes,
+features correspond to bivariate measures of connectivity or other region
+specifc graph statistics and the target is a phenotypic variable (e.g. age, sex,
+disease state). The accuracy of a model for predicting the target variable
+provides a natural means for evaluating the utility of the model as a biomarker
+[] and for measuring the amount of information present in the connectome about
+the target variable [Kjems, Kriegeskorte]. Prediction accuracy when combined
+with a measure of model reproducibilty provides a means to evaluate experimental
+tradeoffs for data acquisition, preprocessing, and analysis [NPAIRS]. Predictive
+modeling techniques have been successfully applied to identify connectome-based
+biomarkers of Alzheimer's disease [92], major depression [93], schizophrenia
+[94], autism [47], ADHD [], and aging [].  Recent work has illustrated the
+utility of predictive modeling for deriving connectivity models at the
+individual level [97,].
+
+Nearly every analytical method can be appplied in a predictive modelling framework, but
+multivariate classification and regression have been the most commonly used
+(referred to as MVPA; multivariate prediction analysis).  Multivariate methods
+are attractive in connectomics because they are sensitive to dependencies
+between features and avoid the need to correct for multiple comparisions since
+the significance of an entire pattern is evaluated using a single statistical
+test. Predictive modeling is typically performed in a supervised learning
+framework where a target is available for each observation of the features,
+although unsupervised and semi-supervised methods can also be used.
+
+Predictive models are validated using one or more iterations of cross
+validation, which involves training and testing phases.  A cross validation
+cycle begins by seperating the available data into two independent subsets:
+training data and testing data.  Training involves learning a predictive model
+from the training data. During testing the model is applied to the testing data
+to predict corresponding values of the target variable.  Prediction accuracy is
+then assessed by comparing these predictions to the observed values of the
+target variable. In order to make 
+
+A general application of predictive modeling can be broken down into feature
+extraction, model selection, feature selection, and model validation, each of
+which may contain one or more iteration of training and testing. Feature
+extraction 
+
+
+Model training can be further broken down into feature extraction, model
+selection and feature selection and testing can be performed for model
+optimziation and 
+
+
+The application of predictive modeling to functional neuroimaging data has been
+an active area of research since the early 90s[] and more recently for comparing
+connectomes[]. Nearly every analytical method can be appplied in a predictive
+modelling framework, but multivariate classification and regression have been
+the most commonly used (referred to as MVPA; multivariate prediction analysis).
+Multivariate methods are attractive in connectomics because they do not require
+any assumptions regarding independence between features and avoid the need to
+correct for multiple comparisions since the significance of an entire pattern is
+evaluated using a single statistical test. Support vector machines
+(classification and regression) are popular for MVPA applications owing to their
+proven track record for acheiving good prediction accuracy in high dimensional
+datasets (many features) with few observations.
+
+Cross validation
+
+MVPA algorithms typically require the specification of several parameters, the
+values of which will impact the quality of the results. These parameters may be
+prespecified based on domain specific knowledge, or requirements, determined
+using an analytical approach, or optimized using cross validation. In latter
+case a nest cross-validation scheme is required to avoid biasing resultant
+measures of prediction accuracy. it is necessary to perform a nested
+cross-validation These parameters may be set by hand in the case where 
+
+Determining the subset of features most relevant to the model (feature
+selection) is essential for interpreting the models, and is the subject of
+ongoing research. In cases were model weights can be directly mapped to their
+corresponding feature, there is typically no statistical framework for
+thresholding these weights, and meaningless features are not always set to zero
+(this is particularly the case for L2 regularized algorithms such as SVM and
+ridge regression). One feature selection strategy is to filter out features
+based on their statistical relationship with the variable of interest using a
+univariate statistical criterion such as t-test, Pearson's correlation, or
+mutual information.  A drawback of this approach is that since the filters are
+typically insensitive to multivaratiate information, they may exclude features
+that would be important to the model.  Another approach is to treat feature
+selection as a model selection problem in which case the features are
+iteratively pruned and a subset is chosen based on prediction performance. A
+third approach is to use sparse modeling methods such as L1 SVM or LASSO that
+force meaningless weights to be zero.  Although ideal, these methods may have
+limits on the number of non-zero weights used in the model or the exclusion of
+highly correlated features from the model.  Contrary to previous reports [Guyon
+2002, Craddock 2009] no matter which feature selection strategy is employed, it
+must be performed withen cross-validation to avoid biasing estimates of
+prediction accuracy [later Guyon].
+
+The interpretation of classifier weights for selected features, when available,
+is complicated and requires insight into the mechanisms underlying the modeling
+approach. If features are appropriately standardized prior to training, the
+magnitude of weights can be interpreted to reflect the relative importance of
+the feature to the model, but interpreting how the feature differs between
+classes or relates to a continuous variable is more complicated, particularly
+given the multivariate nature of their involvement.  For classification methods
+such as Fisher's linear descriminate analysis (LDA),which maximally seperates
+class means given their standard deviation, feature weights are representative
+of the differences between class means. For support vector classification,
+classifier weights are derived from observations that are the most similar
+between classes, and hence represents the border between classes.  It is perhaps
+most reasonable to adapt a conservative interpretation in which MVPA is used to
+identify the most relevant features that are later tested in followon
+experiments better suited to elucidating their relationship to the variable of
+interest.
+
 \emph{ --- CC text from TICS paper, do not use without modification!}
-Multivariate Prediction Analysis. When applied to the study of intrinsic activity, the goal of discovery
-science is to identify models that relate measures of that activity (such as iFC) to phenotypic variables.
-Prediction analysis provides a means for measuring how well these models generalize to independent data.
-This is complementary to inferential statistics, which measure the likelihood of such relationships
-arising by chance. In the prediction analysis framework, a model relating iFC to a phenotype is learned 
-from a training dataset. This model is then applied to an independent test dataset to predict phenotypes.
-The resultant predictions are compared to the true phenotypes to estimate how well the model generalizes
-to the tese dataset. Thus, prediction analysis provides a natural framework for evaluating biomarkers [21],
-performing real-time fMRI [88], and evaluating experimental tradeoffs [89]. 
+Multivariate Prediction Analysis. When applied to the study of intrinsic
+activity, the goal of discovery science is to identify models that relate
+measures of that activity (such as iFC) to phenotypic variables.  Prediction
+analysis provides a means for measuring how well these models generalize to
+independent data.  This is complementary to inferential statistics, which
+measure the likelihood of such relationships arising by chance. In the
+prediction analysis framework, a model relating iFC to a phenotype is learned
+from a training dataset. This model is then applied to an independent test
+dataset to predict phenotypes.  The resultant predictions are compared to the
+true phenotypes to estimate how well the model generalizes to the tese dataset.
+Thus, prediction analysis provides a natural framework for evaluating biomarkers
+[21], performing real-time fMRI [88], and evaluating experimental tradeoffs
+[89]. 
 
 Prediction analysis has been applied to functional neuroimaging data since the early 90’s [90], and more
 recently to IFC data [91]. Most, if not all, analysis methods can be applied in a predictive modeling
