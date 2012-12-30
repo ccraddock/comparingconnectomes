@@ -217,9 +217,9 @@ activation peaks. For resting-state studies, unsupervised multivariate
 analysis techniques are necessary. Clustering approaches extract
 full-brain parcellations \cite{craddock2011, bellec2010, yeo2011,
 thirion2006}, and have been shown to extract well-known functional
-structures from rest data \cite{yeo2011}. Alternatively, decompositions
-methods, such as ICA \cite{beckmann2004}, can unmixing linear
-combinations of multiple effects and separate out multiple spatial maps
+structures from rest data. Alternatively, decompositions
+methods, such as ICA \cite{beckmann2004}, can unmix linear
+combinations of multiple effects and separate out overlapping spatial maps
 capturing functional networks or confounding effects. At high model
 order, ICA maps define a functional parcellation \cite{kiviniemi2009}.
 Extracting regions from these maps requires additional effort as they can
@@ -298,7 +298,7 @@ regions of the Varoquaux 2011 \cite{varoquaux2011} parcellation with
 different choices of confound regressors -- 
 \textbf{Left}: regressing out CompCor signals, as well as white matter and
 CSF average signals and movement parameters. The insert shows the
-connections restricted to the .
+connections restricted to a few major nodes.
 -- \textbf{Upper right}: regressing out only movement parameters. -- 
 \textbf{Lower right}:
 regressing out movement parameters and global signal mean.
@@ -324,7 +324,7 @@ study \emph{on-going} activity, \emph{e.g.}\ with rest data, signal
 extraction is performed from the EPI time series; however, to study
 \emph{evoked} activity with task-driven studies it can be beneficial to
 run a first-level analysis, enforcing specificity of the measure
-extracted to the task. With slow event-related design, task-specific
+extracted to the task. With slow event-related designs, task-specific
 functional connectivity can be captured in trial-to-trial fluctuations in
 the BOLD response, estimated using a GLM analysis with one regressor per
 trial \cite{grillon2012,rissman2004}. This approach, known as beta-series
@@ -339,7 +339,7 @@ using the CompCor \cite{behzadi2007} procedure gives more contrasted
 correlation matrices that outline functional structures better
 (fig.\,\ref{fig:correlation_matrices}). Filtering high frequencies is
 often recommended, based on the initial observation that neural-related
-signal are observed below 0.1\,Hz \cite{cordes2001,biswal1995}. While
+signals are observed below 0.1\,Hz \cite{cordes2001,biswal1995}. While
 high-pass and low-pass filtering decrease the impact of some confounds,
 recent studies have shown that information on neural processes is present
 in the full spectrum of frequencies observed
@@ -392,7 +392,7 @@ Different inverse-covariance matrices estimates corresponding to
 Fig.\,\ref{fig:correlation_matrices} -- \textbf{Left}: group-sparse estimate
 using the $\ell_{21}$ estimator \cite{varoquaux2010c}.
 The insert shows the
-connections restricted to the default mode network. -- \textbf{Upper
+connections restricted to a few major nodes. -- \textbf{Upper
 right}: non-sparse estimate: inverse of the sample correlation matrix. --
 \textbf{Lower right}: sparse estimate using the Graph Lasso
 \cite{friedman2008}.
@@ -411,7 +411,7 @@ correlation matrix obtained by plugging the observed signal in the
 correlation matrix formula, is not the population correlation matrix,
 \emph{i.e.}\ the correlation matrix of the data-generating process. If the
 number of measurements was infinite, the two would coincide, however if
-this number is not large compared to the number of connection (that
+this number is not large compared to the number of connections (that
 scales as the square of the number of ROIs), the sample correlation
 matrix is a poor estimate of the underlying population correlation
 matrix. In other words, the sample correlation matrix captures a lot of
@@ -457,7 +457,7 @@ which, sparse inverse covariance estimators have been found to be
 efficient \cite{varoquaux2010c, smith2011}. The intuition for relying on
 inverse covariance rather than correlation stems from that fact that
 standard correlation (marginal correlation) between two variables $a$ and
-$b$ also capture the effects of other variables -- strong correlation of
+$b$ also capture the effects of other variables: strong correlation of
 $a$ and $b$ with a third variable $c$ will induce a correlation between
 $a$ and $b$. On the opposite, the inverse covariance\footnote{Covariance
 and correlation matrices differ simply by the fact that a covariance
@@ -483,7 +483,7 @@ degrade the estimation of the actual connections. The sparse estimators
 make a compromise between imposing simpler models, \emph{i.e.}\ with less
 connections, and fitting well the data. This compromise is set via a
 regularization parameter which controls the sparsity of the estimate. A
-good rule of thumb to set this parameter is via cross-validation
+good rule of thumb to choose this parameter is via cross-validation
 \cite{varoquaux2010c}.
 
 % XXX: must comment on the estimator figure
@@ -495,9 +495,9 @@ contain a lot of information on the functional structure of the brain.
 First, the correlation matrix (Fig.\,\ref{fig:correlation_matrices})
 shows blocks of coactivating regions that can be interpreted as
 large-scale functional networks, such as the default mode network. Note
-the split in network is not straightforward. Different ordering of the
+that the split in networks is not straightforward. Different ordering of the
 nodes will reveal different networks. Indeed, because of the presence of
-hubs and interleaved networks the picture in terms of segregated networks
+hubs and interleaved networks, the picture in terms of segregated networks
 is not sufficient to explain full-brain connectivity
 \cite{varoquaux2012}. The connectivity matrices, correlation matrix or
 inverse-covariance matrix, can be represented as graphs: nodes connected
@@ -511,7 +511,8 @@ the BOLD signal: they give the conditional independence structure between
 the regions \cite{varoquaux2012}. In other words, regions $a$ and $b$ are
 not connected if the signal that they have in common can be explained by
 a third region $c$. In this light, the choice of nuisance regressors to
-remove confounding common signal is less critical. Indeed, while with
+remove confounding common signal is less critical with partial
+correlations than with correlations. Indeed, while with
 correlation matrices regressing out the global mean has a drastic
 (Fig.\,\ref{fig:correlation_matrices} upper right and lower right), on
 inverse covariance it only changes very slightly the resulting matrices
