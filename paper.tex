@@ -179,9 +179,9 @@ from techniques such as independent component analysis (ICA).
 Atlases can be used to define full-brain parcellations. The most popular
 choice is probably the AAL atlas \cite{tzourio-mazoyer2002a}, that
 benefits from an SPM toolbox. However, it suffers from major
-shortcomings; namely that \emph{i)} it was defined on a single subject
+shortcomings; namely \emph{i)} that it was defined on a single subject
 and thus does does not reflect inter-subject variability and \emph{ii)}
-focuses on labeling large anatomical structures and does not match
+that it focuses on labeling large anatomical structures and does not match
 functional layout --for instance only two regions describe the medial
 part of the frontal lobe. Multi-subject probabilistic altases such as the
 Harvard-Oxford atlas distributed with FSL \cite{smith2004} or the
@@ -207,7 +207,7 @@ regions that would overlap and lead to mixing of the signal.
 %
 Defining regions directly from the fMRI signal brings many benefits.
 First, it can capture subject-specific functional information. Second, it
-also adapts to the signal at hand and it's limitations, such as
+adapts to the signal at hand and its limitations, such as
 EPI-specific warps or vascular and movement artifacts that are isolated
 in ICA-like approaches. The simplest approach to define task-specific
 regions is to use activation maps derived from standard GLM-based
