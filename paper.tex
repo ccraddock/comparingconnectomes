@@ -80,9 +80,10 @@ mapping of regions recruited in tasks. However, while there exists a
 well-defined standard analysis framework for activation mapping that enables
 statistically-controlled comparisons across subjects \cite{friston1995},
 group-level analysis of functional connectivity still faces many open
-methodological challenges. Giving a picture of functional connectivity at
-the subject level is by itself not straightforward, as the brain
-comprises a myriad of interacting subsystems and must be decomposed in
+methodological challenges. Giving a picture of a single subject's 
+functional connectivity is by itself not straightforward, as the brain
+comprises a myriad of interacting subsystems and its connectivity must 
+be decomposed in
 simplified and synthetic representations. An important view of brain
 connectivity is that of distributed functional networks depicted by their
 spatial maps \cite{fox2005}. Another no less important and complementary
@@ -101,7 +102,8 @@ specific tools and guidelines that, in the experience of the authors,
 lead to controlled and powerful inter-subject comparisons. The paper is
 focused on functional connectomes, in contrast to structural connectomes,
 as the inference of functional connectivity from fluctuations in the
-signal induces important specificities. While the notion of functional
+signal implies important specificities in the statistical modeling. While 
+the notion of functional
 connectome is often associated with the study of resting-state
 \cite{biswal2010}, the methods presented in this paper are also relevant
 for task-based studies. On the other hand, the paper has a focus on fMRI;
@@ -118,15 +120,15 @@ is completely equivalent to its \emph{adjacency matrix}, a symmetric
 matrix tabulating the connection weights between each pair of nodes.
 Functional-connectivity graphs can be used to represent evoked activity,
 as in task-response studies \cite{mcintosh2000}, as well as
-task-independent ongoing activity that is present in the background
-during task and often studies in so-called \emph{resting-state}
+ongoing activity, present in the absence of specific tasks or in 
+the background during task and often studied in so-called \emph{resting-state}
 experiments \cite{raichle2010}. Another important notion that arises from
 the study of distributed modes of brain function is that of specialized
 functional networks\footnote{In neuroimaging, the term network is
 sometimes used to denote a graph of brain function. To disambiguate the
 notion of segregated spatial mode \cite{fox2005} from that of
 connectivity graphs, we will purposely restrict its usage in this
-paper.}. With our definition of the functional connectome, functional
+paper.} \cite{fox2005}. With our definition of the functional connectome, functional
 networks are not directly building blocks of the connectome but appear
 as a consequence of the graphical structure
 \cite{varoquaux2010c,varoquaux2012}.
@@ -146,7 +148,7 @@ and more complex models, such as effective-connectivity models.
 
 \section{Estimating functional connectomes}
 
-Here we discuss strategies to infer connectomes from functional brain
+Here we discuss the inference of connectomes from functional brain
 imaging data. We start with the choice of nodes \emph{i.e.}\ regions,
 followed by signal extraction, and the estimation of graphs.
 
@@ -157,15 +159,15 @@ The choice of regions of interests (ROIs) that defines the nodes of the
 graphs can be very important both in the estimation of connectomes and
 for group comparison \cite{wang2009}. Unsurprisingly, simulations have
 shown that extracting signal from ROIs that did not match functional
-units would lead to incorrect graph extraction \cite{smith2011}.
+units would lead to incorrect graphs estimated \cite{smith2011}.
 %
-Different strategies coexist. While dense parcellations approaches cover
+Different strategies to define suitable ROIs coexist. While dense parcellations approaches cover
 a large fraction of the brain \cite{achard2006, varoquaux2010c,
 wang2009}, this coverage can be traded off to focus on some specific
 regions, in favor of increased functional specificity and thus better
 differentiation across networks \cite{greicius2003, fair2009,
-varoquaux2010b, lewis2009, fransson2008, shirer2012}. In addition, while
-ROIs and most often defined as a hard selection of voxels, it is also
+varoquaux2010b}. In addition, while
+ROIs are most often defined as a hard selection of voxels, it is also
 possible to use a \emph{soft} definition, attributing weights as with
 probabilistic atlases, or spatial maps of functional networks extracted
 from techniques such as independent component analysis (ICA).
