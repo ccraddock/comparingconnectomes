@@ -906,14 +906,6 @@ beyond empirical correlation matrices, as discuss in the previous section.
 \subsection{Predictive Modeling}
 
 \cite{craddock2009}
-craddock 2009, Dosenbach 2010, lord 2011, deshpande, 
-
-1. importance of interpretation!
-2. the need for feature extraction
-3. the need for feature selection
-4. setting parameters.
-5. different methods have different interpretations
-
 % Define predictive modeling and give examples
 
 % Feature extraction and parameter selection
@@ -950,6 +942,53 @@ test. Predictive modeling is typically performed in a supervised learning
 framework where a target is available for each observation of the features,
 although unsupervised and semi-supervised methods can also be used.
 
+The quality of a predictive model is determined by its ability to make accurate predictions
+from never-before-seen data. This generalization ability is estimated by seperating the 
+available data into independet training and testing subsets. A predictive model is learned
+from the training data and applied to the testing data to predict corresponding values of the
+target variable. Prediction accuracy is then assessed by comparing these predictions to the 
+observed value of the target variable. This procedure can be iterated several times for different
+splits of the data and averaged to form a single measure of prediction accuracy, in a procedure termed 
+cross validation. One of the most important parameters for cross validation is the manner in which data 
+are subdivided. There are several strategies for constructing the training dataset ranging from using
+all but one observations (leave-one-out cross-validation), using a fraction of the observations
+(k-fold cross validation; kfcv), to resampling the observations with replacement (boostrap 
+cross-validation, bscv). Although loocv has been popular in neuroimaging applications of MVPA since
+it incorporates the largest amount of data into training performs the largest amount of data as it is
+easy to implement and results in the same error estimate, its estimates are more variable than 
+kfcv or bscv. Split-half cross validation (two-fold cross validation, 2fcv), minimizes the estimation
+variance, at the cost of using less training
+
+
+single observation (leave-one-out cross-validation; loocv), a fraction of the observations (k-fold cross-validation; kfcv),
+or resampling the observations with replacement (bootstrap cross-validation; bscv);  
+
+
+, leaving a  A commmon practice is leave-on-out cross-validation (loocv) in which a single observation
+is used for testing at each iteration, 
+
+
+is estimated through a one or
+more iterations of cross validation. 
+
+
+A cross validation cycle begins by seperating the 
+available data into two independent subsets: training data and testing data. A predictive model 
+is learned from the training data and subsequently applied to the testing data to predict 
+corresponding values of the target variable. Prediction accuracy is then assessed by comparing
+these predictions to the observed value of the target variable. This procedure is typically repeated
+for several different splits of the data. The simplest is hold-out validation in which the data
+is split into testing and training 
+	
+	One of the most important parameters for cross validation
+is the manner in which data are subdivided, which sets the balance between maximally use of the
+data for training.
+	
+	
+	Cross-validation can be performed
+in a variaty of ways, and if performed correctly will result in an unbiased estimator of 
+generalization ability. A major choice 
+
 Predictive models are validated using one or more iterations of cross
 validation, which involves training and testing phases.  A cross validation
 cycle begins by seperating the available data into two independent subsets:
@@ -957,7 +996,7 @@ training data and testing data.  Training involves learning a predictive model
 from the training data. During testing the model is applied to the testing data
 to predict corresponding values of the target variable.  Prediction accuracy is
 then assessed by comparing these predictions to the observed values of the
-target variable. In order to make 
+target variable. 
 
 A general application of predictive modeling can be broken down into feature
 extraction, model selection, feature selection, and model validation, each of
