@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Neuroimage-like layout
-%\documentclass[5p]{elsarticle}
+\documentclass[5p]{elsarticle}
 % For kindle
-\documentclass[1p,12pt]{elsarticle}
-\usepackage{geometry}
-\geometry{a6paper,hmargin={.2cm,.2cm},vmargin={1cm,1cm}}
+%\documentclass[1p,12pt]{elsarticle}
+%\usepackage{geometry}
+%\geometry{a6paper,hmargin={.2cm,.2cm},vmargin={1cm,1cm}}
 % End kindle
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{bm}
@@ -1088,36 +1088,36 @@ also expressed in \cite{mcintosh2010}).
 
 A first step to move from purely descriptive statistics to modeling with
 functional connectivity analysis is to consider a correlation matrix as a
-Gaussian graphical model, \emph{i.e.} a well-defined probabilistic model
+Gaussian graphical model, \emph{i.e.}\ a well-defined probabilistic model
 that describes observed correlations in terms of an independence
 structure and conditional relations \cite{lauritzen1996,varoquaux2011}.
 In such settings, the inverse covariance graph or the partial
 correlations are a measure of influence from one node to another, albeit
 undirected. Inferring direction in a Gaussian model is impossible. Linear
-structural equation models (SEMs) \cite{mcintosh1994} rely on similar
+structural equation models (SEMs) \cite{mcintosh1994} rely on a similar
 model that consists in specifying a candidate directed graphical
 structure. This structure constraints the covariance matrix of the
 signals and can thus be tested on observed data. In fact some forms of
-SEMs are known as ``covariance structure models''. Their is thus a strong
+SEMs are known as ``covariance structure models''. There is thus a strong
 formal link between correlation analysis in the framework of graphical
 models and SEMs: the former is undirected but fully exploratory, as it
 does not require the specification of candidate structure, while the
-latter is directory but confirmatory. The link has been exploited to
+latter is directed but confirmatory. This link has been exploited to
 specify candidate structures for SEMs using partial correlations
 \cite{marrelec2007}. More complex models, such as dynamical causal models
 (DCMs) \cite{friston2003a} or Granger causality \cite{goebel2003} require
 additional hypotheses such as non-linear couplings or time lags.
 
 Most importantly, more complex models can only be used to model
-interactions between a smaller number of nodes. This is not only due to a
+interactions between a small number of nodes. This is not only due to a
 computational difficulty, but also to fundamental roadblocks in
 statistics: the complexity of the model must match the richness of the
 data. While injecting prior information can help model estimation, the
-more informative this prior, the fragile the inference becomes. The
+more informative this prior the more fragile the inference becomes. The
 ongoing debate on the impact of hemodynamic lag on Granger-causality
 inference \cite{smith2012a} is an example of such fragility.
-While most of the theory underpinning correlation analysis (Gaussian
-graphical models) is based on a Gaussian assumption, the core results
+Note that although most of the theory underpinning correlation analysis
+(Gaussian graphical models) is based on a Gaussian assumption, the core results
 are robust to violations of this assumption \cite{ravikumar2011}.
 
 It is tempting to favor more neurobiologically-inspired models that give
@@ -1134,18 +1134,19 @@ can be preferred, if rich data is available. Automatic choice of model is
 a difficult problem, however, cross-validation (as used in
 \cite{varoquaux2010c,craddock2011,strother2006}) is a useful tool. The
 central principle of cross-validation is to learn (or fit) a model, and
-then test its test predictive power on unseen data. Models too complex
-for the data available while fit noise in the data, and thus generalize
+then test its predictive power on unseen data. Models too complex
+for the data available will fit noise in the data, and thus generalize
 poorly. The main benefit of cross-validation is that it is a
 non-parametric method which does not rely strongly on modeling
-assumption\footnote{This is to be contrasted to Bayesian model
+assumptions\footnote{This is to be contrasted to Bayesian model
 comparison, which will give correct results only if the true generative
 model is in the list of models compared. \cite{friston2012} argues that,
 based on the Neyman-Pearson lemma, cross-validation is less powerful than
 likelihood ratio tests relying on the full dataset. However, it is
 important to keep in mind that these approaches only test for
-self-consistence, as they require that model likelihood to describe the
-data well.}.
+self-consistence, as the Neyman-Pearson lemma requires that 
+the model likelihood describes the data well which may not always be the
+case\cite{lohmann2012}.}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
