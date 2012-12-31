@@ -903,14 +903,9 @@ beyond empirical correlation matrices, as discuss in the previous section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Predictive Modeling}
-craddock 2009, Dosenbach 2010, lord 2011, deshpande, 
+\subsection{Predictive Modeling}
 
-1. importance of interpretation!
-2. the need for feature extraction
-3. the need for feature selection
-4. setting parameters.
-\section{Predictive Modeling}
+\cite{craddock2009}
 craddock 2009, Dosenbach 2010, lord 2011, deshpande, 
 
 1. importance of interpretation!
@@ -919,6 +914,11 @@ craddock 2009, Dosenbach 2010, lord 2011, deshpande,
 4. setting parameters.
 5. different methods have different interpretations
 
+% Define predictive modeling and give examples
+
+% Feature extraction and parameter selection
+
+% Importance and caveats of interpretation
 
 Predictive modeling has been an active area of research in functional
 neuroimaging since the early 90s [] that has more recently been adapted to
@@ -940,7 +940,7 @@ biomarkers of Alzheimer's disease [92], major depression [93], schizophrenia
 utility of predictive modeling for deriving connectivity models at the
 individual level [97,].
 
-Nearly every analytical method can be appplied in a predictive modelling framework, but
+Nearly every analytical method can be applied in a predictive modeling framework, but
 multivariate classification and regression have been the most commonly used
 (referred to as MVPA; multivariate prediction analysis).  Multivariate methods
 are attractive in connectomics because they are sensitive to dependencies
@@ -967,7 +967,7 @@ extraction
 
 Model training can be further broken down into feature extraction, model
 selection and feature selection and testing can be performed for model
-optimziation and 
+optimization and 
 
 
 The application of predictive modeling to functional neuroimaging data has been
@@ -1012,7 +1012,7 @@ force meaningless weights to be zero.  Although ideal, these methods may have
 limits on the number of non-zero weights used in the model or the exclusion of
 highly correlated features from the model.  Contrary to previous reports [Guyon
 2002, Craddock 2009] no matter which feature selection strategy is employed, it
-must be performed withen cross-validation to avoid biasing estimates of
+must be performed with cross-validation to avoid biasing estimates of
 prediction accuracy [later Guyon].
 
 The interpretation of classifier weights for selected features, when available,
@@ -1022,7 +1022,7 @@ magnitude of weights can be interpreted to reflect the relative importance of
 the feature to the model, but interpreting how the feature differs between
 classes or relates to a continuous variable is more complicated, particularly
 given the multivariate nature of their involvement.  For classification methods
-such as Fisher's linear descriminate analysis (LDA),which maximally seperates
+such as Fisher's linear discriminant analysis (LDA), which maximally seperates
 class means given their standard deviation, feature weights are representative
 of the differences between class means. For support vector classification,
 classifier weights are derived from observations that are the most similar
@@ -1031,45 +1031,6 @@ most reasonable to adapt a conservative interpretation in which MVPA is used to
 identify the most relevant features that are later tested in followon
 experiments better suited to elucidating their relationship to the variable of
 interest.
-
-\emph{ --- CC text from TICS paper, do not use without modification!}
-Multivariate Prediction Analysis. When applied to the study of intrinsic
-activity, the goal of discovery science is to identify models that relate
-measures of that activity (such as iFC) to phenotypic variables.  Prediction
-analysis provides a means for measuring how well these models generalize to
-independent data.  This is complementary to inferential statistics, which
-measure the likelihood of such relationships arising by chance. In the
-prediction analysis framework, a model relating iFC to a phenotype is learned
-from a training dataset. This model is then applied to an independent test
-dataset to predict phenotypes.  The resultant predictions are compared to the
-true phenotypes to estimate how well the model generalizes to the tese dataset.
-Thus, prediction analysis provides a natural framework for evaluating biomarkers
-[21], performing real-time fMRI [88], and evaluating experimental tradeoffs
-[89]. 
-
-Prediction analysis has been applied to functional neuroimaging data since the early 90’s [90], and more
-recently to IFC data [91]. Most, if not all, analysis methods can be applied in a predictive modeling
-framework but the majority of methods that have been applied to iFC are multivariate classification and
-regression methods (referred to as MVPA; multivariate prediction analysis). Multivariate methods are more
-sensitive to distributed patterns of iFC than their univariate counterparts. Additionally they provide a
-means for evaluating the significance of an entire pattern using a single statistic, obviating the need
-to correct for multiple comparisons. 
-
-Although there are many circumstances in which high prediction accuracy is the ultimate goal of an
-analysis (e.g. predicting treatment outcome), in general it is desirable that the model also be
-interpretable. Identifying the iFC measures (features) that are most important to the model is
-problematic and an open issue for MVPA research. Several feature selection algorithms have been proposed
-to address this issue, but there is no consensus on which is best [21]. We note that feature selection
-methods that rely on feature-by-feature statistical tests require correction for multiple comparisons. 
-
-MVPA classification has already been successfully used to identify potential iFC biomarkers of Alzheimer’s
-disease [92], major depression [93], schizophrenia [94], and autism [47], among others. MVPA
-classification and regression techniques have also been applied to identify biomarkers of age [95,96]
-and recent work has shown the utility of MVPA methods for deriving iFC models at the individual
-level [97]. An in-depth overview of the statistical pattern recognition methods underlying MVPA
-techniques can be found in [98].
-\emph{ --- END CC text from TICS paper, do not use without modification!}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
