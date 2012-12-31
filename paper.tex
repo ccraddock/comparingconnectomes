@@ -1,6 +1,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Neuroimage-like layout
-\documentclass[5p]{elsarticle}
+%\documentclass[5p]{elsarticle}
+% For kindle
+\documentclass[1p,12pt]{elsarticle}
+\usepackage{geometry}
+\geometry{a6paper,hmargin={.2cm,.2cm},vmargin={1cm,1cm}}
+% End kindle
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{bm}
 \usepackage{algorithm}
@@ -540,32 +545,36 @@ brain regions easier and more robust to the choice of confounds.
 
 \section{Comparing connectivity}
 
-Here, we consider the problem of comparing functional connectivity across
-subjects or across conditions.
+In this section, we consider the problem of comparing functional
+connectivity across subjects or across conditions.
 
 %------------------------------------------------------------------------------
 \subsection{Detecting changing connections}
 
 First, we focus on detecting where the connectivity matrices estimated in
-the previous section differ. \paragraph{Mass-univariate approaches}
+the previous section differ.
+
+\paragraph{Mass-univariate approaches}
 %
-The most natural approach is to do a linear model on each coefficient of
-the connectivity matrices, as in \cite{lewis2009,grillon2012}. This
+The most natural approach is to apply a linear model to each coefficient of
+the connectivity matrices \cite{lewis2009,grillon2012}. This
 approach is similar to the second-level analysis used in mass-univariate
-brain mapping, and will give rise to many of the well-known techniques
-used in such a context, such as the definition of second-level design,
+brain mapping, and gives rise to many of the well-known techniques
+used in such a context, such as the definition of a second-level design,
 with possibly the inclusion of confounding effects, and statistical tests
 (T tests or F tests) on contrast vector. Importantly, in order to work
-with Gaussian-distributed correlations, it is necessary to apply a Fisher
+with Gaussian-distributed variables, it is necessary to apply a Fisher
 Z transform\footnote{See
 \url{http://en.wikipedia.org/wiki/Fisher_transformation} or
-\cite{anderson1958}, section 4.2.3 for mathematical arguments}. Note that
+\cite{anderson1958}, section 4.2.3 for mathematical arguments} to the
+correlations. Note that
 in these settings, the Ledoit-Wolf estimator \cite{ledoit2004} is
-probably a good choice to estimate the correlation matrix, as it is
-parameter-less and gives good estimation performance without imposing any
+often a good choice to estimate the correlation matrix, as it is
+parameter-free and gives good estimation performance without imposing any
 restrictions on the data.
 %
-Correcting for multiple comparison can often severely limit statistical
+For hypothesis testing,
+correcting for multiple comparison can severely limit statistical
 power, as the number of tests performed scales as the square of the
 number of regions used. Controlling for the false discovery rate (FDR)
 mitigates this problem. Alternatively, as the assumption underlying the
@@ -753,7 +762,7 @@ Corresponding Z-score for the subject residuals, as defined in
 \paragraph{Accounting for distributed variability}
 %
 A specific challenge of connectivity analysis is that the connectivity
-between different regions tend to covary. For instance, with
+strength between different regions tend to covary. For instance, with
 resting-state data, functional networks comprising many nodes can appear
 as more or less connected across subjects (see for instance
 Fig.\,\ref{fig:inter_subject}.a, showing variability in a control
@@ -761,18 +770,18 @@ population at rest). In other words, non-specific variability is
 distributed accross the connectivity graph, and it is structured by the
 graph itself. This observation brings the natural question of whether
 second-level analysis should be performed on correlation matrices,
-inverse-covariance matrices, or another parametrisation that would
+inverse-covariance matrices, or another parametrization that would
 disentangle effects and give unstructured (white) residuals. While
 inverse-covariance matrices show less distributed fluctuations than
 correlation matrices, they capture a lot of background noise, as partial
 correlations are intrinsically harder to estimate. Preliminary work
-\cite{varoquaux2010b} suggest to perform statistics on residuals of
-a parametrisation intermediate between correlation matrix and inverse
-covariance matrix.
+\cite{varoquaux2010b} suggests to perform statistics on residuals of
+a parametrization intermediate between correlation matrix and inverse
+covariance matrix, that decouples effects and noise.
 
 Taking a different stance on distributed variability, the ``network-based
 statistics'' approach \cite{zalesky2010} draws from the hypothesis that
-if, in a second-level analysis, an effect is detected in a connection
+if, in a second-level analysis, an effect is detected on a connection
 that lies in a network of strongly connected nodes, the whole network is
 likely to cary an effect. Thus, they adapt cluster-level inference to
 connectivity analysis, in order to mitigate the curse of multiple
@@ -782,29 +791,33 @@ comparisons.
 
 \subsection{Comparing network summary statistics}
 
+Both the multiple comparison issue and the network-level distributed
+variability are a plague to edge-level comparison of connectomes. A
+possible strategy to circumvent these difficulties is to perform
+comparison and statistical testing at the level of the network, rather
+than the individual connection. 
+
 \paragraph{Network integration}
 %
-To avoid the multiple comparison issue and to capture the network-level
-distributed variability, a possible strategy is to perform comparison and
-statistical testing at the level of the network, rather than the
-individual connection. In particular, Marrelec \emph{et al.}\
+Marrelec \emph{et al.}\
 \cite{marrelec2008} introduce the use of entropy and mutual information
 as a measure of network integration\footnote{See \cite{varoquaux2010c}
 for simplified formulas for network integration and mutual information.}.
 Gaussian entropy can be seen as a simple metric to generalize correlation
 or variance to multiple nodes (see \cite{anderson1958} \S2.5.2 and
-\S7.5). Indeed, let us considering 3 nodes: $a$, $b$ and $c$. Their
+\S7.5). Indeed, let us consider 3 nodes: $a$, $b$ and $c$. Their
 correlation structure is captured by three correlation coefficients:
 $\rho_{ab}$, $\rho_{bc}$ and $\rho_{ac}$. Summarizing these by their
 mean, as it might seem natural, discards the relationship between the
 signals, while using the integration tells us how much two signals can be
-combined to form the third (see Fig.\,\ref{fig:integration}). Similarly
-as Gaussian entropy can be used to measure the integration of a brain
-system or network, cross-entropy --or mutual information--
+combined to form the third (see Fig.\,\ref{fig:integration}). 
+Cross-entropy --or mutual information--
 \cite{marrelec2008} measures the amount of cross-talk between two
-systems. The functional-connectivity structure, or its representation in
+systems in a similar way as Gaussian entropy to used to measure the
+integration of a brain
+system. The functional-connectivity structure, or its representation in
 form of a correlation matrix, can thus be characterized via the
-integration and cross-talk of some of its subs-systems. This appraoch
+integration and cross-talk of some of its subs-systems. This approach
 gives a simplified representation with a small number of metrics that can
 be compared across subjects.
 
@@ -842,9 +855,9 @@ be compared across subjects.
 
 \caption{Two different correlation matrices with the same average
 correlation, but with very different integration values. Indeed, the
-matrix on the left was chosen to have represent three signals $a$, $b$
+matrix on the left was chosen to represent three signals $a$, $b$
 and $c$ as different from each other as possible, given $\rho_{ab} +
-\rho_{bc} + \rho{ac} = 1.35$; it thus as a small integration value. On
+\rho_{bc} + \rho{ac} = 1.35$; it thus has a small integration value. On
 the opposite, for the matrix on the right, signal $b$ can almost be fully
 recovered by combining signals $a$ and $c$; the matrix thus has a large
 integration value.
@@ -864,27 +877,29 @@ approaches'', however graph theory is an entire division of mathematics
 and computer science that is concerned with much more than topology of
 random graphs.} that are characteristic of small-word networks
 \cite{stam2004,salvador2005,achard2006,bullmore2009}. These networks
-display excellent transport properties: although they display relatively
+display excellent transport properties: although they have a relatively
 small number of connections, any two regions of the brain are well
 connected. Another interesting consequence of their specific topology is
-the resilience it gives to the system to attacks such as resulting from
+the resilience it gives the system to attacks such as resulting from
 brain lesions \cite{achard2006}. This overall structure of
 functional-connectivity graphs can be summarized by a few metrics, such
 as the average path length between any two nodes or the local clustering
-coefficients \cite{rubinov2010}. Given that pathologies without a well-defined focus, such
+coefficients \cite{rubinov2010}. Given that pathologies without a
+localized focus, such
 as schizophrenia, are thought to have a global impact on brain
-connectivity \cite{liu2008,bassett2008}, it is interesting to use the
-graph-topology metrics to perform inter-subject comparison. Such an
+connectivity \cite{liu2008,bassett2008}, the graph-topology metrics are
+promising markers to perform inter-subject comparison. Such an
 approach is appealing as it is not subject to multiple comparison issues.
 However, it has been criticized as giving a fairly unspecific
 characterization of the brain and being fragile to noise
-\cite{ioannides2007}. Another caveat is that correlation matrices display
-small-word properties such as local clustering by construction, as if two
+\cite{ioannides2007}. Another caveat is that these properties are not
+specific to brain function: correlation matrices display
+small-word properties such as local clustering by construction. Indeed, if two
 nodes are strongly correlated to a third, they are highly likely to be
 correlated to each other \cite{zalesky2012}. This observation highlight
 the need for well defined null-hypothesis \cite{zalesky2012,rubinov2011},
 but also for controlled recovery of brain functional connectivity going
-beyond empirical correlation matrices.
+beyond empirical correlation matrices, as discuss in the previous section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
