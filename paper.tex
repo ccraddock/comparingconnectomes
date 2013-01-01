@@ -914,7 +914,8 @@ markers \cite{stonnington2010}. However, beyond the practical use of
 prediction, these models can also be useful to uncover mechanism of brain
 function \cite{norman2006}. Both the fact that information \emph{can} be
 drawn to generalize predictions to new data and \emph{how} or
-\emph{where} informs us on brain function. Multivariate predictive models
+\emph{where} it lies informs us on brain function. Multivariate
+predictive models
 are attractive in connectomics because they are sensitive to dependencies
 between features and avoid the need to correct for multiple comparisons
 since the significance of an entire pattern is evaluated using a single
@@ -943,7 +944,7 @@ biomarker, but also its explanatory power for the mechanism under study.
 %
 This prediction accuracy is measured using one or more iterations of
 cross validation, which involves training and testing phases
-\cite{pereira2009}.  A cross validation cycle begins by separating the
+\cite{pereira2009}. Cross validation cycles separate the
 available data into two independent subsets: training data and testing
 data.  Training involves learning a predictive model from the training
 data. During testing the model is applied to the testing data to predict
@@ -951,38 +952,32 @@ corresponding values of the target variable.  Prediction accuracy is then
 assessed by comparing these predictions to the observed values of the
 target variable.
 
-% XXX: sentence below should probably be moved elsewhere
-Support vector machines (classification and regression) are popular
-algorithms for predictive modeling as they do not require fine parameter
-setting.
-% XXX: need better explanation, in particular of nested cross-val
-However, learning algorithms require in general the specification of
+Support vector machines\footnote{See \cite{kloppel2008}
+for a gentle introduction to support vector machines.} (classification and regression) are popular
+algorithms for predictive modeling as they work on a large class of problems 
+and do not require fine parameter setting.
+However, in general learning algorithms do require the specification of
 parameters, the values of which will impact the quality of the results.
-These parameters may be specified based on domain specific knowledge, or
-requirements, determined using an analytical approach, or optimized using
-cross validation. In latter case a nest cross-validation scheme is
-required to avoid biasing resultant measures of prediction accuracy. 
-
-Determining the subset of features most relevant to the model (feature
-selection) is essential for interpreting the models. In cases were model
-weights can be directly mapped to their corresponding feature, there is
-typically no statistical framework for thresholding these weights, and
-meaningless features are not always set to zero (this is particularly the
-case for $\ell_2$ regularized algorithms such as SVM and ridge
-regression). One feature selection strategy is to filter out features
+These parameters may be specified based on domain specific knowledge,
+determined using an analytical approach, or set using
+cross validation to optimize the prediction accuracy. In latter case 
+to avoid biasing measures of prediction accuracy, a
+nested cross-validation scheme \cite{pereira2009} is required, assessing 
+prediction on left-out data not used to set the parameters.
+%
+Selecting features most relevant to the model can help prediction
+accuracy and model interpretation \cite{pereira2009}. One feature selection strategy is 
+to filter out features
 based on their statistical relationship with the variable of interest
 using a univariate statistical criterion such as t-test, Pearson's
 correlation, or mutual information.  A drawback of this approach is that
 since the filters are typically insensitive to multivariate
 information, they may exclude features that would be important to the
-model. 
-
-% XXX: mention nested cross-val for feature selection above
+model. Note that feature selection must be performed inside the
+cross-validation loop, \emph{i.e.}\ on the train data, excluding the test
+data.
 
 % Importance and caveats of interpretation
-
-% XXX: distinguish linear from non-linear classifiers. Explain that a
-% linear classifier is nothing more than a fancy linear regression
 
 The interpretation of the predictive model can be complicated and
 requires insight into the mechanisms
@@ -993,7 +988,11 @@ standardized prior to training, the magnitude of weights can be
 interpreted to reflect the relative importance of the feature to the
 model, but interpreting how the feature differs between classes or
 relates to a continuous variable is more complicated, particularly given
-the multivariate nature of their involvement.  For classification methods
+the multivariate nature of their involvement\footnote{Note that there is
+typically no statistical framework for thresholding these weights, and
+meaningless features are not always set to zero (this is particularly the
+case for $\ell_2$ regularized algorithms such as SVM and ridge
+regression)}. For classification methods
 such as Fisher's linear discriminant analysis (LDA), which maximally
 separates class means given their standard deviation, feature weights are
 representative of the differences between class means. For support vector
