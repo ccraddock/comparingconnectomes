@@ -984,9 +984,11 @@ model.
 % XXX: distinguish linear from non-linear classifiers. Explain that a
 % linear classifier is nothing more than a fancy linear regression
 
-The interpretation of classifier weights for selected features, when
-available, is complicated and requires insight into the mechanisms
-underlying the modeling approach. If features are appropriately
+The interpretation of the predictive model can be complicated and
+requires insight into the mechanisms
+underlying the modeling approach. For linear classifiers, 
+classifier weights are similar to the weight of a ordinary regression.
+If features are appropriately
 standardized prior to training, the magnitude of weights can be
 interpreted to reflect the relative importance of the feature to the
 model, but interpreting how the feature differs between classes or
