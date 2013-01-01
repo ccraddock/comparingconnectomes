@@ -1111,25 +1111,28 @@ that ``the crucial concept needed for network analysis is covariance''.
 In our eyes, this still holds today. Estimation functional connectomes
 relies largely on fitting covariance models. Their comparison requires
 understanding how these covariances vary and finding metrics to capture
-this variability. Additionally, a secret ingredient to all statistical
-steps is a good choice of confounds.
-% XXX: more practical advice?
+this variability. The additional secret ingredient may be a good choice
+of confounds in all statistical steps. A good choice of a small number of
+relevant regions facilitates connectome comparison. However, such a
+choice cannot yet be fully factored out via methods and must rely on
+neuroscientific expertise.
 
 Methodological challenges to functional-connectome-based group studies
 arise from the dimensionality and the of variability the connectome. With
 the current tools, inter-subject comparison of connectomes comprising
 many nodes is limited by the difficulty of estimating high-dimensional
 covariance matrices and the loss of statistical power due to multiple
-comparisons. Better algorithms integrating powerful a priori is required
+comparisons. Better algorithms integrating powerful a priori are required
 to push the limits of covariance estimation. Better characterization of
 inter-subject variability of connectomes \cite{kelly2012} will help
 choosing parameterizations and invariants to avoid testing each edge for
-a difference, as it inevitably leads to a needle in a haystack problem.
+a difference, as this strategy inevitably leads to a needle in a haystack
+problem.
 
 Reviewing methodological options to learn and compare connectomes
 highlights that there is currently no unique solution, but a spectrum of
 related methods and analysis strategies. More empirical results are
-required to guide the choices, however this diversity is probably
+required to guide the choices. However this diversity is probably
 unavoidable: a diffuse disease like schizophrenia will not lead to the
 same connectome modifications as a focal lesion. In statistical learning,
 ``no free lunch'' theorems \cite{wolpert1996} tell us that no strategy
