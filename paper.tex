@@ -984,12 +984,12 @@ data.
 The interpretation of the predictive model can be complicated and
 requires insight into the mechanisms
 underlying the modeling approach. For linear classifiers, 
-classifier weights are similar to the weights of a ordinary regression.
+classifier weights are similar to the weights of a ordinary linear regression.
 If features are appropriately
 standardized prior to training, the magnitude of weights can be
 interpreted to reflect the relative importance of the feature to the
-model, but interpreting how the feature differs between classes or
-relates to a continuous variable is more complicated, particularly given
+model. However, interpreting how the feature differs between classes or
+relates to a continuous variable can be more complicated given
 the multivariate nature of their involvement\footnote{Note that there is
 typically no statistical framework for thresholding these weights, and
 meaningless features are not always set to zero (this is particularly the
@@ -1005,6 +1005,13 @@ perhaps most reasonable to adapt a conservative interpretation in which
 predictive models is used to identify the most relevant features that are
 later tested in follow-up experiments better suited to elucidating their
 relationship to the variable of interest.
+
+To conclude on predictive modeling with a practical note for connectome
+comparison, we would like to stress that, while machine learning
+algorithms are powerful tools, they work best if they are provided with
+discriminant and noiseless features. In other words, as with all other
+connectome comparison methods, optimizing first-level analysis
+--subject-level connectome extraction-- is paramount.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
