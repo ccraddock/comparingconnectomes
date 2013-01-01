@@ -1113,11 +1113,18 @@ relies largely on fitting covariance models. Their comparison requires
 understanding how these covariances vary and finding metrics to capture
 this variability. Additionally, a secret ingredient to all statistical
 steps is a good choice of confounds.
+% XXX: more practical advice?
 
-% XXX add here a bit more of connectome stuff. Be optimistic!
-% Look to the future: note that estimation of connectomes with many nodes
-% is more challenging than small connectomes, but that better apriori and
-% better algorithms will push these limits further.
+Methodological challenges to functional-connectome-based group studies
+arise from the dimensionality and the of variability the connectome. With
+the current tools, inter-subject comparison of connectomes comprising
+many nodes is limited by the difficulty of estimating high-dimensional
+covariance matrices and the loss of statistical power due to multiple
+comparisons. Better algorithms integrating powerful a priori is required
+to push the limits of covariance estimation. Better characterization of
+inter-subject variability of connectomes \cite{kelly2012} will help
+choosing parameterizations and invariants to avoid testing each edge for
+a difference, as it inevitably leads to a needle in a haystack problem.
 
 Reviewing methodological options to learn and compare connectomes
 highlights that there is currently no unique solution, but a spectrum of
@@ -1129,7 +1136,7 @@ same connectome modifications as a focal lesion. In statistical learning,
 can perform uniformly better in all situations. In practice, the key to a
 successful analysis is to understand well the assumptions and
 interpretation of each option, in order to match the method to the
-research question.
+question.
 
 {
 %\clearpage
