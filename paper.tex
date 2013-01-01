@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Neuroimage-like layout
-\documentclass[5p]{elsarticle}
+%\documentclass[5p]{elsarticle}
 % For kindle
-%\documentclass[1p,12pt]{elsarticle}
-%\usepackage{geometry}
-%\geometry{a6paper,hmargin={.2cm,.2cm},vmargin={1cm,1cm}}
+\documentclass[1p,12pt]{elsarticle}
+\usepackage{geometry}
+\geometry{a6paper,hmargin={.2cm,.2cm},vmargin={1cm,1cm}}
 % End kindle
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{bm}
@@ -80,7 +80,7 @@ neural systems via correlations in brain activity
 \cite{biswal1995,cordes2000}. Given that high-level
 function emerges from the interaction of specialized units, functional
 connectivity is an essential part of the description of brain function,
-complementary to the localizationist picture emerging from the systematic
+that complements the localizationist picture emerging from the systematic
 mapping of regions recruited in tasks. However, while there exists a
 well-defined standard analysis framework for activation mapping that enables
 statistically-controlled comparisons across subjects \cite{friston1995},
@@ -105,7 +105,7 @@ estimation and comparison of functional connectomes. It does not attempt
 to be exhaustive, as the field is wide and moving rapidly, but details
 specific tools and guidelines that, in the experience of the authors,
 lead to controlled and powerful inter-subject comparisons. The paper is
-focused on functional connectomes, in contrast to structural connectomes,
+focused on functional connectomes in contrast to structural connectomes,
 as the inference of functional connectivity from fluctuations in the
 signal implies important specificities in the statistical modeling. While 
 the notion of functional
@@ -123,7 +123,7 @@ representing functional interactions in the brain, where the term
 connected together by \emph{edges}. A graph can be weighted or not, and
 is completely equivalent to its \emph{adjacency matrix}, a symmetric
 matrix tabulating the connection weights between each pair of nodes.
-Functional-connectivity graphs can be used to represent evoked activity,
+Functional-connectivity graphs are used to represent evoked activity,
 as in task-response studies \cite{mcintosh2000}, as well as
 ongoing activity, present in the absence of specific tasks or in 
 the background during task and often studied in so-called \emph{resting-state}
@@ -160,7 +160,7 @@ followed by signal extraction, and the estimation of graphs.
 %------------------------------------------------------------------------------
 \subsection{Defining regions}
 
-The choice of regions of interests (ROIs) that defines the nodes of the
+The choice of regions of interests (ROIs) that define the nodes of the
 graphs can be very important both in the estimation of connectomes and
 for group comparison \cite{wang2009}. Unsurprisingly, simulations have
 shown that extracting signal from ROIs that did not match functional
@@ -221,7 +221,7 @@ Regions are extracted by thresholding the maps, or using balls around the
 activation peaks. For resting-state studies, unsupervised multivariate
 analysis techniques are necessary. Clustering approaches extract
 full-brain parcellations \cite{craddock2011, bellec2010, yeo2011,
-thirion2006}, and have been shown to extract well-known functional
+thirion2006}, and have been shown to segment well-known functional
 structures from rest data. Alternatively, decompositions
 methods, such as ICA \cite{beckmann2004}, can unmix linear
 combinations of multiple effects and separate out overlapping spatial maps
@@ -265,7 +265,7 @@ learning.
 The concept of functional connectivity has be called elusive
 \cite{horwitz2003}: it has many mathematical instantiations although in
 essence they all strive to extract simple statistics from functional
-imaging to characterize synchrony and communication between large
+imaging in order to characterize synchrony and communication between large
 ensembles of neurons. Here we choose to focus on second order statistics
 that can be related to Gaussian models, the simplest of which being the
 correlation matrix of the signals of the different ROIs.
@@ -328,7 +328,7 @@ Given ROIs, the next step is to extract from them a summary measure. To
 study \emph{on-going} activity, \emph{e.g.}\ with rest data, signal
 extraction is performed from the EPI time series; however, to study
 \emph{evoked} activity with task-driven studies it can be beneficial to
-run a first-level analysis, enforcing specificity of the measure
+run a GLM-based first-level analysis, enforcing specificity of the measure
 extracted to the task. With slow event-related designs, task-specific
 functional connectivity can be captured in trial-to-trial fluctuations in
 the BOLD response, estimated using a GLM analysis with one regressor per
@@ -394,7 +394,7 @@ as output by \emph{e.g.}\ SPM's segmentation tool \cite{ashburner2005}.
 
 \caption{
 Different inverse-covariance matrices estimates corresponding to
-Fig.\,\ref{fig:correlation_matrices} -- \textbf{Left}: group-sparse estimate
+fig.\,\ref{fig:correlation_matrices} -- \textbf{Left}: group-sparse estimate
 using the $\ell_{21}$ estimator \cite{varoquaux2010c}.
 The insert shows the
 connections restricted to a few major nodes. -- \textbf{Upper
@@ -471,7 +471,7 @@ correlation matrix is computed on normalized signals.}
 matrix captures
 partial correlations, removing the effect of other variables
 \cite{marrelec2006a}. In the small sample limit, this removal is
-challenging from the statistical standpoint, and assumption of sparsity,
+challenging from the statistical standpoint, and an assumption of sparsity,
 \emph{i.e.}\ that only few variables need to be considered at a time, is
 important to estimate a good inverse covariance. Various estimation
 strategies exist for sparse inverse covariance, and have an impact on the
@@ -482,7 +482,7 @@ the $\ell_{21}$ estimator \cite{varoquaux2010c,honorio2012} is useful to
 impose a common sparsity structure across different subjects and achieve
 better recovery of this common structure. Simply put, these approaches
 are necessary because estimation noise creates a background structure
-(see Fig.\,\ref{fig:icov_estimators}); however, unlike in a univariate situation, the
+(see fig.\,\ref{fig:icov_estimators}); however, unlike in a univariate situation, the
 parameters are not independent, and the spurious background connections
 degrade the estimation of the actual connections. The sparse estimators
 make a compromise between imposing simpler models, \emph{i.e.}\ with less
@@ -497,7 +497,7 @@ good rule of thumb to choose this parameter is via cross-validation
 %
 The correlation matrices and inverse-covariance matrices that we extract
 contain a lot of information on the functional structure of the brain.
-First, the correlation matrix (Fig.\,\ref{fig:correlation_matrices})
+First, the correlation matrix (fig.\,\ref{fig:correlation_matrices})
 shows blocks of coactivating regions that can be interpreted as
 large-scale functional networks, such as the default mode network. Note
 that the split in networks is not straightforward. Different ordering of the
@@ -506,22 +506,22 @@ hubs and interleaved networks, the picture in terms of segregated networks
 is not sufficient to explain full-brain connectivity
 \cite{varoquaux2012}. The connectivity matrices, correlation matrix or
 inverse-covariance matrix, can be represented as graphs: nodes connected
-by weighted edges (inserts on Fig.\,\ref{fig:correlation_matrices} and
-Fig.\,\ref{fig:icov_estimators}). The inverse-covariance matrix,
+by weighted edges (inserts on fig.\,\ref{fig:correlation_matrices} and
+fig.\,\ref{fig:icov_estimators}). The inverse-covariance matrix,
 capturing partial correlations, appears then as extracting a
-\emph{backbone} or \emph{core} of the graph. While such structure have
+\emph{backbone} or \emph{core} of the graph. While such structure has
 been used as a way to summarize anatomical brain connectivity graphs
-\cite{hagmann2008}, here they have a clear-cut meaning with regards to
-the BOLD signal: they give the conditional independence structure between
+\cite{hagmann2008}, here it has a clear-cut meaning with regards to
+the BOLD signal: it gives the conditional independence structure between
 the regions \cite{varoquaux2012}. In other words, regions $a$ and $b$ are
 not connected if the signal that they have in common can be explained by
 a third region $c$. In this light, the choice of nuisance regressors to
 remove confounding common signal is less critical with partial
 correlations than with correlations. Indeed, while with
-correlation matrices regressing out the global mean has a drastic
-(Fig.\,\ref{fig:correlation_matrices} upper right and lower right), on
+correlation matrices regressing out the global mean has a drastic effect
+(fig.\,\ref{fig:correlation_matrices} upper right and lower right), on
 inverse covariance it only changes very slightly the resulting matrices
-(Fig.\,\ref{fig:icov_regressors}). There have been debates on whether to
+(fig.\,\ref{fig:icov_regressors}). There have been debates on whether to
 regress out certain signals, such as the global mean,  as it induces
 negative correlations \cite{murphy2009,chang2009,fox2009}, and these may seem
 surprising: one network is doing the opposite of the other. However,
@@ -545,7 +545,7 @@ brain regions easier and more robust to the choice of confounds.
 
 \section{Comparing connectivity}
 
-In this section, we consider the problem of comparing functional
+We now turn to the problem of comparing functional
 connectivity across subjects or across conditions.
 
 %------------------------------------------------------------------------------
@@ -566,7 +566,7 @@ with possibly the inclusion of confounding effects, and statistical tests
 with Gaussian-distributed variables, it is necessary to apply a Fisher
 Z transform\footnote{See
 \url{http://en.wikipedia.org/wiki/Fisher_transformation} or
-\cite{anderson1958}, section 4.2.3 for mathematical arguments} to the
+\cite{anderson1958} section 4.2.3 for mathematical arguments.} to the
 correlations. Note that
 in these settings, the Ledoit-Wolf estimator \cite{ledoit2004} is
 often a good choice to estimate the correlation matrix, as it is
@@ -577,9 +577,9 @@ For hypothesis testing,
 correcting for multiple comparison can severely limit statistical
 power, as the number of tests performed scales as the square of the
 number of regions used. Controlling for the false discovery rate (FDR)
-mitigates this problem. Alternatively, as the assumption underlying the
+mitigates this problem. Alternatively, as the assumptions underlying the
 Benjamini-Hochberg procedure \cite{benjamini1995} for the FDR can easily
-be broken, non-parametric permutations-based approaches give reliable
+be broken, non-parametric permutations-based tests give reliable
 approaches. In particular, the max-T procedure \cite{ge2003,nichols2001}
 is interesting to avoid the drastic Bonferroni correction when
 controlling for multiple comparison in family-wise error rate.
@@ -746,7 +746,7 @@ controlling for multiple comparison in family-wise error rate.
 }
 
 \caption{Inter subject variability. Note that this is variability
-occurring in a healthy population at rest, in other words non specific
+occurring in a healthy population at rest, in other words it is non specific
 variability -- \textbf{a}: single-subject
 correlation matrices for different subjects -- \textbf{b}:
 Corresponding Z-score (effect / standard deviation) of the difference
@@ -765,7 +765,7 @@ A specific challenge of connectivity analysis is that the connectivity
 strength between different regions tend to covary. For instance, with
 resting-state data, functional networks comprising many nodes can appear
 as more or less connected across subjects (see for instance
-Fig.\,\ref{fig:inter_subject}.a, showing variability in a control
+fig.\,\ref{fig:inter_subject}.a, showing variability in a control
 population at rest). In other words, non-specific variability is
 distributed accross the connectivity graph, and it is structured by the
 graph itself. This observation brings the natural question of whether
@@ -810,10 +810,10 @@ correlation structure is captured by three correlation coefficients:
 $\rho_{ab}$, $\rho_{bc}$ and $\rho_{ac}$. Summarizing these by their
 mean, as it might seem natural, discards the relationship between the
 signals, while using the integration tells us how much two signals can be
-combined to form the third (see Fig.\,\ref{fig:integration}). 
+combined to form the third (see fig.\,\ref{fig:integration}). 
 Cross-entropy --or mutual information--
 \cite{marrelec2008} measures the amount of cross-talk between two
-systems in a similar way as Gaussian entropy to used to measure the
+systems in a similar way as Gaussian entropy is used to measure the
 integration of a brain
 system. The functional-connectivity structure, or its representation in
 form of a correlation matrix, can thus be characterized via the
@@ -872,7 +872,7 @@ integration value.
 %
 Functional connectivity graphs have been found to display specific
 topological properties\footnote{In the neuroscience world, these
-descriptions are group under the terms of ``graph theoretical
+descriptions are grouped under the terms of ``graph theoretical
 approaches'', however graph theory is an entire division of mathematics
 and computer science that is concerned with much more than topology of
 random graphs.} that are characteristic of small-word networks
@@ -908,16 +908,16 @@ beyond empirical correlation matrices, as discuss in the previous section.
 % Define predictive modeling and give examples
 
 Predictive modeling is concerned with learning (or fitting) a model to
-draw conclusions on new and unseen data \cite{pereira2009}. Typically on
+draw conclusions on new and unseen data \cite{pereira2009}. Typically, on
 brain imaging data, it opens the door to learning diagnosis or prognosis
 markers \cite{stonnington2010}. However, beyond the practical use of
-prediction, these models can also be useful to uncover mechanism of brain
+prediction, these models can also be useful to uncover mechanisms of brain
 function \cite{norman2006}. Both the fact that information \emph{can} be
-drawn to generalize predictions to new data and \emph{how} or
+used to make predictions on new data, and \emph{how} it is used or
 \emph{where} it lies informs us on brain function. Multivariate
 predictive models
 are attractive in connectomics because they are sensitive to dependencies
-between features and avoid the need to correct for multiple comparisons
+between features and avoid the curse of multiple comparisons
 since the significance of an entire pattern is evaluated using a single
 statistical test. From the perspective of medical applications, using
 resting-state connectivity as a biomarker is particularly appealing as it
@@ -953,14 +953,14 @@ assessed by comparing these predictions to the observed values of the
 target variable.
 
 Support vector machines\footnote{See \cite{kloppel2008}
-for a gentle introduction to support vector machines.} (classification and regression) are popular
+for a gentle introduction to support vector machines.} are popular
 algorithms for predictive modeling as they work on a large class of problems 
 and do not require fine parameter setting.
 However, in general learning algorithms do require the specification of
 parameters, the values of which will impact the quality of the results.
 These parameters may be specified based on domain specific knowledge,
 determined using an analytical approach, or set using
-cross validation to optimize the prediction accuracy. In latter case 
+cross validation to optimize the prediction accuracy. In latter case, 
 to avoid biasing measures of prediction accuracy, a
 nested cross-validation scheme \cite{pereira2009} is required, assessing 
 prediction on left-out data not used to set the parameters.
@@ -1007,7 +1007,7 @@ later tested in follow-up experiments better suited to elucidating their
 relationship to the variable of interest.
 
 To conclude on predictive modeling with a practical note for connectome
-comparison, we would like to stress that, while machine learning
+comparison, we would like to stress that while machine learning
 algorithms are powerful tools, they work best if they are provided with
 discriminant and noiseless features. In other words, as with all other
 connectome comparison methods, optimizing first-level analysis
@@ -1028,14 +1028,15 @@ we would like to bridge the gap between these concepts, which in our eyes
 should be seen as a continuum rather than an opposition (this opinion is
 also expressed in \cite{mcintosh2010}).
 
-A first step to move from purely descriptive statistics to modeling with
+A first step to move from purely descriptive statistics to interaction
+models with
 functional connectivity analysis is to consider a correlation matrix as a
 Gaussian graphical model, \emph{i.e.}\ a well-defined probabilistic model
 that describes observed correlations in terms of an independence
 structure and conditional relations \cite{lauritzen1996,varoquaux2011}.
 In such settings, the inverse covariance graph or the partial
 correlations are a measure of influence from one node to another, albeit
-undirected. Inferring direction in a Gaussian model is impossible. Linear
+undirected. Inferring directionality in a Gaussian model is impossible. Linear
 structural equation models (SEMs) \cite{mcintosh1994} rely on a similar
 model that consists in specifying a candidate directed graphical
 structure. This structure constraints the covariance matrix of the
@@ -1055,7 +1056,7 @@ interactions between a small number of nodes. This is not only due to a
 computational difficulty, but also to fundamental roadblocks in
 statistics: the complexity of the model must match the richness of the
 data. While injecting prior information can help model estimation, the
-more informative this prior the more fragile the inference becomes. The
+more informative this prior is, the more fragile the inference becomes. The
 ongoing debate on the impact of hemodynamic lag on Granger-causality
 inference \cite{smith2012a} is an example of such fragility.
 Note that although most of the theory underpinning correlation analysis
@@ -1071,12 +1072,12 @@ and simple phenomenological models such as correlation matrices. In
 particular to model interactions between a large number of regions, as in
 full-brain analysis, and learn a large \emph{connectome}, simple models
 are to be preferred. For more hypothesis-driven studies, such as the
-analysis of the mechanism underlying a specific task, more complex models
+analysis of the mechanisms underlying a specific task, more complex models
 can be preferred, if rich data is available. Automatic choice of model is
 a difficult problem, however, cross-validation (as used in
 \cite{varoquaux2010c,craddock2011,strother2006}) is a useful tool. The
-central principle of cross-validation is to learn (or fit) a model, and
-then test its predictive power on unseen data. Models too complex
+central principle of cross-validation is to test a model on different
+data than the data used to fit the model. Models too complex
 for the data available will fit noise in the data, and thus generalize
 poorly. The main benefit of cross-validation is that it is a
 non-parametric method which does not rely strongly on modeling
