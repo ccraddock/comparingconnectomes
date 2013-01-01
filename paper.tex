@@ -905,132 +905,103 @@ beyond empirical correlation matrices, as discuss in the previous section.
 
 \subsection{Predictive Modeling}
 
-\cite{craddock2009}
-craddock 2009, Dosenbach 2010, lord 2011, deshpande, 
-
-1. importance of interpretation!
-2. the need for feature extraction
-3. the need for feature selection
-4. setting parameters.
-5. different methods have different interpretations
-
 % Define predictive modeling and give examples
 
-% Feature extraction and parameter selection
+Predictive modeling is concerned with learning (or fitting) a model to
+draw conclusion on new and unseen data \cite{pereira2009}. Typically on
+brain imaging data, it opens the door to learning diagnosis or prognosis
+markers \cite{stonnington2010}. However, beyond the practical use of
+prediction, these models can also be useful to uncover mechanism of brain
+function \cite{norman2006}. Both the fact that information \emph{can} be
+drawn to generalize predictions to new data and \emph{how} or
+\emph{where} informs us on brain function. Multivariate predictive models
+are attractive in connectomics because they are sensitive to dependencies
+between features and avoid the need to correct for multiple comparisons
+since the significance of an entire pattern is evaluated using a single
+statistical test. From the perspective of medical applications, using
+resting-state connectivity as a biomarker is particularly appealing as it
+can be applied to impaired patients \cite{greicius2008b}. Predictive
+modeling techniques have been successfully applied to identify
+connectome-based biomarkers of Alzheimer's disease
+\cite{stonnington2010}, depression \cite{craddock2009}, schizophrenia
+\cite{cecchi2009}, autism \cite{anderson2011}, ADHD \cite{zhu2008}, aging
+\cite{dosenbach2010}, as well as to classify mental operations
+\cite{richiardi2011,shirer2012}.
+
+% A bit of technical details
+
+Technically, predictive modeling is a supervised machine learning problem
+where a target to be predicted --\emph{e.g.}\ age, disease state,
+cognitive state-- is available for each observation of the data. In the
+context of comparing connectomes, features used in the predictive model
+usually correspond to bivariate measures of connectivity, or any other
+summary metrics discussed earlier.
+%
+The prediction accuracy of a model for predicting the target variable
+provides a natural means for evaluating the utility of the model as a
+biomarker, but also its explanatory power for the mechanism under study.
+%
+This prediction accuracy is measured using one or more iterations of
+cross validation, which involves training and testing phases
+\cite{pereira2009}.  A cross validation cycle begins by separating the
+available data into two independent subsets: training data and testing
+data.  Training involves learning a predictive model from the training
+data. During testing the model is applied to the testing data to predict
+corresponding values of the target variable.  Prediction accuracy is then
+assessed by comparing these predictions to the observed values of the
+target variable.
+
+% XXX: sentence below should probably be moved elsewhere
+Support vector machines (classification and regression) are popular
+algorithms for predictive modeling as they do not require fine parameter
+setting.
+% XXX: need better explanation, in particular of nested cross-val
+However, learning algorithms require in general the specification of
+parameters, the values of which will impact the quality of the results.
+These parameters may be specified based on domain specific knowledge, or
+requirements, determined using an analytical approach, or optimized using
+cross validation. In latter case a nest cross-validation scheme is
+required to avoid biasing resultant measures of prediction accuracy. 
+
+Determining the subset of features most relevant to the model (feature
+selection) is essential for interpreting the models. In cases were model
+weights can be directly mapped to their corresponding feature, there is
+typically no statistical framework for thresholding these weights, and
+meaningless features are not always set to zero (this is particularly the
+case for $\ell_2$ regularized algorithms such as SVM and ridge
+regression). One feature selection strategy is to filter out features
+based on their statistical relationship with the variable of interest
+using a univariate statistical criterion such as t-test, Pearson's
+correlation, or mutual information.  A drawback of this approach is that
+since the filters are typically insensitive to multivariate
+information, they may exclude features that would be important to the
+model. 
+
+% XXX: mention nested cross-val for feature selection above
 
 % Importance and caveats of interpretation
 
-Predictive modeling has been an active area of research in functional
-neuroimaging since the early 90s [] that has more recently been adapted to
-comparing connectomes [].  A predictive model defines a mathematical
-relationship between a set of data features and a categorical or continuous
-variable of interest (target) that is capable of decoding or \emph{predicting}
-the target variable from the data.  In the context of comparing connectomes,
-features correspond to bivariate measures of connectivity or other region
-specifc graph statistics and the target is a phenotypic variable (e.g. age, sex,
-disease state). The accuracy of a model for predicting the target variable
-provides a natural means for evaluating the utility of the model as a biomarker
-[] and for measuring the amount of information present in the connectome about
-the target variable [Kjems, Kriegeskorte]. Prediction accuracy when combined
-with a measure of model reproducibilty provides a means to evaluate experimental
-tradeoffs for data acquisition, preprocessing, and analysis [NPAIRS]. Predictive
-modeling techniques have been successfully applied to identify connectome-based
-biomarkers of Alzheimer's disease [92], major depression [93], schizophrenia
-[94], autism [47], ADHD [], and aging [].  Recent work has illustrated the
-utility of predictive modeling for deriving connectivity models at the
-individual level [97,].
+% XXX: distinguish linear from non-linear classifiers. Explain that a
+% linear classifier is nothing more than a fancy linear regression
 
-Nearly every analytical method can be applied in a predictive modeling framework, but
-multivariate classification and regression have been the most commonly used
-(referred to as MVPA; multivariate prediction analysis).  Multivariate methods
-are attractive in connectomics because they are sensitive to dependencies
-between features and avoid the need to correct for multiple comparisions since
-the significance of an entire pattern is evaluated using a single statistical
-test. Predictive modeling is typically performed in a supervised learning
-framework where a target is available for each observation of the features,
-although unsupervised and semi-supervised methods can also be used.
-
-Predictive models are validated using one or more iterations of cross
-validation, which involves training and testing phases.  A cross validation
-cycle begins by seperating the available data into two independent subsets:
-training data and testing data.  Training involves learning a predictive model
-from the training data. During testing the model is applied to the testing data
-to predict corresponding values of the target variable.  Prediction accuracy is
-then assessed by comparing these predictions to the observed values of the
-target variable. In order to make 
-
-A general application of predictive modeling can be broken down into feature
-extraction, model selection, feature selection, and model validation, each of
-which may contain one or more iteration of training and testing. Feature
-extraction 
-
-
-Model training can be further broken down into feature extraction, model
-selection and feature selection and testing can be performed for model
-optimization and 
-
-
-The application of predictive modeling to functional neuroimaging data has been
-an active area of research since the early 90s[] and more recently for comparing
-connectomes[]. Nearly every analytical method can be appplied in a predictive
-modelling framework, but multivariate classification and regression have been
-the most commonly used (referred to as MVPA; multivariate prediction analysis).
-Multivariate methods are attractive in connectomics because they do not require
-any assumptions regarding independence between features and avoid the need to
-correct for multiple comparisions since the significance of an entire pattern is
-evaluated using a single statistical test. Support vector machines
-(classification and regression) are popular for MVPA applications owing to their
-proven track record for acheiving good prediction accuracy in high dimensional
-datasets (many features) with few observations.
-
-Cross validation
-
-MVPA algorithms typically require the specification of several parameters, the
-values of which will impact the quality of the results. These parameters may be
-prespecified based on domain specific knowledge, or requirements, determined
-using an analytical approach, or optimized using cross validation. In latter
-case a nest cross-validation scheme is required to avoid biasing resultant
-measures of prediction accuracy. it is necessary to perform a nested
-cross-validation These parameters may be set by hand in the case where 
-
-Determining the subset of features most relevant to the model (feature
-selection) is essential for interpreting the models, and is the subject of
-ongoing research. In cases were model weights can be directly mapped to their
-corresponding feature, there is typically no statistical framework for
-thresholding these weights, and meaningless features are not always set to zero
-(this is particularly the case for L2 regularized algorithms such as SVM and
-ridge regression). One feature selection strategy is to filter out features
-based on their statistical relationship with the variable of interest using a
-univariate statistical criterion such as t-test, Pearson's correlation, or
-mutual information.  A drawback of this approach is that since the filters are
-typically insensitive to multivaratiate information, they may exclude features
-that would be important to the model.  Another approach is to treat feature
-selection as a model selection problem in which case the features are
-iteratively pruned and a subset is chosen based on prediction performance. A
-third approach is to use sparse modeling methods such as L1 SVM or LASSO that
-force meaningless weights to be zero.  Although ideal, these methods may have
-limits on the number of non-zero weights used in the model or the exclusion of
-highly correlated features from the model.  Contrary to previous reports [Guyon
-2002, Craddock 2009] no matter which feature selection strategy is employed, it
-must be performed with cross-validation to avoid biasing estimates of
-prediction accuracy [later Guyon].
-
-The interpretation of classifier weights for selected features, when available,
-is complicated and requires insight into the mechanisms underlying the modeling
-approach. If features are appropriately standardized prior to training, the
-magnitude of weights can be interpreted to reflect the relative importance of
-the feature to the model, but interpreting how the feature differs between
-classes or relates to a continuous variable is more complicated, particularly
-given the multivariate nature of their involvement.  For classification methods
-such as Fisher's linear discriminant analysis (LDA), which maximally seperates
-class means given their standard deviation, feature weights are representative
-of the differences between class means. For support vector classification,
-classifier weights are derived from observations that are the most similar
-between classes, and hence represents the border between classes.  It is perhaps
-most reasonable to adapt a conservative interpretation in which MVPA is used to
-identify the most relevant features that are later tested in followon
-experiments better suited to elucidating their relationship to the variable of
-interest.
+The interpretation of classifier weights for selected features, when
+available, is complicated and requires insight into the mechanisms
+underlying the modeling approach. If features are appropriately
+standardized prior to training, the magnitude of weights can be
+interpreted to reflect the relative importance of the feature to the
+model, but interpreting how the feature differs between classes or
+relates to a continuous variable is more complicated, particularly given
+the multivariate nature of their involvement.  For classification methods
+such as Fisher's linear discriminant analysis (LDA), which maximally
+separates class means given their standard deviation, feature weights are
+representative of the differences between class means. For support vector
+classification, classifier weights are derived from observations that are
+the most similar between classes, and hence represents the border between
+classes. To draw conclusions on the features used for prediction, it is
+perhaps most reasonable to adapt a conservative interpretation in which
+predictive models is used to identify the most relevant features that are
+later tested in followon experiments better suited to elucidating their
+relationship to the variable of interest.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1107,7 +1078,7 @@ likelihood ratio tests relying on the full dataset. However, it is
 important to keep in mind that these approaches only test for
 self-consistence, as the Neyman-Pearson lemma requires that 
 the model likelihood describes the data well which may not always be the
-case\cite{lohmann2012}.}.
+case \cite{lohmann2012}.}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
