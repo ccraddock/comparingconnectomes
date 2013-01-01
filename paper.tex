@@ -1108,9 +1108,28 @@ case \cite{lohmann2012}.}.
 
 Horwitz \emph{el al.}\ \cite{horwitz1995} claimed almost 20 years ago
 that ``the crucial concept needed for network analysis is covariance''.
-In our eyes, this still holds today. Estimation of noiseless functional
-connectomes relies largely on fitting covariance models.
+In our eyes, this still holds today. Estimation functional connectomes
+relies largely on fitting covariance models. Their comparison requires
+understanding how these covariances vary and finding metrics to capture
+this variability. Additionally, a secret ingredient to all statistical
+steps is a good choice of confounds.
 
+% XXX add here a bit more of connectome stuff. Be optimistic!
+% Look to the future: note that estimation of connectomes with many nodes
+% is more challenging than small connectomes, but that better apriori and
+% better algorithms will push these limits further.
+
+Reviewing methodological options to learn and compare connectomes
+highlights that there is currently no unique solution, but a spectrum of
+related methods and analysis strategies. More empirical results are
+required to guide the choices, however this diversity is probably
+unavoidable: a diffuse disease like schizophrenia will not lead to the
+same connectome modifications as a focal lesion. In statistical learning,
+``no free lunch'' theorems \cite{wolpert1996} tell us that no strategy
+can perform uniformly better in all situations. In practice, the key to a
+successful analysis is to understand well the assumptions and
+interpretation of each option, in order to match the method to the
+research question.
 
 {
 %\clearpage
