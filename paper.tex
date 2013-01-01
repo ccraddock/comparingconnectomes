@@ -954,99 +954,68 @@ are subdivided. There are several strategies for constructing the training datas
 all but one observations (leave-one-out cross-validation), using a fraction of the observations
 (k-fold cross validation; kfcv), to resampling the observations with replacement (boostrap 
 cross-validation, bscv). Although loocv has been popular in neuroimaging applications of MVPA since
-it incorporates the largest amount of data into training performs the largest amount of data as it is
-easy to implement and results in the same error estimate, its estimates are more variable than 
+it results in the largest amount of training data, its estimates are more variable than 
 kfcv or bscv. Split-half cross validation (two-fold cross validation, 2fcv), minimizes the estimation
-variance, at the cost of using less training
+variance, at the cost of using less training data, and also permits the simultaneous estimation
+of model reproducibility using the NPAIRs framework []. Bootstrap cross-validation minimizes estimation
+variance while maximising the amount of data available for training at the cost of introducing bias. This
+bias is due to the fact that on average 63.2\percent of the testing data overlaps with the training data,
+the .632\plus bootstrap corrects for this bias.
+No matter which cross validation scheme is used, the accurate estimation of generalization ability
+requires that the testing data and training data are independent and identically distributied (iid). The
+meaning of indenpdence here depends on the context in which the predictive model will be applied. For 
+example, if observations correspond to subjects, then testing with scans acquired from the same subject, 
+even acquired at different points in time, will introduce bias. If observations are different time points 
+for the same subject, with the goal of testing whether the model can predict a later time point for that 
+subject, then scans acquired from a later time point for that subject may be used for testing as long as
+enough time has passed to account for temporal autocorrelation.  
 
+Another important parameter for estimating generalization ability is the error term employed. For
+classification problems error can be simply measured as a '1' if the prediction is correct and a '0' if it
+is incorrect, alternatively misclassifications for some groups may be weighted higher then others.
+Log-loss or the negative log-likelihood can be used if class probabilities are outputed rather than
+simply class membership. For
+regression problems, common loss functions are the correlation or mean squared error between predicted and
+true target values. The former is preferred in cases when differences in scale and shift are less 
+important then the relative ordering of the output balues.  Mean-squared error is preferred when the 
+target variable has units and penalizing a model for shift or scale differences is important. 
 
-single observation (leave-one-out cross-validation; loocv), a fraction of the observations (k-fold cross-validation; kfcv),
-or resampling the observations with replacement (bootstrap cross-validation; bscv);  
-
-
-, leaving a  A commmon practice is leave-on-out cross-validation (loocv) in which a single observation
-is used for testing at each iteration, 
-
-
-is estimated through a one or
-more iterations of cross validation. 
-
-
-A cross validation cycle begins by seperating the 
-available data into two independent subsets: training data and testing data. A predictive model 
-is learned from the training data and subsequently applied to the testing data to predict 
-corresponding values of the target variable. Prediction accuracy is then assessed by comparing
-these predictions to the observed value of the target variable. This procedure is typically repeated
-for several different splits of the data. The simplest is hold-out validation in which the data
-is split into testing and training 
-	
-	One of the most important parameters for cross validation
-is the manner in which data are subdivided, which sets the balance between maximally use of the
-data for training.
-	
-	
-	Cross-validation can be performed
-in a variaty of ways, and if performed correctly will result in an unbiased estimator of 
-generalization ability. A major choice 
-
-Predictive models are validated using one or more iterations of cross
-validation, which involves training and testing phases.  A cross validation
-cycle begins by seperating the available data into two independent subsets:
-training data and testing data.  Training involves learning a predictive model
-from the training data. During testing the model is applied to the testing data
-to predict corresponding values of the target variable.  Prediction accuracy is
-then assessed by comparing these predictions to the observed values of the
-target variable. 
-
-A general application of predictive modeling can be broken down into feature
-extraction, model selection, feature selection, and model validation, each of
-which may contain one or more iteration of training and testing. Feature
-extraction 
-
-
-Model training can be further broken down into feature extraction, model
-selection and feature selection and testing can be performed for model
-optimization and 
-
-
-The application of predictive modeling to functional neuroimaging data has been
-an active area of research since the early 90s[] and more recently for comparing
-connectomes[]. Nearly every analytical method can be appplied in a predictive
-modelling framework, but multivariate classification and regression have been
-the most commonly used (referred to as MVPA; multivariate prediction analysis).
-Multivariate methods are attractive in connectomics because they do not require
-any assumptions regarding independence between features and avoid the need to
-correct for multiple comparisions since the significance of an entire pattern is
-evaluated using a single statistical test. Support vector machines
-(classification and regression) are popular for MVPA applications owing to their
-proven track record for acheiving good prediction accuracy in high dimensional
-datasets (many features) with few observations.
-
-Cross validation
+After generalization ability (or error) has been estimated it is compared to what would be acheived by 
+``chance'' in order to estimate its significance. In the case of classification problems, the likelihood
+of obtaining a generalization accuracy by change can be estimated from a multinomial distribution []. 
+Alternatively, a permutation test can be performed in which the target labels are randomly permuted 
+several times and the cross-validation error is estimated using each of the permutations. Significance
+is the assessed from the fraction of permutations that obtained higher prediction accuracy then was 
+obtained from the unpermuted model. This method has the advantage of being available for both 
+classification and regression models with the caveat that, any correlationl 
+structure between observations to avoid biased results. Null distributions can be constructed for
+non-independent data using block permutation or wavelet resampling. When that statistical significance
+of the entire model is measured in this manner, the entire pattern is test with a single statistical
+test and there is no need to correct for multiple comparisons (unless multiple patterns are tested in 
+this manner).
 
 MVPA algorithms typically require the specification of several parameters, the
 values of which will impact the quality of the results. These parameters may be
 prespecified based on domain specific knowledge, or requirements, determined
-using an analytical approach, or optimized using cross validation. In latter
+using an analytical approach, or optimized using cross validation. In the latter
 case a nest cross-validation scheme is required to avoid biasing resultant
-measures of prediction accuracy. it is necessary to perform a nested
-cross-validation These parameters may be set by hand in the case where 
-
-Determining the subset of features most relevant to the model (feature
+measures of prediction accuracy.  Determining the subset of features most relevant 
+to the model (feature
 selection) is essential for interpreting the models, and is the subject of
 ongoing research. In cases were model weights can be directly mapped to their
 corresponding feature, there is typically no statistical framework for
 thresholding these weights, and meaningless features are not always set to zero
-(this is particularly the case for L2 regularized algorithms such as SVM and
+(this is particularly the case for L2 regularized algorithms such as support vector machines and
 ridge regression). One feature selection strategy is to filter out features
 based on their statistical relationship with the variable of interest using a
 univariate statistical criterion such as t-test, Pearson's correlation, or
 mutual information.  A drawback of this approach is that since the filters are
 typically insensitive to multivaratiate information, they may exclude features
-that would be important to the model.  Another approach is to treat feature
-selection as a model selection problem in which case the features are
-iteratively pruned and a subset is chosen based on prediction performance. A
-third approach is to use sparse modeling methods such as L1 SVM or LASSO that
+that would be important to the model. Another approach is to treat feature
+selection as a model selection problem in which case the optimal festure subset 
+is chosen based on cross validation based measures of prediction performance [] or 
+a measure of their stability[].  A third approach is to use sparse modeling methods 
+such as L1 SVM or LASSO that
 force meaningless weights to be zero.  Although ideal, these methods may have
 limits on the number of non-zero weights used in the model or the exclusion of
 highly correlated features from the model.  Contrary to previous reports [Guyon
