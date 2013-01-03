@@ -485,6 +485,7 @@ For the problem of recovering the functional-connectivity
 \emph{structure}, \emph{i.e.}\ finding which region is connected to
 which, sparse inverse covariance estimators have been found to be
 % CAMERON Isn't there a paper from Stanford about this as well??
+% GAEL: I cannot find it with a quick Google. Do you have a name?
 efficient \cite{varoquaux2010c, smith2011}. The intuition for relying on
 inverse covariance rather than correlation stems from that fact that
 standard correlation (marginal correlation) between two variables $a$ and
@@ -1021,8 +1022,8 @@ or bscv [tibs, book]. Split-half cross validation (two-fold cross validation,
 data, and also permits the simultaneous estimation of model reproducibility
 using the NPAIRs framework []. Bootstrap cross-validation minimizes estimation
 variance while maximising the amount of data available for training at the cost
-of introducing bias. This bias is due to the fact that on average 63.2\percent
-of the testing data overlaps with the training data, the .632\plus bootstrap
+of introducing bias. This bias is due to the fact that on average 63.2\%
+of the testing data overlaps with the training data, the .632+ bootstrap
 corrects for this bias.  No matter which cross validation scheme is used, the
 accurate estimation of generalization ability requires that the testing data and
 training data are independent and identically distributied (iid). The meaning of
