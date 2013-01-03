@@ -85,88 +85,82 @@
 \section{Introduction}
 
 % General introduction
-Functional connectivity reveals the synchronization of distant
-neural systems via correlations in brain activity
-% CAMERON change cordes 2000 to Friston 1993
-\cite{biswal1995,cordes2000}.
-% CAMERON would probably include citation to connectome in next sentence.
-Given that high-level
-function emerges from the interaction of specialized units, functional
-connectivity is an essential part of the description of brain function,
-that complements the localizationist picture emerging from the systematic
-mapping of regions recruited in tasks. However, while there exists a
-well-defined standard analysis framework for activation mapping that enables
-statistically-controlled comparisons across subjects \cite{friston1995},
-group-level analysis of functional connectivity still faces many open
-methodological challenges. Deriving a picture of a single subject's 
-functional connectivity is by itself not straightforward, as the brain
-comprises a myriad of interacting subsystems and its connectivity must 
-be decomposed into
+Functional connectivity reveals the synchronization of distant neural systems
+via correlations in neurophysiological measures of brain activity 
+\cite{friston1994, biswal1995}.  Given that
+high-level function emerges from the interaction of specialized units,
+functional connectivity is an essential part of the description of brain
+function, that complements the localizationist picture emerging from the
+systematic mapping of regions recruited in tasks\cite{sporns2004}. However,
+while there exists a well-defined standard analysis framework for activation
+mapping that enables statistically-controlled comparisons across subjects
+\cite{friston1995}, group-level analysis of functional connectivity still faces
+many open methodological challenges. Deriving a picture of a single subject's
+functional connectivity is by itself not straightforward, as the brain comprises
+a myriad of interacting subsystems and its connectivity must be decomposed into
 simplified and synthetic representations. An important view of brain
 connectivity is that of distributed functional networks depicted by their
-spatial maps \cite{fox2005}. Another no less important and complementary
-view is that of connections linking localized functional modules depicted
-as a graph \cite{bullmore2009}. This representation of brain connectivity
-is often called the functional connectome \cite{sporns2005} and is the
-focus of intense worldwide research efforts as it holds promises of new
-insights in cognition and pathologies
-\cite{greicius2008b,biswal2010,fox2010}.
+spatial maps \cite{fox2005}. Another no less important and complementary view is
+that of connections linking localized functional modules depicted as a graph
+\cite{bullmore2009}. This representation of brain connectivity is often called
+the functional connectome \cite{sporns2005} and is the focus of intense
+worldwide research efforts as it holds promises of new insights in cognition and
+pathologies \cite{greicius2008b,biswal2010,fox2010}.
 
 % Give the scope of the paper and narrow it
 The purpose of this paper is to review methodological progress in the
-estimation and comparison of functional connectomes. It does not attempt
+estimation of functional connectomes from blood oxygenation level dependent
+(BOLD) based functional magnetic resonance imaging (fMRI) data and their
+comparisons across individuals.  It does not attempt
 to be exhaustive, as the field is wide and moving rapidly, but details
 specific tools and guidelines that, in the experience of the authors,
 lead to controlled and powerful inter-subject comparisons. The paper is
 focused on functional connectomes in contrast to structural connectomes,
-as the inference of functional connectivity from (hemodynamic?, BOLD?) fluctuations 
-% CAMERON the sentence "implies important specificities in the statical modeling"
-% is a little odd
-implies important specificities in the statistical modeling. While 
-the notion of functional
-connectome is often associated with the study of resting-state
+as the inference of functional connectivity requires important statistical
+modeling considerations that are vastly different from the complications involved
+with estimating structural connectivity.
+While the notion of functional
+connectomics is often associated with the study of resting-state
 \cite{biswal2010}, the methods presented in this paper are also relevant
 for task-based studies. On the other hand, the paper has a focus on fMRI;
-although the core concepts presented can be applied to MEG or EEG
+although the core concepts presented can be applied to 
+magnetoencephalography (MEG) or electroencephalography (EEG)
 \cite{stam2004}, additional specific problems such as source
 reconstruction must be considered \cite{schoffelen2009}.
 
 % Define terms
-By ``functional connectome'', here we specifically denote a graph
-representing functional interactions in the brain, where the term
-``graph'' is taken in its mathematical sense: a set of \emph{nodes}
-connected together by \emph{edges}. 
-% CAMERON I would define nodes and edges here, I like the Varela definitions
-% where a node represents a local network of cells, typically < 1 cm^3
-% in volume in which synchronization is achieved via biochemical processes
-% and edges represent long range interactions synchronized via fibers
-A graph can be weighted or not, and
-is completely equivalent to its \emph{adjacency matrix}, a symmetric
-matrix tabulating the connection weights between each pair of nodes.
-Functional-connectivity graphs are used to represent evoked activity,
-as in task-response studies \cite{mcintosh2000}, as well as
-ongoing activity, present in the absence of specific tasks or in 
-the background during task and often studied in so-called \emph{resting-state}
-experiments \cite{raichle2010}. Another important notion that arises from
-the study of distributed modes of brain function is that of specialized
-functional networks\footnote{In neuroimaging, the term network is
-sometimes used to denote a graph of brain function. To disambiguate the
-notion of segregated spatial mode \cite{fox2005} from that of
-connectivity graphs, we will purposely restrict its usage in this
-paper.} \cite{fox2005}. With our definition of the functional connectome, functional
-networks are not directly building blocks of the connectome but appear
-as a consequence of the graphical structure
-\cite{varoquaux2010c,varoquaux2012}.
+By ``functional connectome'', here we specifically denote a graph representing
+functional interactions in the brain, where the term ``graph'' is taken in its
+mathematical sense: a set of \emph{nodes} connected together by \emph{edges}.
+Graph nodes (brain region) correspond to a spatially contiguous and functionally
+coherent patchs of cortex whose activity is synchronized through
+cytoarchitecture and edges describe large range synchronizations between nodes
+that are putatively subtended by large fiber pathways \cite{marrelec2006}.  A
+graph can be weighted or not, and is completely equivalent to its
+\emph{adjacency matrix}, a symmetric matrix tabulating the connection weights
+between each pair of nodes.  Functional-connectivity graphs are used to
+represent evoked activity, as in task-response studies \cite{mcintosh2000}, as
+well as ongoing activity, present in the absence of specific tasks or in the
+background during task and often studied in so-called \emph{resting-state}
+experiments \cite{raichle2010}. Another important notion that arises from the
+study of distributed modes of brain function is that of specialized functional
+networks\footnote{In neuroimaging, the term network is sometimes used to denote
+	a graph of brain function. To disambiguate the notion of segregated
+	spatial mode \cite{fox2005} from that of connectivity graphs, we will
+	purposely restrict its usage in this paper.} \cite{fox2005}. With our
+definition of the functional connectome, functional networks are not directly
+building blocks of the connectome but appear as a consequence of the graphical
+structure \cite{varoquaux2010c,varoquaux2012}.
 
 % Give a layout of the paper
-The paper is organized as follows. First we discuss estimation of
-functional connectomes. This part, akin to a first-level analysis in
-standard activation mapping methodology, is not in itself a group-level
-operation, but it is a critical step for inter-subject comparison.
-In a following section, we discuss several strategies for comparing
-connectomes across subjects. Finally we discuss the links between the
-representation of brain connectivity as graphs of functional connectivity
-and more complex models, such as effective-connectivity models.
+The paper is organized as follows. First we discuss estimation of functional
+connectomes. This part, akin to a first-level analysis in standard activation
+mapping methodology, is not in itself a group-level operation, but it is a
+critical step for inter-subject comparison.  In a following section, we discuss
+several strategies for comparing connectomes across subjects. Finally we discuss
+the links between the representation of brain connectivity as graphs of
+functional connectivity and more complex models, such as effective-connectivity
+models.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -174,10 +168,63 @@ and more complex models, such as effective-connectivity models.
 \section{Estimating functional connectomes}
 
 Here we discuss the inference of connectomes from functional brain
-imaging data. We start with the choice of nodes \emph{i.e.}\ regions,
-followed by signal extraction, and the estimation of graphs.
+imaging data. We start with preprocessing considerations, followed by
+the choice of nodes \emph{i.e.}\ regions,
+signal extraction, and the estimation of graphs.  
 
 %------------------------------------------------------------------------------
+\subsection{Preprocessing Considerations}
+
+% CAMERON make sure these citations are accounted for
+In addition to standard preprocessing performed for task based analyses
+(slice-timing correction, realignment, spatial normalization, and possibly
+smooting), connectivity based analyses require additional denoising 
+to separate intrinsic activity from confounding signals. This process involves
+regressing time series capturing sources of structured noise from the fMRI data.
+Physiological noise due to cardiac and respiration are two important
+noise signals \cite{Hu1993, lund2006, birn2006, birn2008} that are
+difficult to control for and as a result are not commonly regressed out. Instead
+the mean signal from white matter (WM) and cerbrospinal fluid (CSF) are used as
+surrogates to measure these sources of noise as well as other scanner induced
+signal fluctuations \cite{fox2005, lund2006}. More complex models account for
+spatial variation in noise by incorporating voxel specific regressors of
+neighboring WM (ANATICOR \cite{jo2010}) or the top components from a principle
+components analysis of WM signal (CompCor \cite{behzadi2007}). Head motion
+induced signal fluctuations are accounted for by incorporating movement
+parameters \cite{friston1996, fox2005, lund2006}. The global mean time series
+has been proposed as an additional noise regressor that appears to improve the
+spatial specifity of connectivity results \cite{fox2005, fox2009}. This practice
+has become controversial since the global mean has been shown to primarily reflect neuronal
+signal and the fact that global signal regression introduces negative correlations
+\cite{murphy2009,chang2009,saad2012}. 
+Removing these sources of
+nuisance in addition to linear trends results in more contrasted
+correlation matrices that improve the delineation of functional structures
+(fig.\,\ref{fig:correlation_matrices}). 
+
+Filtering to remove high frequencies is often performed, based on the initial
+observation that fluctuations implicated in resting state functional
+connectivity are predominately slower than 0.1\,Hz \cite{cordes2001,biswal1995}.
+While high-pass and low-pass filtering decrease the impact of some confounds,
+recent studies have shown that connectivity is present across the
+full spectrum of observed frequencies \cite{smith2012,vanoort2012}. Regressing
+out a good choice of confound signals is more specific than frequency filter,
+and in our experience gives more contrasted correlation matrices\footnote{Note
+	that naive use of filtering can induce spurious correlations
+	\cite{davey2012}.}.
+
+
+It is important to keep in mind that the proposed correction strategies
+are approximate and not definitive techniques. This has become particularly
+apparent for head motion with reports that micromovements on the scale
+of $\le 0.2$mm can induce artefactual group-level findings even when motion is
+accounted for in preprocessing
+\cite{vandijk2012,power2011,satterthwaite2012}. Special care must be taken to
+adequately control for residual impact of head motion in the group model
+\cite{satterthwaite2012, saad2012}.
+
+%
+
 \subsection{Defining regions}
 
 The choice of regions of interests (ROIs) that define the nodes of the
@@ -187,43 +234,35 @@ shown that extracting signal from ROIs that did not match functional
 units would lead to erronous graph estimation \cite{smith2011}.
 %
 Different strategies to define suitable ROIs coexist. While dense parcellations approaches cover
-% CAMERON what about all the other clustering people Flandin, Poline, Bellec, ...
 a large fraction of the brain \cite{achard2006, varoquaux2010c,
 wang2009}, this coverage can be traded off to focus on some specific
 regions, in favor of increased functional specificity and thus better
-% CAMERON I think that this reference to Fair should be Dosenbach
-differentiation across networks \cite{greicius2003, fair2009,
+% CAMERON I think that this reference to Fair should be Dosenbach 2006 neuron
+differentiation across networks \cite{greicius2003, dosenbach2006,
 varoquaux2010b}. In addition, while
 ROIs are most often defined as a hard selection of voxels, it is also
 possible to use a \emph{soft} definition, attributing weights as with
 probabilistic atlases, or spatial maps of functional networks extracted
-% CAMERON: cite Smith, Kivinimi, maybe Yeo
-from techniques such as independent component analysis (ICA).
-
-% XXX: discuss tradeoffs in the number of regions
-% CAMERON TODO
+from techniques such as independent component analysis (ICA) \cite{kiviniemi2009,smith2012}.
 
 \paragraph{Regions from atlases}
 %
-Atlases can be used to define full-brain parcellations. The most popular
-% CAMERON I would avoid using such statements, in my readings HO is much
-% more popular, also the Talaraich Atlas is commonly used, I would include
-% all of these
-choice is probably the AAL atlas \cite{tzourio-mazoyer2002a}, that
-benefits from an SPM toolbox. However, it suffers from major
-shortcomings; namely \emph{i)} that it was defined on a single subject
-and thus does does not reflect inter-subject variability and \emph{ii)}
-that it focuses on labeling large anatomical structures and does not match
+Atlases can be used to define full-brain parcellations. Popular
+choices are the the Automatic Anatomic Labeling (AAL) atlas \cite{tzourio-mazoyer2002a}, 
+which benefits from an SPM toolbox or the ubiquitous Talaraich-Tournoux
+atlas \cite{talaraich}. 
+However, these atlases suffer from major
+shortcomings; namely \emph{i)} they were defined on a single subject
+and thus does does not reflect inter-subject variability, \emph{ii)}
+they focus on labeling large anatomical structures and does not match
 functional layout --for instance only two regions describe the medial
-part of the frontal lobe. Multi-subject probabilistic altases such as the
+part of the frontal lobe, and \emph{iii} they are defined based on
+cytoarchitectonic or anatomical boundaries and do not incorporate functional
+information. Multi-subject probabilistic altases such as the
 Harvard-Oxford atlas distributed with FSL \cite{smith2004} or the
 sulci-based structural atlas used in \cite{varoquaux2010c} mitigate the
 first problem, and the high number of regions defined using sulci also
-somewhat circumvent the second problem (see
-fig.\,\ref{fig:parcellations}).
-% CAMERON my paper directly shows the inadequacy of AAL, TT, HO and EZ for
-% representing functional connectivity
-
+somewhat circumvent the second problem (see fig.\,\ref{fig:parcellations}).
 
 \paragraph{Defining regions from the literature}
 %
@@ -232,7 +271,7 @@ systematic meta-analysis. This strategy is used to define the main
 resting-state networks, such as the default mode network, but may also be
 useful to study connectivity in task-specific networks
 % CAMERON include citation to Dosenbach, and some others
-\cite{grillon2012}. The common practice is to place balls of a given
+\cite{dosenbach2006,grillon2012}. The common practice is to place balls of a given
 radius, 5 or 10\,mm, centered at the coordinates of interest. Given that
 functional networks are tightly interleaved in some parts of the cortex,
 such as the parietal lobe, care must be taken not to define too many
@@ -243,9 +282,11 @@ regions that would overlap and lead to mixing of the signal.
 Defining regions directly from the fMRI signal brings many benefits.
 First, it can capture subject-specific functional information. Second, it
 adapts to the signal at hand and its limitations, such as
-% CAMERON I don't think that EPI was ever defined or even need be
-EPI-specific warps or vascular and movement artifacts that are isolated
-in ICA-like approaches. The simplest approach to define task-specific
+image distortions or vascular and movement artifacts that are isolated
+in ICA-like approaches. Lastly, incorporating functional information into
+regional definition will result in more homogenous regions that better represent
+connectivity present at the voxel level then anatomically defined atlases such
+as AAL or Harvard-Oxford \cite{craddock2011}. The simplest approach to define task-specific
 regions is to use activation maps derived from standard GLM-based
 analysis in a task-driven study (see for instance \cite{poldrack2011}).
 Regions are extracted by thresholding the maps, or using balls around the
@@ -263,6 +304,26 @@ display fragmented spatial features and structured background noise, but
 incorporating sparsity and spatial constraints in the decomposition
 techniques leads to contrasted maps that outline many different
 structures \cite{craddock2011, varoquaux2012} (see fig.\,\ref{fig:parcellations}).
+
+%% XX number of regions
+% CAMERON added this since it was left to do, I don't know if it really says
+% anything 
+\paragraph{Optimal number of regions}
+%
+Defining an optimal number of regions to use for whole brain connectivity analysis bears
+careful consideration. On one hand we desire a sufficiently large number of
+regions to guarentee that they are functionally homogenous regions and adequately 
+represent the connectivity information present in the data. On the other hand
+too many regions will result in an explosion in computational complexity 
+and interfere with the interpretability of observed connections. For functional
+parcellation, cross validation methods can be employed to estimate an optimal 
+number of regions based on homogeniety, the ability to reproduce 
+connectivity information present at the voxel scale, and the ability to
+obtain the same parcellations from independent data 
+\cite{craddock2011, germanguy}. In general these metrics do not result in an
+obvious peak at a ``best'' number of regions, but instead offer a range over
+which the number of regions can be chosen based on the needs of the analysis at
+hand.
 
 %{{{------ Parcellation figure -----------------------------------------------
 \begin{figure}
@@ -293,7 +354,7 @@ learning.
 %------------------------------------------------------------------------------
 \subsection{Estimating connections}
 
-The concept of functional connectivity has be called elusive
+The concept of functional connectivity has been called elusive
 \cite{horwitz2003}: it has many mathematical instantiations although in
 essence they all strive to extract simple statistics from functional
 imaging in order to characterize synchrony and communication between large
@@ -356,63 +417,49 @@ confounds or a global mean, teases out the structure.
 % Horrible sentence below
 
 \paragraph{Signal extraction}
-% CAMERON = I think we should differentiate between signal extraction and
-% signal cleaning, actually the cleaning is a seperate issue, that is independent
-% of the regions or nodes.
-Given graph nodes, the next step 
-Given ROIs, the next step is to extract from them a summary measure. To
-study \emph{on-going} activity, \emph{e.g.}\ with rest data, signal
-extraction is performed from the EPI time series; however, to study
-\emph{evoked} activity with task-driven studies it can be beneficial to
-run a GLM-based first-level analysis, enforcing specificity of the measure
-extracted to the task. With slow event-related designs, task-specific
-functional connectivity can be captured in trial-to-trial fluctuations in
-the BOLD response, estimated using a GLM analysis with one regressor per
-trial \cite{grillon2012,rissman2004}. This approach, known as beta-series
-regression, has been adapted for rapid event-related designs, using
-multiple GLMs to optimize deconvolution of each trial \cite{mumford2012}.
-% CAMERON it is important to regress movement and other stuff from 
-% REST and TASK, just not done in task
-With rest datasets, it is important to regress out time series capturing
-movement and other sources of structured noise, to separate on-going
-activity from confounding signals. In addition to removing movement
-parameters estimated during preprocessing, removing linear trends, signal
-% CAMERON WM and CSF are "negative controls" and represent thermal noise, 
-% systematic variation due to multichannel head coils, cardiac and resp.
-% smaller motions, physiological noise correction, spatial varying WM noise
-% GLOBAL MEAN IS A HUGE CONTROVERSY
-extracted from the white matter and the CSF \cite{chang2009}, as well as
-using the CompCor \cite{behzadi2007} procedure gives more contrasted
-correlation matrices that outline functional structures better
-(fig.\,\ref{fig:correlation_matrices}). Filtering high frequencies is
-often recommended, based on the initial observation that neural-related
-signals are observed below 0.1\,Hz \cite{cordes2001,biswal1995}. While
-high-pass and low-pass filtering decrease the impact of some confounds,
-recent studies have shown that information on neural processes is present
-in the full spectrum of frequencies observed
-\cite{smith2012,vanoort2012}. Regressing out a good choice of confound
-signals is more specific than frequency filter, and in our experience
-gives more contrasted correlation matrices\footnote{Note that naive use
-of filtering can induce spurious correlations \cite{davey2012}.}.
+% CAMERON = I think we should differentiate between signal extraction and signal
+% cleaning, actually the cleaning is a seperate issue, that is independent of
+% the regions or nodes.
+Given a set of graph nodes, the next step is to extract a representative time
+series for each node.  To study \emph{intrinsic} activity, \emph{e.g.}\ with
+rest data, signal extraction can be acheived by either averaging the fmri time
+series across the voxels in a region, or by taking the first eigenvariate from a
+principle components analysis of the time series \cite{Friston functional
+	localizers}.  The latter approach provides an additional level of
+denoising by selecting a time series that explains the greatest variance across
+the voxels, and excludes ``deviant'' time series from noise or dissimilar
+voxels. Comparisons of these methods has shown that the eigenvariate method is
+more sensitive to function inhomogeniety \cite{craddock 2011} and exhibits worse
+test-retest reliablity than averaging time series \cite{zuo thingy}. A hybrid
+approach would be to average the top few eigenvariates from the PCA
+decomposition.  In addition, improved specificity to BOLD signal can be enforced
+by using only signal in voxels near gray-matter tissues. For this purpose, we
+suggest summarizing the signal in an ROI by a mean of the different voxels
+weighted by the subject-specific gray matter probabilistic segmentation, as
+output by \emph{e.g.}\ SPM's segmentation tool \cite{ashburner2005}.
 
-% CAMERON, this is just as important for task btw ...
-Finally, it is important to keep in mind that using resting-state to
-study on-going activity is fragile to confounds such as movement
-\cite{vandijk2012,power2011} or scanner noise, and probably more so than
-activation studies as it is harder to control the specificity of the
-signal extracted. Special care must be taken in preprocessing strategies
-\cite{vandijk2010,satterthwaite2012}.
-%
-In addition, improved specificity to BOLD signal can be enforced by
-using only signal in voxels near gray-matter tissues. For this purpose,
-we suggest summarizing the signal in an ROI by a mean of the different voxels
-weighted by the subject-specific gray matter probabilistic segmentation,
-% CAMERON why only SPM's tool?
-as output by \emph{e.g.}\ SPM's segmentation tool \cite{ashburner2005}.
 
-% CAMERON TODO: two sentences max
+To study connectivity from \emph{evoked} activity with task-driven studies it
+can be beneficial to run a GLM-based first-level analysis, enforcing specificity
+of the measure extracted to the task. With slow event-related designs,
+task-specific functional connectivity can be captured in trial-to-trial
+fluctuations in the BOLD response, estimated using a GLM analysis with one
+regressor per trial \cite{grillon2012,rissman2004,mennes2010}. This approach,
+known as beta-series regression, has been adapted for rapid event-related
+designs, using multiple GLMs to optimize deconvolution of each trial
+\cite{mumford2012}.
+
 % Regressing out task?? Skipping for lack of space
-
+% CAMERON make this better
+Estimating intrinsic activity from task based data can be obtained by either
+temporally concatenating rest blocks from the task, or by regressing the task
+from the fMRI data. The latter approach is justified by the observation that
+spontaneous activity is present during and additive to task BOLD responses 
+\cite{fox finger tapping}. Evaluations of these methods have shown variable
+results, where the resulting connectivity is similar too, but not the same as
+results obtained from resting state data \cite{fair, lohman}. The differences 
+are likely due to the
+large carry over effects seen from task to rest blocks. 
 
 %{{{------ Precision matrices figure -----------------------------------------
 \begin{figure}
@@ -504,7 +551,6 @@ instead of the white matter, CSF, and CompCor time courses.
 %---------------------------------------------------------------------------}}}
 
 
-
 For the problem of recovering the functional-connectivity
 \emph{structure}, \emph{i.e.}\ finding which region is connected to
 which, sparse inverse covariance estimators have been found to be
@@ -582,8 +628,10 @@ correlations than with correlations. Indeed, while with
 correlation matrices regressing out the global mean has a drastic effect
 (fig.\,\ref{fig:correlation_matrices} upper right and lower right), on
 inverse covariance it only changes very slightly the resulting matrices
-(fig.\,\ref{fig:icov_regressors}). 
-% CAMERON I would move this to preprocessing section
+(fig.\,\ref{fig:icov_regressors}).
+
+% CAMERON I really like this section, but would change it slightly to reflect
+% that preprocessing has been moved to its own sectoin.
 There have been debates on whether to
 regress out certain signals, such as the global mean,  as it induces
 negative correlations \cite{murphy2009,chang2009,fox2009}, and these may seem
@@ -619,8 +667,6 @@ First, we focus on detecting where the connectivity matrices estimated in
 the previous section differ.
 
 \paragraph{Mass-univariate approaches}
-%
-% CAMERON there has to be other references ...
 The most natural approach is to apply a linear model to each coefficient of
 the connectivity matrices \cite{lewis2009,grillon2012}. This
 approach is similar to the second-level analysis used in mass-univariate
@@ -971,7 +1017,7 @@ the need for well defined null-hypothesis \cite{zalesky2012,rubinov2011},
 but also for controlled recovery of brain functional connectivity going
 beyond empirical correlation matrices, as discuss in the previous section.
 % CAMERON What about regional summary measures such as centrality??? Xinian's work
-% maybe a paragraph on these ReHo, degree centrality, eigenvector centrality, pagerank etc...
+% maybe a paragraph that covers ReHo, degree centrality, eigenvector centrality, pagerank etc...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -983,37 +1029,41 @@ beyond empirical correlation matrices, as discuss in the previous section.
 % Importance and caveats of interpretation
 
 Predictive modeling is concerned with learning (or fitting) a model that is
-capable of decoding or \emph{predicting} information from new unseen data \cite{pereira2009}.
-In the context of connectomes, predictive modeling provides a means for
-delineating connectivity based biomarkers of disease diagnosis, 
-prognosis, or other phenotypic outcomes \cite{craddock2009, dosenbach2010}. The accuracy
-of a predictive model provides a measure of the amount of information present
-in the connectome about the phenotypic measure being evaluated [kriegeskorte, Kjems]. 
-When combined with reproducibility, prediction accuracy provides a metric for
-evaluating experimental tradeoffs for data acquisition, preprocessing, and analysis 
-[Strother, LaConte].  Multivariate predictive models are attractive in connectomics 
-because they are sensitive to dependencies between features and avoid the need to correct
-for  multiple comparisons since the significance of an entire pattern is evaluated 
-using a single statistical test. From the perspective of medical applications, using
-resting-state connectivity as a biomarker is particularly appealing as it
-can be applied to impaired patients \cite{greicius2008b}. Predictive
-modeling techniques have been successfully applied to identify
-connectome-based biomarkers of Alzheimer's disease
-\cite{stonnington2010}, depression \cite{craddock2009}, schizophrenia
+capable of decoding or \emph{predicting} information from new unseen data
+\cite{pereira2009}.  In the context of connectomes, predictive modeling provides
+a means for delineating connectivity based biomarkers of disease diagnosis,
+prognosis, or other phenotypic outcomes \cite{craddock2009, dosenbach2010}. The
+accuracy of a predictive model provides a measure of the amount of information
+present in the connectome about the phenotypic measure being evaluated
+[kriegeskorte, Kjems].  When combined with reproducibility, prediction accuracy
+provides a metric for evaluating experimental tradeoffs for data acquisition,
+preprocessing, and analysis [Strother, LaConte].  Multivariate predictive models
+are attractive in connectomics because they are sensitive to dependencies
+between features and avoid the need to correct for  multiple comparisons since
+the significance of an entire pattern is evaluated using a single statistical
+test. From the perspective of medical applications, using resting-state
+connectivity as a biomarker is particularly appealing as it can be applied to
+impaired patients \cite{greicius2008b}. Predictive modeling techniques have been
+successfully applied to identify connectome-based biomarkers of Alzheimer's
+disease \cite{stonnington2010}, depression \cite{craddock2009}, schizophrenia
 \cite{cecchi2009}, autism \cite{anderson2011}, ADHD \cite{zhu2008}, aging
 \cite{dosenbach2010}, as well as to classify mental operations
 \cite{richiardi2011,shirer2012}.
 % CAMERON something about the ADHD200 Global Competition highlights the
-% interest/need for predictive modeling in connectomics as well
-% as the number of approaches applicable 
-Recent work has illustrated the
-utility of predictive modeling for deriving connectivity models at the
-individual level [Chu 2010, Craddock in press or HBM].
+% interest/need for predictive modeling in connectomics as well as the number of
+% approaches applicable 
+Recent work has illustrated the utility of predictive modeling for deriving
+connectivity models at the individual level [Chu 2010, Craddock in press or
+HBM].
 
 
 Both the fact that information \emph{can} be
 used to make predictions on new data, and \emph{how} it is used or
 \emph{where} it lies informs us on brain function. 
+
+
+% CAMERON condense below ALOT, focus on "where" the i information is
+% and how it is used ...
 
 % A bit of technical details
 % technical details
@@ -1045,8 +1095,8 @@ or bscv [tibs, book]. Split-half cross validation (two-fold cross validation,
 data, and also permits the simultaneous estimation of model reproducibility
 using the NPAIRs framework []. Bootstrap cross-validation minimizes estimation
 variance while maximising the amount of data available for training at the cost
-of introducing bias. This bias is due to the fact that on average 63.2\percent
-of the testing data overlaps with the training data, the .632\plus bootstrap
+of introducing bias. This bias is due to the fact that on average 63.2 percent
+of the testing data overlaps with the training data, the .632 plus bootstrap
 corrects for this bias.  No matter which cross validation scheme is used, the
 accurate estimation of generalization ability requires that the testing data and
 training data are independent and identically distributied (iid). The meaning of
@@ -1141,7 +1191,6 @@ most reasonable to adapt a conservative interpretation in which predictive
 modeling is used to identify candidate connections that are later tested in
 followon experiments better suited to elucidating their relationship to the
 variable of interest.
-
 
 
 To conclude on predictive modeling with a practical note for connectome
