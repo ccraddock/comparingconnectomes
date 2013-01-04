@@ -135,7 +135,7 @@ functional interactions in the brain, where the term ``graph'' is taken in its
 mathematical sense: a set of \emph{nodes} connected together by \emph{edges}.
 Graph nodes (brain region) correspond to a spatially contiguous and functionally
 coherent patchs of cortex and edges describe large range synchronizations between nodes
-that are putatively subtended by large fiber pathways \cite{marrelec2006}.  A
+that are putatively subtended by large fiber pathways \cite{marrelec2006b}.  A
 graph can be weighted or not, and is completely equivalent to its
 \emph{adjacency matrix}, a symmetric matrix tabulating the connection weights
 between each pair of nodes.  Functional-connectivity graphs are used to
@@ -182,7 +182,7 @@ smooting), connectivity based analyses require additional denoising
 to separate intrinsic activity from confounding signals. This process involves
 regressing time series capturing sources of structured noise from the fMRI data.
 Physiological noise due to cardiac and respiration are two important
-noise signals \cite{Hu1993, lund2006, birn2006, birn2008} that are
+noise signals \cite{hu1995, lund2006, birn2006, birn2008} that are
 difficult to control for and as a result are not commonly regressed out. Instead
 the mean signal from white matter (WM) and cerbrospinal fluid (CSF) are used as
 surrogates to measure these sources of noise as well as other scanner induced
@@ -249,7 +249,7 @@ from techniques such as independent component analysis (ICA) \cite{kiviniemi2009
 Atlases can be used to define full-brain parcellations. Popular
 choices are the Automatic Anatomic Labeling (AAL) atlas \cite{tzourio-mazoyer2002a}, 
 which benefits from an SPM toolbox or the ubiquitous Talaraich-Tournoux
-atlas \cite{talaraich1988}. 
+atlas \cite{talairach1988}. 
 However, these atlases suffer from major
 shortcomings; namely \emph{i)} they were defined on a single subject
 and thus does does not reflect inter-subject variability, \emph{ii)}
@@ -284,13 +284,13 @@ image distortions or vascular and movement artifacts that are isolated
 in ICA-like approaches. Lastly, incorporating functional information into
 regional definition will result in more homogenous regions that better represent
 connectivity present at the voxel level then anatomically defined atlases such
-as AAL or Harvard-Oxford \cite{craddock2011}. The simplest approach to define task-specific
+as AAL or Harvard-Oxford \cite{craddock2012}. The simplest approach to define task-specific
 regions is to use activation maps derived from standard GLM-based
 analysis in a task-driven study (see for instance \cite{poldrack2011}).
 Regions are extracted by thresholding the maps, or using balls around the
 activation peaks. For resting-state studies, unsupervised multivariate
 analysis techniques are necessary. Clustering approaches extract
-full-brain parcellations \cite{craddock2011, bellec2010, yeo2011,
+full-brain parcellations \cite{craddock2012, bellec2010, yeo2011,
 thirion2006}, and have been shown to segment well-known functional
 structures from rest data. Alternatively, decompositions
 methods, such as ICA \cite{beckmann2004}, can unmix linear
@@ -301,7 +301,7 @@ Extracting regions from these maps requires additional effort as they can
 display fragmented spatial features and structured background noise, but
 incorporating sparsity and spatial constraints in the decomposition
 techniques leads to contrasted maps that outline many different
-structures \cite{craddock2011, varoquaux2012} (see fig.\,\ref{fig:parcellations}).
+structures \cite{craddock2012, varoquaux2012} (see fig.\,\ref{fig:parcellations}).
 
 %% XXX number of regions
 % CAMERON added this since it was left to do, I don't know if it really says
@@ -318,7 +318,7 @@ parcellation, cross validation methods can be employed to estimate an optimal
 number of regions based on homogeniety, the ability to reproduce 
 connectivity information present at the voxel scale, and the ability to
 obtain the same parcellations from independent data 
-\cite{craddock2011, blumensath2012}. In general these metrics do not result in an
+\cite{craddock2012, blumensath2012}. In general these metrics do not result in an
 obvious peak at a ``best'' number of regions, but instead offer a range over
 which the number of regions can be chosen based on the needs of the analysis at
 hand.
@@ -341,7 +341,7 @@ hand.
 Different full-brain parcellations: the AAL atlas
 \cite{tzourio-mazoyer2002a}, the Harvard-Oxford atlas, the sucli atlas used in
 \cite{varoquaux2010c}, regions extracted by Ncuts
-\cite{craddock2011}, the resting-state networks extracted in
+\cite{craddock2012}, the resting-state networks extracted in
 \cite{smith2009} by ICA, and in \cite{varoquaux2011} by sparse dictionary
 learning.
 \label{fig:parcellations}
@@ -475,10 +475,9 @@ Given a set of graph nodes, the next step is to extract a representative time
 series for each node.  To study \emph{intrinsic} activity, \emph{e.g.}\ with
 rest data, signal extraction can be achieved by either averaging the fMRI time
 series across the voxels in a region, or by taking the first eigenvariate from a
-principle components analysis of the time series \cite{Friston functional
-	localizers}.
+principle components analysis of the time series \cite{friston2006}.
 Comparisons of these methods has shown that the eigenvariate method is
-more sensitive to function inhomogeniety \cite{craddock2011} and exhibits worse
+more sensitive to function inhomogeniety \cite{craddock2012} and exhibits worse
 test-retest reliablity than averaging time series \cite{zuo2010}. 
 In addition, improved specificity to BOLD signal can be enforced
 by using only signal in voxels near gray-matter tissues. For this purpose, we
@@ -1118,7 +1117,7 @@ formulated to deal with high dimensional datasets with few observations.
 Predictive modeling techniques have been
 successfully applied to identify connectome-based biomarkers of Alzheimer's
 disease \cite{stonnington2010}, depression \cite{craddock2009, zeng2012}, schizophrenia
-\cite{cecchi2009}, autism \cite{anderson2011}, ADHD \cite{zhu2008,}, aging
+\cite{cecchi2009, shen2010}, autism \cite{anderson2011}, ADHD \cite{zhu2008}, aging
 \cite{dosenbach2010}, as well as to classify mental operations
 \cite{richiardi2011,shirer2012}. The growing interest for applying MPM 
 to connectivity analysis was highlighted by the ADHD200
@@ -1134,83 +1133,69 @@ of predictive modeling for deriving connectivity models at the individual level
 
 % A bit of technical details
 % technical details
-Technically, predictive modeling is a supervised machine learning problem
-where a target to be predicted --\emph{e.g.}\ age, disease state,
-cognitive state-- is available for each observation of the data. In the
-context of comparing connectomes, features used in the predictive model
-correspond to bivariate measures of connectivity, or any of the previously
-discussed summary metrics.  
+Technically, predictive modeling is a supervised machine learning problem where
+a target to be predicted --\emph{e.g.}\ age, disease state, cognitive state-- is
+available for each observation of the data. In the context of comparing
+connectomes, features used in the predictive model correspond to bivariate
+measures of connectivity, or any of the previously discussed summary metrics.  
 %
 The quality of a predictive model is determined by its prediction accuracy (or
 generalization ability) which is measured using one or more iterations of
-cross-validation. Cross-validation iteratively seperates available data into
-a subset used for training the classifier and a dataset for evaluating
-classifier performance. Several strategies exist for subdividing the data and
-the commonly used approach of using only a single observation for testing
-(leave-one-out cross-validation) results in highly variable estimates of
-prediction accuracy[]. Alternative approaches such as (5 or 10)-fold
-cross-validation, split half resampling, or $0.632+$ bootstrap should be
-preferred[]. The significance of acheived prediction accuracy can be assessed
-using permutation tests[]. Predictive modeling approaches typically require the
-specification of several parameters, which may be chosen based on domain
-specific knowledge or requirements [cherkassky book], determined using an
-analytical approach [cherkassky], or optimized using a second level cross
-validation procedure [cherrkasky book, tibs book].  
+cross-validation. Cross-validation iteratively seperates available data into a
+subset used for training the classifier and a dataset for evaluating classifier
+performance. Several strategies exist for performing cross-valdiaiton and the commonly
+used approach of using only a single observation for testing (leave-one-out
+cross-validation) results in highly variable estimates of prediction accuracy
+\cite{hastie2003}.
+Alternative approaches such as (5 or 10)-fold cross-validation, split half
+resampling, or $0.632+$ bootstrap should be preferred \cite{hastie2003}. The significance of
+achieved prediction accuracy can be assessed using permutation tests
+\cite{golland2003}.
+Predictive modeling approaches typically require the specification of several
+parameters, which may be chosen based on domain specific knowledge or
+requirements \cite{cherkassky1998}, determined using an analytical approach
+\cite{cherkassky2004}, or optimized using a second level cross validation procedure
+\cite{cherkassky1998}.  
 
 Although MPM techniques are extremely well suited at measuring whether
-information exists in the connectome about a phenotypic variable, indentifying the
-connections most relevant to the variable and interpreting their relationship
-with the variable is less straight forward. These problems can be somewhat mitigated by
-carefully selecting the number of
-% CAMERON: Need advice on how to say "previously described sparse inverse
-% covariance estimation techniques"
-nodes in the connectome and employing the previously described sparse inverse covariance estimation
-techniques to minimize the number of connections. 
-
-Although MPM techniques are extremely well suited at measuring whether
-information exists in the connectome about a phenotypic variable, indentifying the
-connections most relevant to the predictive model (feature selection) is less straight forward. 
-These problems can be somewhat mitigated by carefully previously described
-sparse inverse covariance estimation techniques to minimize the number of
-connections. Additionally connections can be filtered out based on their statistical relationship with the variable of
-interest using a statistical criterion such as t-test, Pearson's
-correlation, or mutual information [guyon].  
-A drawback of this approach is that
-since the filters are typically insensitive to multivaratiate information, they
-may exclude features that would be important to the model [guyon]. Another
-approach is to treat feature selection as a model selection problem in which
-case the optimal feature subset is chosen based on cross validation based
-measures of prediction performance \cite{craddock2009, deshpande} or a measure
-of their stability \cite{craddock2009}.  A
-third approach are to use sparse modeling methods such as L1 SVM or LASSO that
-force weights for non-essential features to be zero [tibs,??]. 
-No matter
-which feature selection strategy is employed, it must be performed within
-cross-validation to avoid biasing estimates of prediction accuracy [later
-Guyon].
+information exists in the connectome about a phenotypic variable, indentifying
+the connections most relevant to the predictive model (feature selection) is
+less straight forward.  These problems can be somewhat mitigated by carefully
+previously described sparse inverse covariance estimation techniques to minimize
+the number of connections. Feature selection \cite{guyon2003} can be performed by filtering out
+features based on their statistical relationship with the variable of interest
+\cite{craddock2009, shen2010},
+selecting features based on cross-validation \cite{craddock2009, deshpande2010}, or by employing sparse modeling
+methods that force weights for non-essential features to be zero
+\cite{tibshirani1994, michel2009, ryali2010}.
+Filtering features based on a univariate criterion such as t-test should be
+avoided, since they are insensitive to multivariate information and may exclude
+features that could be important to a multivariate model \cite{guyon2003,
+	craddock2009}. No matter which
+feature selection strategy is employed, it must be performed within
+cross-validation to avoid biasing estimates of prediction accuracy.
  
-The interpretation of connections implicated by MPM and their relationship
-with a phenotypic outcome is complicated and requires insight into the
-mechanisms underlying the modeling approach. If features are appropriately
-standardized prior to training, the magnitude of model weights can be
-interpreted to reflect the relative importance of the corresponding feature to the model,
-similar to beta values from a standard regression model. But due to the
-multivariate nature of the MPMs, the sign of the weight cannot necessarily be
-interpreted to indicate the relationship between a connection and a phenotypic
-variable. Indeed, it is possible for the sign of a model weight to change based
-on the inclusion or exclusion of another feature in the model
-\cite{craddock2009}.  It is perhaps
-most reasonable to adapt a conservative interpretation in which predictive
-modeling is used to identify candidate connections that are later tested in
-followon experiments better suited to elucidating their relationship to the
-variable of interest.
+The interpretation of connections implicated by MPM and their relationship with
+a phenotypic outcome is complicated and requires insight into the mechanisms
+underlying the modeling approach. If features are appropriately standardized
+prior to training, the magnitude of model weights can be interpreted to reflect
+the relative importance of the corresponding feature to the model, similar to
+beta values from a standard regression model. But due to the multivariate nature
+of the MPMs, the sign of the weight cannot necessarily be interpreted to
+indicate the relationship between a connection and a phenotypic variable.
+Indeed, it is possible for the sign of a model weight to change based on the
+inclusion or exclusion of another feature in the model \cite{craddock2009}.  It
+is perhaps most reasonable to adapt a conservative interpretation in which
+predictive modeling is used to identify candidate connections that are later
+tested in followon experiments better suited to elucidating their relationship
+to the variable of interest.
 
 To conclude on predictive modeling with a practical note for connectome
-comparison, we would like to stress that while machine learning
-algorithms are powerful tools, they work best if they are provided with
-discriminant and noiseless features. In other words, as with all other
-connectome comparison methods, optimizing first-level analysis
---subject-level connectome extraction-- is paramount.
+comparison, we would like to stress that while machine learning algorithms are
+powerful tools, they work best if they are provided with discriminant and
+noiseless features. In other words, as with all other connectome comparison
+methods, optimizing first-level analysis --subject-level connectome extraction--
+is paramount.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1276,7 +1261,7 @@ are to be preferred. For more hypothesis-driven studies, such as the
 analysis of the mechanisms underlying a specific task, more complex models
 can be preferred, if rich data is available. Automatic choice of model is
 a difficult problem, however, cross-validation (as used in
-\cite{varoquaux2010c,craddock2011,strother2006}) is a useful tool. The
+\cite{varoquaux2010c,craddock2012,strother2006}) is a useful tool. The
 central principle of cross-validation is to test a model on different
 data than the data used to fit the model. Models too complex
 for the data available will fit noise in the data, and thus generalize
