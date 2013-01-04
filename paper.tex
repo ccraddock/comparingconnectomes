@@ -1035,7 +1035,7 @@ beyond empirical correlation matrices, as discuss in the previous section.
 % Importance and caveats of interpretation
 
 Predictive modeling is concerned with learning (or fitting) a model that is
-capable of decoding or \emph{predicting} information from new unseen data
+capable of \emph{predicting} information from new unseen data
 \cite{pereira2009}.  In the context of connectomes, predictive modeling provides
 a means for delineating connectivity based biomarkers of disease diagnosis,
 prognosis, or other phenotypic outcomes \cite{craddock2009, dosenbach2010}. The
@@ -1044,20 +1044,20 @@ present in the connectome about the phenotypic measure being evaluated
 \cite{kjems2002, kriegeskorte2006}.  When combined with reproducibility, prediction accuracy
 provides a metric for evaluating experimental tradeoffs for data acquisition,
 preprocessing, and analysis \cite{strother2002, laconte2003}.  Multivariate
-predictive modeling (MPM)
-are attractive in connectomics because they are sensitive to dependencies
+predictive models are attractive in connectomics because they are sensitive to dependencies
 between features and avoid the need to correct for multiple comparisons since
 the significance of an entire pattern is evaluated using a single statistical
 test. 
-Additionally many modern MPM techniques exist which are specifically
-formulated to deal with high dimensional datasets with few observations.
-Predictive modeling techniques have been
+Additionally modern predictive modeling techniques draw from the
+statistical learning literature, which specifically addresses
+ high dimensional datasets with few observations.
+Predictive modeling has been
 successfully applied to identify connectome-based biomarkers of Alzheimer's
 disease \cite{stonnington2010}, depression \cite{craddock2009, zeng2012}, schizophrenia
 \cite{cecchi2009, shen2010}, autism \cite{anderson2011}, ADHD \cite{zhu2008}, aging
 \cite{dosenbach2010}, as well as to classify mental operations
-\cite{richiardi2011,shirer2012}. The growing interest for applying MPM 
-to connectivity analysis was highlighted by the ADHD200
+\cite{richiardi2011,shirer2012}. The growing interest for applying
+predictive modeling to connectivity analysis was highlighted by the ADHD200
 Global Competition, in which the object was to identify a connectivity based
 biomarker of ADHD \cite{adhd2002012}. Recent work has illustrated the utility
 of predictive modeling for deriving connectivity models at the individual level
@@ -1078,9 +1078,9 @@ measures of connectivity, or any of the previously discussed summary metrics.
 %
 The quality of a predictive model is determined by its prediction accuracy (or
 generalization ability) which is measured using one or more iterations of
-cross-validation. Cross-validation iteratively seperates available data into a
+cross-validation. Cross-validation iteratively separates available data into a
 subset used for training the classifier and a dataset for evaluating classifier
-performance. Several strategies exist for performing cross-valdiaiton and the commonly
+performance. Several strategies exist for performing cross-validation and the commonly
 used approach of using only a single observation for testing (leave-one-out
 cross-validation) results in highly variable estimates of prediction accuracy
 \cite{hastie2003}.
@@ -1094,12 +1094,12 @@ requirements \cite{cherkassky1998}, determined using an analytical approach
 \cite{cherkassky2004}, or optimized using a second level cross validation procedure
 \cite{cherkassky1998}.  
 
-Although MPM techniques are extremely well suited at measuring whether
-information exists in the connectome about a phenotypic variable, indentifying
-the connections most relevant to the predictive model (feature selection) is
-less straight forward.  These problems can be somewhat mitigated by carefully
-previously described sparse inverse covariance estimation techniques to minimize
-the number of connections. Feature selection \cite{guyon2003} can be performed by filtering out
+Although predictive modeling techniques are well suited at measuring whether
+information exists in the connectome about a phenotypic variable, they do
+not directly identify the connections that are most relevant to the prediction.  These problems can be somewhat mitigated  by
+relying on previously described sparse inverse covariance estimation techniques to minimize
+the number of connections. In addition, feature selection \cite{guyon2003} 
+can be performed by filtering out
 features based on their statistical relationship with the variable of interest
 \cite{craddock2009, shen2010},
 selecting features based on cross-validation \cite{craddock2009, deshpande2010}, or by employing sparse modeling
