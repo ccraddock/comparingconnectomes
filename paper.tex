@@ -462,6 +462,7 @@ weighted by the subject-specific gray matter probabilistic segmentation,
 % CAMERON why only SPM's tool?
 % GAEL: afaik, it only gives hard segmentation, and not probabilistic
 % segmentation
+% CAMERON: FSL's fast gives probabilistic segmentation
 as output by \emph{e.g.}\ SPM's segmentation tool \cite{ashburner2005}.
 
 % CAMERON TODO: two sentences max
@@ -623,7 +624,8 @@ For the problem of recovering the functional-connectivity
 which, sparse inverse covariance estimators have been found to be
 % CAMERON Isn't there a paper from Stanford about this as well??
 % GAEL: I cannot find it with a quick Google. Do you have a name?
-efficient \cite{varoquaux2010c, smith2011}. The intuition for relying on
+% CAMERON: I think that it is ryali 2011, added
+efficient \cite{varoquaux2010c, ryali2011, smith2011}. The intuition for relying on
 inverse covariance rather than correlation stems from that fact that
 standard correlation (marginal correlation) between two variables $a$ and
 $b$ also capture the effects of other variables: strong correlation of
@@ -1103,31 +1105,28 @@ a means for delineating connectivity based biomarkers of disease diagnosis,
 prognosis, or other phenotypic outcomes \cite{craddock2009, dosenbach2010}. The
 accuracy of a predictive model provides a measure of the amount of information
 present in the connectome about the phenotypic measure being evaluated
-[kriegeskorte, Kjems].  When combined with reproducibility, prediction accuracy
+\cite{kjems2002, kriegeskorte2006}.  When combined with reproducibility, prediction accuracy
 provides a metric for evaluating experimental tradeoffs for data acquisition,
-preprocessing, and analysis [Strother, LaConte].  Multivariate predictive models
+preprocessing, and analysis \cite{strother2002, laconte2003}.  Multivariate
+predictive modeling (MPM)
 are attractive in connectomics because they are sensitive to dependencies
-between features and avoid the need to correct for  multiple comparisons since
+between features and avoid the need to correct for multiple comparisons since
 the significance of an entire pattern is evaluated using a single statistical
-test. From the perspective of medical applications, using resting-state
-connectivity as a biomarker is particularly appealing as it can be applied to
-impaired patients \cite{greicius2008b}. Predictive modeling techniques have been
+test. 
+Additionally many modern MPM techniques exist which are specifically
+formulated to deal with high dimensional datasets with few observations.
+Predictive modeling techniques have been
 successfully applied to identify connectome-based biomarkers of Alzheimer's
-disease \cite{stonnington2010}, depression \cite{craddock2009}, schizophrenia
-\cite{cecchi2009}, autism \cite{anderson2011}, ADHD \cite{zhu2008}, aging
+disease \cite{stonnington2010}, depression \cite{craddock2009, zeng2012}, schizophrenia
+\cite{cecchi2009}, autism \cite{anderson2011}, ADHD \cite{zhu2008,}, aging
 \cite{dosenbach2010}, as well as to classify mental operations
-\cite{richiardi2011,shirer2012}.
-% CAMERON something about the ADHD200 Global Competition highlights the
-% interest/need for predictive modeling in connectomics as well as the number of
-% approaches applicable 
-Recent work has illustrated the utility of predictive modeling for deriving
-connectivity models at the individual level [Chu 2010, Craddock in press or
-HBM].
+\cite{richiardi2011,shirer2012}. The growing interest for applying MPM 
+to connectivity analysis was highlighted by the ADHD200
+Global Competition, in which the object was to identify a connectivity based
+biomarker of ADHD \cite{adhd2002012}. Recent work has illustrated the utility
+of predictive modeling for deriving connectivity models at the individual level
+\cite{chu2011}.
 
-
-Both the fact that information \emph{can} be
-used to make predictions on new data, and \emph{how} it is used or
-\emph{where} it lies informs us on brain function. 
 
 
 % CAMERON condense below ALOT, focus on "where" the i information is
@@ -1139,96 +1138,44 @@ Technically, predictive modeling is a supervised machine learning problem
 where a target to be predicted --\emph{e.g.}\ age, disease state,
 cognitive state-- is available for each observation of the data. In the
 context of comparing connectomes, features used in the predictive model
-usually correspond to bivariate measures of connectivity, or any other
-summary metrics discussed earlier.  
+correspond to bivariate measures of connectivity, or any of the previously
+discussed summary metrics.  
 %
 The quality of a predictive model is determined by its prediction accuracy (or
 generalization ability) which is measured using one or more iterations of
-cross-validation. Cross-validation begins by seperating the available data into
-independent training and testing subsets.  A predictive model is learned from
-the training data and applied to the testing data to predict corresponding
-values of the target variable. Prediction accuracy is then assessed by comparing
-these predictions to the observed value of the target variable. This procedure
-can be iterated several times for different splits of the data and averaged to
-form a single measure of prediction accuracy.  One of the most important
-parameters for cross validation is the manner in which data are subdivided.
-There are several strategies for constructing the training dataset ranging from
-using all but one observations (leave-one-out cross-validation), using a
-fraction of the observations (k-fold cross validation; kfcv), to resampling the
-observations with replacement (boostrap cross-validation, bscv). Although loocv
-has been popular in neuroimaging applications of MVPA since it makes the largest
-amount of data available for training, its estimates are more variable than kfcv
-or bscv [tibs, book]. Split-half cross validation (two-fold cross validation,
-2fcv), minimizes the estimation variance, at the cost of using less training
-data, and also permits the simultaneous estimation of model reproducibility
-using the NPAIRs framework []. Bootstrap cross-validation minimizes estimation
-variance while maximising the amount of data available for training at the cost
-of introducing bias. This bias is due to the fact that on average 63.2 percent
-of the testing data overlaps with the training data, the .632 plus bootstrap
-corrects for this bias.  No matter which cross validation scheme is used, the
-accurate estimation of generalization ability requires that the testing data and
-training data are independent and identically distributied (iid). The meaning of
-independence here depends on the context in which the predictive model will be
-applied. For example, if observations correspond to subjects, then testing with
-scans acquired from the same subject, even acquired at different points in time,
-will introduce bias. If observations are different time points for the same
-subject, with the goal of testing whether the model can predict a later time
-point for that subject, then scans acquired from a later time point for that
-subject may be used for testing as long as enough time has passed to account for
-temporal autocorrelation.  
+cross-validation. Cross-validation iteratively seperates available data into
+a subset used for training the classifier and a dataset for evaluating
+classifier performance. Several strategies exist for subdividing the data and
+the commonly used approach of using only a single observation for testing
+(leave-one-out cross-validation) results in highly variable estimates of
+prediction accuracy[]. Alternative approaches such as (5 or 10)-fold
+cross-validation, split half resampling, or $0.632+$ bootstrap should be
+preferred[]. The significance of acheived prediction accuracy can be assessed
+using permutation tests[]. Predictive modeling approaches typically require the
+specification of several parameters, which may be chosen based on domain
+specific knowledge or requirements [cherkassky book], determined using an
+analytical approach [cherkassky], or optimized using a second level cross
+validation procedure [cherrkasky book, tibs book].  
 
-Another important parameter for estimating generalization ability is the error
-term employed. For classification problems error can be simply measured as a '1'
-if the prediction is correct and a '0' if it is incorrect, alternatively
-misclassifications for some groups may be weighted higher then others.  Log-loss
-or the negative log-likelihood can be used if class probabilities are outputed
-rather than simply class membership. For regression problems, common loss
-functions are the correlation or mean squared error between predicted and true
-target values. The former is preferred in cases when differences in scale and
-shift are less important then the relative ordering of the output values.
-Mean-squared error is preferred when the target variable has units and
-penalizing a model for shift or scale differences is important. 
+Although MPM techniques are extremely well suited at measuring whether
+information exists in the connectome about a phenotypic variable, indentifying the
+connections most relevant to the variable and interpreting their relationship
+with the variable is less straight forward. These problems can be somewhat mitigated by
+carefully selecting the number of
+% CAMERON: Need advice on how to say "previously described sparse inverse
+% covariance estimation techniques"
+nodes in the connectome and employing the previously described sparse inverse covariance estimation
+techniques to minimize the number of connections. 
 
-After generalization ability (or error) has been estimated it is compared to
-what would be acheived by ``chance'' in order to estimate its significance. In
-the case of classification problems, the likelihood of obtaining a
-generalization accuracy by change can be estimated from a multinomial
-distribution [].  Alternatively, a permutation test can be performed in which
-the target labels are randomly permuted several times and the cross-validation
-error is estimated using each of the permutations. Significance is the assessed
-from the fraction of permutations that obtained higher prediction accuracy then
-was obtained from the unpermuted model. This method has the advantage of being
-available for both classification and regression models with the caveat that any
-correlationl structure between observations must be preserved to avoid biased
-results. Null distributions can be constructed for non-independent data using
-block permutation or wavelet resampling. When statistical significance is
-measured in this manner, the entire pattern is test with a single statistical
-test and there is no need to correct for multiple comparisons (unless multiple
-patterns are evaluated).
-
-MVPA algorithms typically require the specification of several parameters, the
-values of which will impact the quality of the results. These parameters may be
-prespecified based on domain specific knowledge or requirements [cherkassky
-book], determined using an analytical approach [cherkassky], or optimized using
-cross validation [cherrkasky book, tibs book].  In the latter case a nested
-cross-validation scheme is required to avoid biasing resultant measures of
-prediction accuracy [cherkassky].  
-%
-Determining the subset of features most relevant to the model (feature
-selection) can improve prediction accuracy \footnote{This is not necessarily
-	true, it has been shown in very high dimensional datasets that feature
-	selection does not improve prediction accuracy[cite high dimensional
-	gene paper], whereas in other cases it does\cite{craddock2009}.} and is
-essential for interpreting the models. For connectivity analyses, feature
-selection involves highlighting the connections that underlie the obtained
-prediction.  In cases were model weights can be directly mapped to their
-corresponding feature, there is typically no statistical framework for
-thresholding these weights, and meaningless features are not always set to zero
-\footnote{This is particularly the case for $\ell_2$ regularized algorithms such
-	as support vector machines and ridge regression}. One strategy is to
-filter out features based on their statistical relationship with the variable of
-interest using a univariate statistical criterion such as t-test, Pearson's
-correlation, or mutual information [guyon].  A drawback of this approach is that
+Although MPM techniques are extremely well suited at measuring whether
+information exists in the connectome about a phenotypic variable, indentifying the
+connections most relevant to the predictive model (feature selection) is less straight forward. 
+These problems can be somewhat mitigated by carefully previously described
+sparse inverse covariance estimation techniques to minimize the number of
+connections. Additionally connections can be filtered out based on their statistical relationship with the variable of
+interest using a statistical criterion such as t-test, Pearson's
+correlation, or mutual information [guyon].  
+A drawback of this approach is that
 since the filters are typically insensitive to multivaratiate information, they
 may exclude features that would be important to the model [guyon]. Another
 approach is to treat feature selection as a model selection problem in which
@@ -1238,11 +1185,42 @@ third approach are to use sparse modeling methods such as L1 SVM or LASSO that
 force weights for non-essential features to be zero [tibs,??]. Although ideal,
 these methods may have limits on the number of non-zero weights used in the
 model or the exclusion of highly correlated features from the model [elastic net
-paper].  Contrary to previous reports [Guyon 2002, Craddock 2009] no matter
-which feature selection strategy is employed, it must be performed with
+paper].  No matter
+which feature selection strategy is employed, it must be performed within
+cross-validation to avoid biasing estimates of prediction accuracy [later
+Guyon].
+ 
+
+Additional filtering of input connections can be obtained 
+
+tures.  For connectivity analyses, feature
+selection involves highlighting the connections that underlie the obtained
+prediction.  In cases were model weights can be directly mapped to their
+corresponding feature, there is typically no statistical framework for
+thresholding these weights, and meaningless features are not always set to zero
+One strategy is to filter out features based on their statistical relationship with the variable of
+interest using a univariate statistical criterion such as t-test, Pearson's
+correlation, or mutual information [guyon].  
+
+A drawback of this approach is that
+since the filters are typically insensitive to multivaratiate information, they
+may exclude features that would be important to the model [guyon]. Another
+approach is to treat feature selection as a model selection problem in which
+case the optimal feature subset is chosen based on cross validation based
+measures of prediction performance [] or a measure of their stability[].  A
+third approach are to use sparse modeling methods such as L1 SVM or LASSO that
+force weights for non-essential features to be zero [tibs,??]. Although ideal,
+these methods may have limits on the number of non-zero weights used in the
+model or the exclusion of highly correlated features from the model [elastic net
+paper].  No matter
+which feature selection strategy is employed, it must be performed within
 cross-validation to avoid biasing estimates of prediction accuracy [later
 Guyon].
 
+Although MPM techniques are extremely well suited at measuring whether
+information exists in the connectome about a phenotypic variable, indentifying the
+connections most relevant to the variable and interpreting their relationship
+with the variable is less straight forward. These problems can be somewhat mitigated by
 The interpretation of classifier weights for selected features, when available,
 is complicated and requires insight into the mechanisms underlying the modeling
 approach. If features are appropriately standardized prior to training, the
