@@ -221,7 +221,7 @@ of $\le 0.2$mm can induce artefactual group-level findings even when motion is
 accounted for in preprocessing
 \cite{vandijk2012,power2011,satterthwaite2012}. Special care must be taken to
 adequately control for residual impact of head motion in the group model
-\cite{satterthwaite2012, saad2012}.
+\cite{satterthwaite2012, vandijk2012}.
 
 %
 
@@ -249,7 +249,7 @@ from techniques such as independent component analysis (ICA) \cite{kiviniemi2009
 Atlases can be used to define full-brain parcellations. Popular
 choices are the Automatic Anatomic Labeling (AAL) atlas \cite{tzourio-mazoyer2002a}, 
 which benefits from an SPM toolbox or the ubiquitous Talaraich-Tournoux
-atlas \cite{talaraich}. 
+atlas \cite{talaraich1988}. 
 However, these atlases suffer from major
 shortcomings; namely \emph{i)} they were defined on a single subject
 and thus does does not reflect inter-subject variability, \emph{ii)}
@@ -269,7 +269,7 @@ Regions can be defined from previous studies, informally or with
 systematic meta-analysis. This strategy is used to define the main
 resting-state networks, such as the default mode network, but may also be
 useful to study connectivity in task-specific networks
-\cite{dosenbach2006,biswal1995,rissman2004,grillon2012}. The common practice is to place balls of a given
+\cite{biswal1995,rissman2004,dosenbach2006,grillon2012}. The common practice is to place balls of a given
 radius, 5 or 10\,mm, centered at the coordinates of interest. Given that
 functional networks are tightly interleaved in some parts of the cortex,
 such as the parietal lobe, care must be taken not to define too many
@@ -318,7 +318,7 @@ parcellation, cross validation methods can be employed to estimate an optimal
 number of regions based on homogeniety, the ability to reproduce 
 connectivity information present at the voxel scale, and the ability to
 obtain the same parcellations from independent data 
-\cite{craddock2011, germanguy}. In general these metrics do not result in an
+\cite{craddock2011, blumensath2012}. In general these metrics do not result in an
 obvious peak at a ``best'' number of regions, but instead offer a range over
 which the number of regions can be chosen based on the needs of the analysis at
 hand.
@@ -477,8 +477,8 @@ series across the voxels in a region, or by taking the first eigenvariate from a
 principle components analysis of the time series \cite{Friston functional
 	localizers}.
 Comparisons of these methods has shown that the eigenvariate method is
-more sensitive to function inhomogeniety \cite{craddock 2011} and exhibits worse
-test-retest reliablity than averaging time series \cite{zuo thingy}. 
+more sensitive to function inhomogeniety \cite{craddock2011} and exhibits worse
+test-retest reliablity than averaging time series \cite{zuo2010}. 
 In addition, improved specificity to BOLD signal can be enforced
 by using only signal in voxels near gray-matter tissues. For this purpose, we
 suggest summarizing the signal in an ROI by a mean of the different voxels
