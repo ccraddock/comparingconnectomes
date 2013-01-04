@@ -284,14 +284,13 @@ image distortions or vascular and movement artifacts that are isolated
 in ICA-like approaches. Lastly, incorporating functional information into
 regional definition will result in more homogenous regions that better represent
 connectivity present at the voxel level then anatomically defined atlases such
-as AAL or Harvard-Oxford \cite{craddock2011}. The simplest approach to define task-specific
+as AAL or Harvard-Oxford \cite{craddock2012}. The simplest approach to define task-specific
 regions is to use activation maps derived from standard GLM-based
 analysis in a task-driven study (see for instance \cite{poldrack2011}).
 Regions are extracted by thresholding the maps, or using balls around the
 activation peaks. For resting-state studies, unsupervised multivariate
 analysis techniques are necessary. Clustering approaches extract
-full-brain parcellations \cite{craddock2011, bellec2010, yeo2011,
-thirion2006}, and have been shown to segment well-known functional
+full-brain parcellations \cite{craddock2012,bellec2010,yeo2011,thirion2006}, and have been shown to segment well-known functional
 structures from rest data. Alternatively, decompositions
 methods, such as ICA \cite{beckmann2004}, can unmix linear
 combinations of multiple effects and separate out overlapping spatial maps
@@ -301,7 +300,7 @@ Extracting regions from these maps requires additional effort as they can
 display fragmented spatial features and structured background noise, but
 incorporating sparsity and spatial constraints in the decomposition
 techniques leads to contrasted maps that outline many different
-structures \cite{craddock2011, varoquaux2012} (see fig.\,\ref{fig:parcellations}).
+structures \cite{varoquaux2012} (see fig.\,\ref{fig:parcellations}).
 
 %% XXX number of regions
 % CAMERON added this since it was left to do, I don't know if it really says
@@ -318,7 +317,7 @@ parcellation, cross validation methods can be employed to estimate an optimal
 number of regions based on homogeniety, the ability to reproduce 
 connectivity information present at the voxel scale, and the ability to
 obtain the same parcellations from independent data 
-\cite{craddock2011, blumensath2012}. In general these metrics do not result in an
+\cite{craddock2012, blumensath2012}. In general these metrics do not result in an
 obvious peak at a ``best'' number of regions, but instead offer a range over
 which the number of regions can be chosen based on the needs of the analysis at
 hand.
@@ -341,7 +340,7 @@ hand.
 Different full-brain parcellations: the AAL atlas
 \cite{tzourio-mazoyer2002a}, the Harvard-Oxford atlas, the sucli atlas used in
 \cite{varoquaux2010c}, regions extracted by Ncuts
-\cite{craddock2011}, the resting-state networks extracted in
+\cite{craddock2012}, the resting-state networks extracted in
 \cite{smith2009} by ICA, and in \cite{varoquaux2011} by sparse dictionary
 learning.
 \label{fig:parcellations}
@@ -406,71 +405,7 @@ confounds or a global mean, teases out the structure.
 \end{figure}
 %---------------------------------------------------------------------------}}}
 
-% The following paragraph is convoluted: we start to say that rest is
-% from time-series, and task from beta, we go on discussing about beta
-% maps, and then we move back to rest. It might need restructuring
-
-% Horrible sentence below
-
-<<<<<<< HEAD
 \paragraph{Signal extraction and cleaning}
-Given graph nodes, the next step 
-Given ROIs, the next step is to extract from them a summary measure. To
-study \emph{on-going} activity, \emph{e.g.}\ with rest data, signal
-extraction is performed from the EPI time series; however, to study
-\emph{evoked} activity with task-driven studies it can be beneficial to
-run a GLM-based first-level analysis, enforcing specificity of the measure
-extracted to the task. With slow event-related designs, task-specific
-functional connectivity can be captured in trial-to-trial fluctuations in
-the BOLD response, estimated using a GLM analysis with one regressor per
-trial \cite{grillon2012,rissman2004}. This approach, known as beta-series
-regression, has been adapted for rapid event-related designs, using
-multiple GLMs to optimize deconvolution of each trial \cite{mumford2012}.
-With rest datasets, it is important to regress out time series capturing
-movement and other sources of structured noise, to separate on-going
-activity from confounding signals. In addition to removing movement
-parameters estimated during preprocessing, removing linear trends, signal
-extracted from the white matter and the CSF \cite{chang2009}, as well as
-using the CompCor \cite{behzadi2007} procedure gives more contrasted
-correlation matrices that outline functional structures better
-(fig.\,\ref{fig:correlation_matrices}). 
-Indeed, white matter and CSF signals capture thermal noise, 
-systematic variation due to multichannel head coils, cardiac and resp.
-smaller motions, physiological noise correction.
-Filtering high frequencies is
-often recommended, based on the initial observation that neural-related
-signals are observed below 0.1\,Hz \cite{cordes2001,biswal1995}. While
-high-pass and low-pass filtering decrease the impact of some confounds,
-recent studies have shown that information on neural processes is present
-in the full spectrum of frequencies observed
-\cite{smith2012,vanoort2012}. Regressing out a good choice of confound
-signals is more specific than frequency filter, and in our experience
-gives more contrasted correlation matrices\footnote{Note that naive use
-of filtering can induce spurious correlations \cite{davey2012}.}.
-
-Finally, it is important to keep in mind that using resting-state to
-study on-going activity is fragile to confounds such as movement
-\cite{vandijk2012,power2011} or scanner noise, and probably more so than
-activation studies as it is harder to control the specificity of the
-signal extracted. Special care must be taken in preprocessing strategies
-\cite{vandijk2010,satterthwaite2012}.
-%
-In addition, improved specificity to BOLD signal can be enforced by
-using only signal in voxels near gray-matter tissues. For this purpose,
-we suggest summarizing the signal in an ROI by a mean of the different voxels
-weighted by the subject-specific gray matter probabilistic segmentation,
-% CAMERON why only SPM's tool?
-% GAEL: afaik, it only gives hard segmentation, and not probabilistic
-% segmentation
-% CAMERON: FSL's fast gives probabilistic segmentation
-as output by \emph{e.g.}\ SPM's segmentation tool \cite{ashburner2005}.
-
-% CAMERON TODO: two sentences max
-% Regressing out task?? Skipping for lack of space
-\paragraph{Signal extraction and cleaning}
-% CAMERON = I think we should differentiate between signal extraction and signal
-% cleaning, actually the cleaning is a seperate issue, that is independent of
-% the regions or nodes.
 Given a set of graph nodes, the next step is to extract a representative time
 series for each node.  To study \emph{intrinsic} activity, \emph{e.g.}\ with
 rest data, signal extraction can be achieved by either averaging the fMRI time
@@ -478,13 +413,14 @@ series across the voxels in a region, or by taking the first eigenvariate from a
 principle components analysis of the time series \cite{Friston functional
 	localizers}.
 Comparisons of these methods has shown that the eigenvariate method is
-more sensitive to function inhomogeniety \cite{craddock2011} and exhibits worse
+more sensitive to function inhomogeneity \cite{craddock2012} and exhibits worse
 test-retest reliablity than averaging time series \cite{zuo2010}. 
 In addition, improved specificity to BOLD signal can be enforced
 by using only signal in voxels near gray-matter tissues. For this purpose, we
 suggest summarizing the signal in an ROI by a mean of the different voxels
-weighted by the subject-specific gray matter probabilistic segmentation, as
-output by \emph{e.g.}\ SPM's segmentation tool \cite{ashburner2005}.
+weighted by the subject-specific gray matter probabilistic segmentation, 
+as output by \emph{e.g.}\ SPM's segmentation tool \cite{ashburner2005} or
+FSL's FAST program \cite{zhang2001}.
 
 With rest dataset, it is important to regress out time series capturing
 movement and other sources of structured noise, to separate on-going
@@ -1276,7 +1212,7 @@ are to be preferred. For more hypothesis-driven studies, such as the
 analysis of the mechanisms underlying a specific task, more complex models
 can be preferred, if rich data is available. Automatic choice of model is
 a difficult problem, however, cross-validation (as used in
-\cite{varoquaux2010c,craddock2011,strother2006}) is a useful tool. The
+\cite{varoquaux2010c,craddock2012,strother2006}) is a useful tool. The
 central principle of cross-validation is to test a model on different
 data than the data used to fit the model. Models too complex
 for the data available will fit noise in the data, and thus generalize
