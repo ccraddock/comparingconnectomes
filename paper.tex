@@ -57,19 +57,18 @@
 \address[nki]{Nathan Kline Institute for Psychiatric Research, Orangeburg, New York}
 
 \begin{abstract}
-    Functional connectomes capture brain interactions via 
-    fluctuations in brain imaging signal. On rest data they map
-    the intrinsic functional architecture of the brain. With
-    task-driven experiments they represent the integration mechanisms
-    between specialized brain areas. Analysis of their variability 
-    across subjects and conditions can reveal markers of brain
-    pathologies and cognitive mechanisms. However, connectomes are
-    complex multivariate objects. Methods to estimate them 
-    from the functional signal have undergone rapid developments.
-    The literature is full of diverse strategies to compare them.
-    This paper aims to clarify some links across functional-connectivity
-    methods and expose different steps to perform a group study on
-    functional connectomes.
+	Functional connectomes capture brain interactions via synchronized
+	fluctuations in the functional magnetic resonance imaging signal. If
+	measured during rest, they map the intrinsic functional architecture of
+	the brain. With task-drive experiments they represent integration
+	mechanisms between specialized brain areas. Analyzing the variability in
+	the functional connectome across subjects and conditions can reveal
+	markers of brain pathologies and mechanisms underlying cognition.
+	Methods of estimating functional connectomes from the imaging signal
+	have undergone rapid developments and the literature is full of diverse
+	strategies for comparing them. This review aims to clarify links across
+	functional-connectivity methods and expose different steps in performing
+	a group study of functional connectomes.
 \end{abstract}
 
 \begin{keyword}
@@ -95,7 +94,7 @@ function, that complements the localizationist picture emerging from the
 systematic mapping of regions recruited in tasks\cite{sporns2004}. However,
 while there exists a well-defined standard analysis framework for activation
 mapping that enables statistically-controlled comparisons across subjects
-\cite{friston1995}, group-level analysis of functional connectivity still faces
+\cite{friston1995}, group-level analyses of functional connectivity still face
 many open methodological challenges. Deriving a picture of a single subject's
 functional connectivity is by itself not straightforward, as the brain comprises
 a myriad of interacting subsystems and its connectivity must be decomposed into
@@ -175,16 +174,15 @@ signal extraction, and the estimation of graphs.
 %------------------------------------------------------------------------------
 \subsection{Preprocessing Considerations}
 
-% CAMERON make sure these citations are accounted for
 In addition to standard preprocessing performed for task based analyses
 (slice-timing correction, realignment, spatial normalization, and possibly
-smooting), connectivity based analyses require additional denoising 
+smoothing), connectivity based analyses require additional denoising 
 to separate intrinsic activity from confounding signals. This process involves
 regressing time series capturing sources of structured noise from the fMRI data.
 Physiological noise due to cardiac and respiration are two important
 noise signals \cite{hu1995, lund2006, birn2006, birn2008} that are
 difficult to control for and as a result are not commonly regressed out. Instead
-the mean signal from white matter (WM) and cerbrospinal fluid (CSF) are used as
+the mean signal from white matter (WM) and cerebrospinal fluid (CSF) are used as
 surrogates to measure these sources of noise as well as other scanner induced
 signal fluctuations \cite{fox2005, lund2006}. More complex models account for
 spatial variation in noise by incorporating voxel specific regressors of
@@ -193,7 +191,7 @@ components analysis of WM signal (CompCor \cite{behzadi2007}). Head motion
 induced signal fluctuations are accounted for by incorporating movement
 parameters \cite{friston1996, fox2005, lund2006}. The global mean time series
 has been proposed as an additional noise regressor that appears to improve the
-spatial specifity of connectivity results \cite{fox2005, fox2009}. This practice
+spatial specificity of connectivity results \cite{fox2005, fox2009}. This practice
 has become controversial since the global mean has been shown to primarily reflect neuronal
 signal and the fact that global signal regression introduces negative correlations
 \cite{murphy2009,chang2009,saad2012}. 
@@ -217,7 +215,7 @@ and in our experience gives more contrasted correlation matrices\footnote{Note
 It is important to keep in mind that the proposed correction strategies
 are approximate and not definitive techniques. This has become particularly
 apparent for head motion with reports that micromovements on the scale
-of $\le 0.2$mm can induce artefactual group-level findings even when motion is
+of $\le 0.2$\,mm can induce artefactual group-level findings even when motion is
 accounted for in preprocessing
 \cite{vandijk2012,power2011,satterthwaite2012}. Special care must be taken to
 adequately control for residual impact of head motion in the group model
@@ -235,7 +233,7 @@ units would lead to erronous graph estimation \cite{smith2011}.
 %
 Different strategies to define suitable ROIs coexist. While dense parcellations approaches cover
 a large fraction of the brain \cite{achard2006, varoquaux2010c,
-wang2009,bellec2006}, this coverage can be traded off to focus on some specific
+wang2009,bellec2006,craddock2012}, this coverage can be traded off to focus on some specific
 regions, in favor of increased functional specificity and thus better
 differentiation across networks \cite{greicius2003, dosenbach2006,
 varoquaux2010b}. In addition, while
@@ -252,12 +250,10 @@ which benefits from an SPM toolbox or the ubiquitous Talaraich-Tournoux
 atlas \cite{talairach1988}. 
 However, these atlases suffer from major
 shortcomings; namely \emph{i)} they were defined on a single subject
-and thus does does not reflect inter-subject variability, \emph{ii)}
+and thus does does not reflect inter-subject variability, and \emph{ii)}
 they focus on labeling large anatomical structures and do not match
 functional layout --for instance only two regions describe the medial
-part of the frontal lobe, and \emph{iii} they are defined based on
-cytoarchitectonic or anatomical boundaries and do not incorporate functional
-information. Multi-subject probabilistic altases such as the
+part of the frontal lobe. Multi-subject probabilistic altases such as the
 Harvard-Oxford atlas distributed with FSL \cite{smith2004} or the
 sulci-based structural atlas used in \cite{varoquaux2010c} mitigate the
 first problem, and the high number of regions defined using sulci also
@@ -310,12 +306,12 @@ structures \cite{varoquaux2012} (see fig.\,\ref{fig:parcellations}).
 %
 Defining an optimal number of regions to use for whole brain connectivity analysis bears
 careful consideration. On one hand we desire a sufficiently large number of
-regions to guarentee that they are functionally homogenous regions and adequately 
+regions to guarantee that they are functionally homogeneous regions and adequately 
 represent the connectivity information present in the data. On the other hand
 too many regions will result in an explosion in computational complexity 
 and interfere with the interpretability of observed connections. For functional
 parcellation, cross validation methods can be employed to estimate an optimal 
-number of regions based on homogeniety, the ability to reproduce 
+number of regions based on homogeneity, the ability to reproduce 
 connectivity information present at the voxel scale, and the ability to
 obtain the same parcellations from independent data 
 \cite{craddock2012, blumensath2012}. In general these metrics do not result in an
@@ -339,7 +335,7 @@ hand.
 
 \caption{
 Different full-brain parcellations: the AAL atlas
-\cite{tzourio-mazoyer2002a}, the Harvard-Oxford atlas, the sucli atlas used in
+\cite{tzourio-mazoyer2002a}, the Harvard-Oxford atlas, the sulci atlas used in
 \cite{varoquaux2010c}, regions extracted by Ncuts
 \cite{craddock2012}, the resting-state networks extracted in
 \cite{smith2009} by ICA, and in \cite{varoquaux2011} by sparse dictionary
@@ -406,7 +402,8 @@ confounds or a global mean, teases out the structure.
 \end{figure}
 %---------------------------------------------------------------------------}}}
 
-\paragraph{Signal extraction and cleaning}
+\paragraph{Signal extraction}
+%
 Given a set of graph nodes, the next step is to extract a representative time
 series for each node.  To study \emph{intrinsic} activity, \emph{e.g.}\ with
 rest data, signal extraction can be achieved by either averaging the fMRI time
@@ -414,41 +411,13 @@ series across the voxels in a region, or by taking the first eigenvariate from a
 principle components analysis of the time series \cite{friston2006}.
 Comparisons of these methods has shown that the eigenvariate method is
 more sensitive to function inhomogeneity \cite{craddock2012} and exhibits worse
-test-retest reliablity than averaging time series \cite{zuo2010}. 
+test-retest reliability than averaging time series \cite{zuo2010}. 
 In addition, improved specificity to BOLD signal can be enforced
 by using only signal in voxels near gray-matter tissues. For this purpose, we
 suggest summarizing the signal in an ROI by a mean of the different voxels
 weighted by the subject-specific gray matter probabilistic segmentation, 
 as output by \emph{e.g.}\ SPM's segmentation tool \cite{ashburner2005} or
 FSL's FAST program \cite{zhang2001}.
-
-With rest dataset, it is important to regress out time series capturing
-movement and other sources of structured noise, to separate on-going
-activity from confounding signals. In addition to removing movement
-parameters estimated during preprocessing, removing linear trends, signal
-extracted from the white matter and the CSF \cite{chang2009}, as well as
-using the CompCor \cite{behzadi2007} procedure gives more contrasted
-correlation matrices that outline functional structures better
-(fig.\,\ref{fig:correlation_matrices}). 
-Indeed, white matter and CSF signals capture thermal noise, 
-systematic variation due to multichannel head coils, cardiac and resp.
-smaller motions, physiological noise correction.
-Filtering high frequencies is
-often recommended, based on the initial observation that neural-related
-signals are observed below 0.1\,Hz \cite{cordes2001,biswal1995}. While
-high-pass and low-pass filtering decrease the impact of some confounds,
-recent studies have shown that information on neural processes is present
-in the full spectrum of frequencies observed
-\cite{smith2012,vanoort2012}. Regressing out a good choice of confound
-signals is more specific than frequency filter, and in our experience
-gives more contrasted correlation matrices\footnote{Note that naive use
-of filtering can induce spurious correlations \cite{davey2012}.}.
-Finally, it is important to keep in mind that using resting-state to
-study on-going activity is fragile to confounds such as movement
-\cite{vandijk2012,power2011} or scanner noise, and probably more so than
-activation studies as it is harder to control the specificity of the
-signal extracted. Special care must be taken in preprocessing strategies
-\cite{vandijk2010,satterthwaite2012}.
 
 To study connectivity from \emph{evoked} activity with task-driven studies it
 can be beneficial to run a GLM-based first-level analysis, enforcing specificity
@@ -459,10 +428,6 @@ regressor per trial \cite{grillon2012,rissman2004,mennes2010}. This approach,
 known as beta-series regression, has been adapted for rapid event-related
 designs, using multiple GLMs to optimize deconvolution of each trial
 \cite{mumford2012}.
-
-% Regressing out task?? Skipping for lack of space
-% I'd rather skip it, as I really do not believe it actually works, and
-% would like to stay out of a controversy
 
 %{{{------ Precision matrices figure -----------------------------------------
 \begin{figure}
@@ -513,8 +478,6 @@ neglected point is that the sample correlation matrix, \emph{i.e.}\ the
 correlation matrix obtained by plugging the observed signal in the
 correlation matrix formula, is not the population correlation matrix,
 \emph{i.e.}\ the correlation matrix of the data-generating process. If the
-% CAMERON THIS IS ALSO DETERMINED BY TEMPORAL AUTOCORRELATIONS! band-limited
-% by hemodynamic response, low sampling frequency
 number of measurements was infinite, the two would coincide, however if
 this number is not large compared to the number of connections (that
 scales as the square of the number of ROIs), the sample correlation
@@ -558,9 +521,6 @@ instead of the white matter, CSF, and CompCor time courses.
 For the problem of recovering the functional-connectivity
 \emph{structure}, \emph{i.e.}\ finding which region is connected to
 which, sparse inverse covariance estimators have been found to be
-% CAMERON Isn't there a paper from Stanford about this as well??
-% GAEL: I cannot find it with a quick Google. Do you have a name?
-% CAMERON: I think that it is ryali 2011, added
 efficient \cite{varoquaux2010c, ryali2011, smith2011}. The intuition for relying on
 inverse covariance rather than correlation stems from that fact that
 standard correlation (marginal correlation) between two variables $a$ and
@@ -588,8 +548,7 @@ are necessary because estimation noise creates a background structure
 parameters are not independent, and the spurious background connections
 degrade the estimation of the actual connections. The sparse estimators
 make a compromise between imposing simpler models, \emph{i.e.}\ with less
-% CAMERON "fitting well the data" needs to be fixed
-connections, and fitting well the data. This compromise is set via a
+connections, and providing a good fit to the data. This compromise is set via a
 regularization parameter which controls the sparsity of the estimate. A
 good rule of thumb to choose this parameter is via cross-validation
 \cite{varoquaux2010c}.
@@ -605,12 +564,10 @@ good rule of thumb to choose this parameter is via cross-validation
 The correlation matrices and inverse-covariance matrices that we extract
 contain a lot of information on the functional structure of the brain.
 First, the correlation matrix (fig.\,\ref{fig:correlation_matrices})
-shows blocks of coactivating regions that can be interpreted as
+shows blocks of synchronized regions that can be interpreted as
 large-scale functional networks, such as the default mode network. Note
-% CAMERON How about spectral reordering?
 that the split in networks is not straightforward. Different ordering of the
 nodes will reveal different networks. 
-% CAMERON I don't get this sentence
 Indeed, because of the presence of
 hubs and interleaved networks, the picture in terms of segregated networks
 is not sufficient to explain full-brain connectivity
@@ -620,11 +577,9 @@ by weighted edges (inserts on fig.\,\ref{fig:correlation_matrices} and
 fig.\,\ref{fig:icov_estimators}). The inverse-covariance matrix, which
 captures partial correlations, appears then as extracting a
 \emph{backbone} or \emph{core} of the graph.
-% CAMERON This is a really long sentence
 While such structure has
 been used as a way to summarize anatomical brain connectivity graphs
 \cite{hagmann2008}, here it has a clear-cut meaning with regards to
-% CAMERON BOLD not explicitly defined
 the BOLD signal: it gives the conditional independence structure between
 regions \cite{varoquaux2012}. In other words, regions $a$ and $b$ are
 not connected if the signal that they have in common can be explained by
@@ -700,8 +655,6 @@ be broken, non-parametric permutations-based tests give reliable
 approaches. In particular, the max-T procedure \cite{ge2003,nichols2001}
 is interesting to avoid the drastic Bonferroni correction when
 controlling for multiple comparison in family-wise error rate.
-
-% CAMERON what about CWAS or Bellec??
 
 %{{{------ Inter subject fluctuations ----------------------------------------
 \begin{figure}
@@ -886,7 +839,7 @@ resting-state data, functional networks comprising many nodes can appear
 as more or less connected across subjects (see for instance
 fig.\,\ref{fig:inter_subject}.a, showing variability in a control
 population at rest). In other words, non-specific variability is
-distributed accross the connectivity graph, and it is structured by the
+distributed across the connectivity graph, and it is structured by the
 graph itself. This observation brings the natural question of whether
 second-level analysis should be performed on correlation matrices,
 inverse-covariance matrices, or another parametrization that would
@@ -995,12 +948,10 @@ descriptions are grouped under the terms of ``graph theoretical
 approaches'', however graph theory is an entire division of mathematics
 and computer science that is concerned with much more than topology of
 random graphs.} that are characteristic of small-word networks
-% CAMERON should cite dani basset
 \cite{stam2004,salvador2005,achard2006,bullmore2009}. These networks
 display excellent transport properties: although they have a relatively
 small number of connections, any two regions of the brain are well
 connected. 
-% CAMERON cite first small world network science paper
 Another interesting consequence of their specific topology is
 the resilience it gives the system to attacks such as resulting from
 brain lesions \cite{achard2006}. This overall structure of
@@ -1042,7 +993,7 @@ prognosis, or other phenotypic outcomes \cite{craddock2009, dosenbach2010}. The
 accuracy of a predictive model provides a measure of the amount of information
 present in the connectome about the phenotypic measure being evaluated
 \cite{kjems2002, kriegeskorte2006}.  When combined with reproducibility, prediction accuracy
-provides a metric for evaluating experimental tradeoffs for data acquisition,
+provides a metric for evaluating experimental trade-offs for data acquisition,
 preprocessing, and analysis \cite{strother2002, laconte2003}.  Multivariate
 predictive models are attractive in connectomics because they are sensitive to dependencies
 between features and avoid the need to correct for multiple comparisons since
@@ -1065,20 +1016,17 @@ of predictive modeling for deriving connectivity models at the individual level
 
 
 
-% CAMERON condense below ALOT, focus on "where" the i information is
-% and how it is used ...
-
 % A bit of technical details
 % technical details
 Technically, predictive modeling is a supervised machine learning problem where
 a target to be predicted --\emph{e.g.}\ age, disease state, cognitive state-- is
 available for each observation of the data. In the context of comparing
 connectomes, features used in the predictive model correspond to bivariate
-measures of connectivity, or any of the previously discussed summary metrics.  
+measures of connectivity, or any of the previously discussed graph summary metrics.  
 %
 The quality of a predictive model is determined by its prediction accuracy (or
 generalization ability) which is measured using one or more iterations of
-cross-validation. Cross-validation iteratively separates available data into a
+cross-validation. Cross-validation iteratively subdivides available data into a
 subset used for training the classifier and a dataset for evaluating classifier
 performance. Several strategies exist for performing cross-validation and the commonly
 used approach of using only a single observation for testing (leave-one-out
@@ -1098,33 +1046,29 @@ Although predictive modeling techniques are well suited at measuring whether
 information exists in the connectome about a phenotypic variable, they do
 not directly identify the connections that are most relevant to the prediction.  These problems can be somewhat mitigated  by
 relying on previously described sparse inverse covariance estimation techniques to minimize
-the number of connections. In addition, feature selection \cite{guyon2003} 
+the number of connections. Feature selection \cite{guyon2003} 
 can be performed by filtering out
 features based on their statistical relationship with the variable of interest
-\cite{craddock2009, shen2010},
-selecting features based on cross-validation \cite{craddock2009, deshpande2010}, or by employing sparse modeling
-methods that force weights for non-essential features to be zero
-\cite{tibshirani1994, michel2009, ryali2010}.
-Filtering features based on a univariate criterion such as t-test should be
-avoided, since they are insensitive to multivariate information and may exclude
-features that could be important to a multivariate model \cite{guyon2003,
-	craddock2009}. No matter which
-feature selection strategy is employed, it must be performed within
+\cite{craddock2009, shen2010}. Importantly, it must be performed within
 cross-validation to avoid biasing estimates of prediction accuracy.
- 
-The interpretation of connections implicated by MPM and their relationship with
-a phenotypic outcome is complicated and requires insight into the mechanisms
-underlying the modeling approach. If features are appropriately standardized
-prior to training, the magnitude of model weights can be interpreted to reflect
-the relative importance of the corresponding feature to the model, similar to
-beta values from a standard regression model. But due to the multivariate nature
-of the MPMs, the sign of the weight cannot necessarily be interpreted to
-indicate the relationship between a connection and a phenotypic variable.
+% 
+The interpretation of connections used in predictive models and their
+relationship with
+a phenotypic outcome is difficult and requires insight into the mechanisms
+underlying the modeling approach. For linear models, the weights of the
+model are similar to the weights of
+a ordinary linear regression. If features are appropriately standardized
+prior to training, the magnitude of weights can be interpreted to reflect
+the relative importance of the feature to the model, for instance the
+corresponding edge in the connectome. However,
+interpreting how the connections differs between classes or relates to a
+phenotypic variable can be more complicated given the multivariate nature
+of their involvement.
 Indeed, it is possible for the sign of a model weight to change based on the
 inclusion or exclusion of another feature in the model \cite{craddock2009}.  It
 is perhaps most reasonable to adapt a conservative interpretation in which
 predictive modeling is used to identify candidate connections that are later
-tested in followon experiments better suited to elucidating their relationship
+tested in follow-on experiments better suited to elucidating their relationship
 to the variable of interest.
 
 To conclude on predictive modeling with a practical note for connectome
@@ -1235,8 +1179,7 @@ arise from the dimensionality and the of variability the connectome. With
 the current tools, inter-subject comparison of connectomes comprising
 many nodes is limited by the difficulty of estimating high-dimensional
 covariance matrices and the loss of statistical power due to multiple
-% CAMERON = integrating powerfulr a priori information?
-comparisons. Better algorithms integrating powerful a priori are required
+comparisons. Better algorithms integrating powerful a priori information are required
 to push the limits of covariance estimation. Better characterization of
 inter-subject variability of connectomes \cite{kelly2012} will help
 choosing parameterizations and invariants to avoid testing each edge for
