@@ -1,0 +1,5 @@
+Functional connectomes capture brain-wide functional interactions in rest or in task
+Estimation from fluctuations in brain imaging signal is challenging
+We review estimation and comparison of connectomes across subjects
+We give didactic summaries of methods and practical guidelines 
+
