@@ -174,7 +174,7 @@ the choice of nodes \emph{i.e.}\ regions,
 signal extraction, and the estimation of graphs.  
 
 %------------------------------------------------------------------------------
-\subsection{Preprocessing Considerations}
+\subsection{Preprocessing considerations}
 
 In addition to standard preprocessing performed for task based analysis
 (slice-timing correction, realignment, spatial normalization, and possibly
@@ -188,7 +188,8 @@ the mean signal from white matter (WM) and cerebrospinal fluid (CSF) are used as
 surrogates to measure these sources of noise as well as other scanner induced
 signal fluctuations \cite{fox2005, lund2006}. More complex models account for
 spatial variation in noise by incorporating voxel specific regressors of
-neighboring WM (ANATICOR \cite{jo2010}) or the top components from a principle
+neighboring WM (ANATICOR \cite{jo2010}) or the top components from a
+principal
 components analysis of WM signal (CompCor \cite{behzadi2007}). Head motion
 induced signal fluctuations are accounted for by incorporating movement
 parameters \cite{friston1996, fox2005, lund2006}. The global mean time series
@@ -207,7 +208,8 @@ connectivity are predominately slower than 0.1\,Hz \cite{cordes2001,biswal1995}.
 While high-pass and low-pass filtering decrease the impact of some confounds,
 recent studies have shown that connectivity is present across the
 full spectrum of observed frequencies \cite{smith2012,vanoort2012}. Regressing
-out a good choice of confound signals is more specific than frequency filter,
+out a good choice of confound signals is more specific than frequency
+filtering,
 and in our experience gives more contrasted correlation matrices\footnote{Note
 	that naive use of filtering can induce spurious correlations
 	\cite{davey2012}.}.
@@ -232,7 +234,8 @@ for group comparison \cite{wang2009}. Unsurprisingly, simulations have
 shown that extracting signal from ROIs that did not match functional
 units would lead to erronous graph estimation \cite{smith2011}.
 %
-Different strategies to define suitable ROIs coexist. While dense parcellations approaches cover
+Different strategies to define suitable ROIs coexist. While dense 
+parcellation approaches cover
 a large fraction of the brain \cite{achard2006, varoquaux2010c,
 wang2009,bellec2006,craddock2012}, this coverage can be traded off to focus on some specific
 regions, in favor of increased functional specificity and thus better
@@ -280,7 +283,7 @@ adapts to the signal at hand and its limitations, such as
 image distortions or vascular and movement artifacts that are isolated
 in ICA-like approaches. Lastly, incorporating functional information into
 regional definition will result in more homogenous regions that better represent
-connectivity present at the voxel level then anatomically-defined atlases such
+connectivity present at the voxel level than anatomically-defined atlases such
 as AAL or Harvard-Oxford \cite{craddock2012}. The simplest approach to define task-specific
 regions is to use activation maps derived from standard GLM-based
 analysis in a task-driven study (see for instance \cite{poldrack2011}).
@@ -288,7 +291,7 @@ Regions are extracted by thresholding the maps, or using balls around the
 activation peaks. For resting-state studies, unsupervised multivariate
 analysis techniques are necessary. Clustering approaches extract
 full-brain parcellations \cite{craddock2012,bellec2010,yeo2011,thirion2006}, and have been shown to segment well-known functional
-structures from rest data. Alternatively, decompositions
+structures from rest data. Alternatively, decomposition
 methods, such as ICA \cite{beckmann2004}, can unmix linear
 combinations of multiple effects and separate out overlapping spatial maps
 that capture functional networks or confounding effects. At high model
@@ -497,13 +500,11 @@ uniformly better than the sample correlation matrix
 
 %{{{------ Regressor in precision matrix -------------------------------------
 \begin{figure}
-\includegraphics[height=.482\linewidth]{group_l21_prec_no_confounds.pdf}%
-\hspace*{1pt}%
-\includegraphics[height=.482\linewidth]{group_l21_prec_global_mean.pdf}%
-\hspace*{1pt}%
-\includegraphics[height=.482\linewidth]{cmap.pdf}%
+\includegraphics[height=.499\linewidth]{group_l21_prec_no_confounds.pdf}%
+\hfill%
+\includegraphics[height=.499\linewidth]{group_l21_prec_global_mean.pdf}%
 
-\caption{Inverse covariance matrices for different choice of
+\caption{Inverse-covariance matrices for different choice of
 confound regressors --
 \label{fig:icov_regressors}
 \textbf{Left}: regressing out only movement parameters --
@@ -526,7 +527,7 @@ $a$ and $b$. On the opposite, the inverse covariance\footnote{Covariance
 and correlation matrices differ simply by the fact that a covariance
 matrix captures the amplitude of a signal, via its variance, while a
 correlation matrix is computed on standardized (zero mean, unit variance) signals.}
-matrix captures
+matrix (also called \emph{precision matrix} captures
 partial correlations, removing the effect of other variables
 \cite{marrelec2006a}. In the small sample limit, this removal is
 challenging from the statistical standpoint. This is why an assumption 
@@ -547,7 +548,7 @@ degrade the estimation of the actual connections. The sparse estimators
 make a compromise between imposing simpler models, \emph{i.e.}\ with less
 connections, and providing a good fit to the data. This compromise is set via a
 regularization parameter which controls the sparsity of the estimate. A
-good rule of thumb to choose this parameter is via cross-validation
+good procedure to choose this parameter is via cross-validation
 \cite{varoquaux2010c}.
 
 % CAMERON should you discuss limitations to the L1 norm, such as bounding
@@ -574,7 +575,7 @@ captures partial correlations, appears then as extracting a
 \emph{backbone} or \emph{core} of the graph.
 While such structure has
 been used as a way to summarize anatomical brain connectivity graphs
-\cite{hagmann2008}, here it has a clear-cut meaning with regards to
+\cite{hagmann2008}, here it has a clear-cut meaning with regard to
 the BOLD signal: it gives the conditional independence structure between
 regions \cite{varoquaux2012}. In other words, regions $a$ and $b$ are
 not connected if the signal that they have in common can be explained by
@@ -815,8 +816,8 @@ variability -- \textbf{a}: single-subject
 correlation matrices for different subjects -- \textbf{b}:
 Corresponding Z-score (effect / standard deviation) of the difference
 between a subject and the remaining others -- \textbf{c}:
-single-subject precision matrices -- \textbf{d}: Corresponding Z-score
-for the precision matrices -- \textbf{e}:
+single-subject inverse-covariance matrices -- \textbf{d}: Corresponding Z-score
+for the inverse-covariance matrices -- \textbf{e}:
 Corresponding Z-score for the subject residuals, as defined in 
 \cite{varoquaux2010b}.
 \label{fig:inter_subject}}
@@ -826,10 +827,10 @@ Corresponding Z-score for the subject residuals, as defined in
 \paragraph{Accounting for distributed variability}
 %
 A specific challenge of connectivity analysis is that the connectivity
-strength between different regions tend to covary. For instance, with
+strength between different regions tends to covary. For instance, with
 resting-state data, functional networks comprising many nodes can appear
 as more or less connected across subjects (see for instance
-fig.\,\ref{fig:inter_subject}.a, showing variability in a control
+fig.\,\ref{fig:inter_subject}, showing variability in a control
 population at rest). In other words, non-specific variability is
 distributed across the connectivity graph, and it is structured by the
 graph itself. This observation brings the natural question of whether
@@ -872,16 +873,16 @@ or variance to multiple nodes (see \cite{anderson1958} \S2.5.2 and
 \S7.5). Indeed, let us consider 3 nodes: $a$, $b$ and $c$. Their
 correlation structure is captured by three correlation coefficients:
 $\rho_{ab}$, $\rho_{bc}$ and $\rho_{ac}$. Summarizing these by their
-mean, as it might seem natural, discards the relationship between the
-signals, while using the integration, defined as the Gaussian entropy, tells us how much two signals can be
+mean, as might seem natural, discards the relationship between the
+signals, while using the integration metric, defined as the Gaussian entropy, tells us how much two signals can be
 combined to form the third (see fig.\,\ref{fig:integration}). 
 Cross-entropy --or mutual information--
 \cite{marrelec2008} measures the amount of cross-talk between two
 systems in a similar way as Gaussian entropy is used to measure the
 integration of a brain
 system. The functional-connectivity structure, or its representation in
-form of a correlation matrix, can thus be characterized via the
-integration and cross-talk of some of its subs-systems. This approach
+the form of a correlation matrix, can thus be characterized via the
+integration and cross-talk of some of its sub-systems. This approach
 gives a simplified representation with a small number of metrics that can
 be compared across subjects.
 
@@ -896,10 +897,11 @@ be compared across subjects.
     0.554
 \end{minipage}%
 \begin{minipage}{.2\linewidth}
-    \includegraphics[width=\linewidth]{correlation_ex1.pdf}
+    \includegraphics[width=1.07\linewidth]{correlation_ex1.pdf}
 \end{minipage}%
 \hfill%
 \begin{minipage}{.033\linewidth}
+    \rule{0pt}{6.487\linewidth}%
     \includegraphics[width=\linewidth]{correlation_cmap.pdf}%
     \llap{\raisebox{.4ex}{\scriptsize\sffamily\bfseries 0}\hspace*{.54ex}}%
     \llap{\raisebox{10.1ex}{\scriptsize\sffamily\bfseries\color{white} 1}%
@@ -907,7 +909,8 @@ be compared across subjects.
 \end{minipage}%
 \hfill%
 \begin{minipage}{.2\linewidth}
-    \includegraphics[width=\linewidth]{correlation_ex2.pdf}
+    \hspace*{-.07\linewidth}%
+    \includegraphics[width=1.07\linewidth]{correlation_ex2.pdf}
 \end{minipage}%
 \begin{minipage}{.19\linewidth}
     \center\sffamily
@@ -921,7 +924,7 @@ be compared across subjects.
 correlation, but with very different integration values. Indeed, the
 matrix on the left was chosen to represent three signals $a$, $b$
 and $c$ as different from each other as possible, given $\rho_{ab} +
-\rho_{bc} + \rho{ac} = 1.35$; it thus has a small integration value. On
+\rho_{bc} + \rho_{ac} = 1.35$; it thus has a small integration value. On
 the opposite, for the matrix on the right, signal $b$ can almost be fully
 recovered by combining signals $a$ and $c$; the matrix thus has a large
 integration value.
@@ -932,7 +935,7 @@ integration value.
 %---------------------------------------------------------------------------}}}
 
 
-\paragraph{Graph-topology metrics}
+\paragraph{Graph-topological metrics}
 %
 Functional connectivity graphs have been found to display specific
 topological properties\footnote{In the neuroscience world, these
@@ -952,7 +955,7 @@ as the average path length between any two nodes, the local clustering
 coefficients, or the node degree centrality \cite{rubinov2010}. Given that pathologies without a
 localized focus, such
 as schizophrenia, are thought to have a global impact on brain
-connectivity \cite{liu2008,bassett2008}, the graph-topology metrics are
+connectivity \cite{liu2008,bassett2008}, the graph-topological metrics are
 promising markers to perform inter-subject comparison. Such an
 approach is appealing as it is not subject to multiple comparison issues.
 However, it has been criticized as giving a fairly unspecific
@@ -965,8 +968,6 @@ correlated to each other \cite{zalesky2012}. This observation highlights
 the need for well defined null-hypothesis \cite{zalesky2012,rubinov2011},
 but also for controlled recovery of brain functional connectivity going
 beyond empirical correlation matrices, as discuss in the previous section.
-% CAMERON What about regional summary measures such as centrality??? Xinian's work
-% maybe a paragraph that covers ReHo, degree centrality, eigenvector centrality, pagerank etc...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1035,7 +1036,7 @@ requirements \cite{cherkassky1998}, determined using an analytical approach
 \cite{cherkassky2004}, or optimized using a second level cross validation procedure
 \cite{friedman2001}.  
 
-Although predictive modeling techniques are well suited at measuring whether
+Although predictive modeling techniques are well suited for measuring whether
 information exists in the connectome about a phenotypic variable, they do
 not directly identify the connections that are most relevant to the
 prediction.  This limitation can be somewhat mitigated  by
@@ -1055,7 +1056,7 @@ an ordinary linear regression. If features are appropriately standardized
 prior to training, the magnitude of the weights can be interpreted to reflect
 the relative importance of the feature to the model, for instance the
 corresponding edge in the connectome. However,
-interpreting how the connections differs between classes or relate to a
+interpreting how the connections differ between classes or relate to a
 phenotypic variable can be more complicated given the multivariate nature
 of their involvement.
 Indeed, the inclusion or exclusion of a connection in the model
@@ -1063,12 +1064,12 @@ can induce a change of the sign of another model weight \cite{craddock2009}.
  It
 is perhaps most reasonable to adapt a conservative interpretation in which
 predictive modeling is used to identify candidate connections that are later
-tested in follow-on experiments better suited to elucidating their relationship
+tested in follow-up experiments better suited to elucidating their relationship
 to the variable of interest.
 
 To conclude on predictive modeling with a practical note for connectome
 comparison, we would like to stress that while machine learning algorithms are
-powerful tools, they work best if they are provided with discriminant and
+powerful tools, they work best if they are provided with discriminanting and
 noiseless features. In other words, as with all other connectome comparison
 methods, optimizing first-level analysis --subject-level connectome extraction--
 is paramount.
@@ -1087,8 +1088,6 @@ system exerts over another'' \cite{friston1994}. To conclude this review,
 we would like to bridge the gap between these concepts, which in our eyes
 should be seen as a continuum rather than an opposition (this opinion is
 also expressed in \cite{mcintosh2010}).
-% CAMERON should we mention follow on discussion from the first brain 
-% connectivity meeting
 
 A first step to move from purely descriptive statistics to interaction
 models with
@@ -1128,8 +1127,8 @@ are robust to violations of this assumption \cite{ravikumar2011}.
 It is tempting to favor more neurobiologically-inspired models that give
 descriptions close to our knowledge of the brain basic mechanisms,
 however, as George Box famously said, ``all models are wrong; some models
-are useful''. Depending on the question and the data at hand, the cursor
-should be set between complex models based on a bio-physical description,
+are useful''. Depending on the question and the data at hand, a trade-off 
+should be chosen between complex models based on a bio-physical description,
 and simple phenomenological models such as correlation matrices. In
 particular to model interactions between a large number of regions, as in
 full-brain analysis, and learn a large \emph{connectome}, simple models
@@ -1170,7 +1169,7 @@ choice cannot yet be fully factored out via methods and must rely on
 neuroscientific expertise.
 
 Methodological challenges to functional-connectome-based group studies
-arise from the dimensionality and the of variability the connectome. With
+arise from the dimensionality and the variability of the connectome. With
 the current tools, inter-subject comparison of connectomes comprising
 many nodes is limited by the difficulty of estimating high-dimensional
 covariance matrices and the loss of statistical power due to multiple
@@ -1192,6 +1191,8 @@ can perform uniformly better in all situations. In practice, the key to a
 successful analysis is to understand well the assumptions and
 interpretation of each option, in order to match the method to the
 question.
+
+% Acknowledgments: Bertrand, Andreas, NiConnect
 
 {
 %\clearpage
