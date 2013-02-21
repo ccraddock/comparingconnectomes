@@ -93,7 +93,7 @@ high-level function emerges from the interaction of specialized units
 \cite{tononi1992},
 functional connectivity is an essential part of the description of brain
 function, that complements the localizationist picture emerging from the
-systematic mapping of regions recruited in tasks\cite{sporns2004}. However,
+systematic mapping of regions recruited in tasks \cite{sporns2004}. However,
 while there exists a well-defined standard analysis framework for activation
 mapping that enables statistically-controlled comparisons across subjects
 \cite{friston1995}, group-level analyses of functional connectivity still face
@@ -299,9 +299,6 @@ incorporating sparsity and spatial constraints in the decomposition
 techniques leads to contrasted maps that outline many different
 structures \cite{varoquaux2012} (see fig.\,\ref{fig:parcellations}).
 
-%% XXX number of regions
-% CAMERON added this since it was left to do, I don't know if it really says
-% anything 
 \paragraph{Optimal number of regions}
 %
 Defining an optimal number of regions to use for whole-brain connectivity analysis bears
@@ -381,8 +378,6 @@ correlation matrix of the signals of the different ROIs.
 
     \includegraphics[width=\linewidth]{group_emp_cov_global_mean.pdf}%
 \end{minipage}%
-
-% XXX: need to give details on the dataset used here
 
 \caption{
 Correlation matrices of rest time-series extracted from the 39 main
@@ -559,8 +554,6 @@ good rule of thumb to choose this parameter is via cross-validation
 % the number of non-zero weights by the number of observations: does this
 % only apply to regressions?
 
-% XXX: must comment on the estimator figure
-
 \paragraph{Network structure extracted}
 %
 The correlation matrices and inverse-covariance matrices that we extract
@@ -608,9 +601,6 @@ estimate partial correlations in the whole system. Using
 inverse-covariance matrices or partial correlations to understand brain
 connectivity makes the interpretation in terms of interactions between
 brain regions easier and more robust to the choice of confounds.
-
-% XXX: where to insert this in the above paragraph: cite the
-% Fransson/Marrelec paper on the role of the PCC
 
 % \cite{chai2011} (note: chai2011 used compcor)
 % Remark that partial correlations consistently have no negative values.
