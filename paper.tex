@@ -297,8 +297,10 @@ analysis techniques are necessary. Clustering approaches extract
 full-brain parcellations \cite{craddock2012,bellec2010,yeo2011,thirion2006}, and have been shown to segment well-known functional
 structures from rest data. Alternatively, decomposition
 methods, such as ICA \cite{beckmann2004}, can unmix linear
-combinations of multiple effects and separate out overlapping spatial maps
-that capture functional networks or confounding effects. At high model
+combinations of multiple effects and separate out partially-overlapping
+spatial maps
+that capture functional networks or confounding effects, as for instance
+with the presence of vascular structure in functional networks. At high model
 order, ICA maps define a functional parcellation \cite{kiviniemi2009}.
 Extracting regions from these maps requires additional effort as they can
 display fragmented spatial features and structured background noise, but
@@ -322,7 +324,14 @@ obtain the same parcellations from independent data
 \cite{craddock2012, blumensath2012}. In general these metrics do not result in an
 obvious peak at a ``best'' number of regions, but instead offer a range over
 which the number of regions can be chosen based on the needs of the analysis at
-hand.
+hand. Finally, it is important to keep in mind that there is no
+universally better parcellation and associated number of regions. From a
+practical standpoint, these choices will depend on the task at hand, and
+more fundamentally, a good description of brain function should cover
+multiple scales. Given that it is not clear that an optimal parcellation
+can be identified from the sample size of a typical study, randomized
+parcellation, as used in structural connectomes \cite{zalesky2010a} or
+activation mapping \cite{varoquaux2012a}, may also be considered.
 
 %{{{------ Parcellation figure -----------------------------------------------
 \begin{figure}
@@ -422,7 +431,10 @@ weighted by the subject-specific gray matter probabilistic segmentation,
 as output by \emph{e.g.}\ SPM's segmentation tool \cite{ashburner2005} or
 FSL's FAST program \cite{zhang2001}.
 
-To study connectivity from \emph{evoked} activity with task-driven studies it
+Studying connectivity from \emph{evoked} activity with task-driven studies 
+it requires disambiguating task-specific connectivity effects from
+intrinsic connectivity mediated by shared neuromodulatory/task 
+inputs, anatomical pathways, \emph{etc}. In this regard, it
 can be beneficial to run a GLM-based first-level analysis, enforcing specificity
 of the measure extracted to the task. With slow event-related designs,
 task-specific functional connectivity can be captured in trial-to-trial
@@ -851,7 +863,7 @@ covariance matrix, as it can decouple effects and noise.
 Taking a different stance on distributed variability, the ``network-based
 statistics'' approach \cite{zalesky2010} draws from the hypothesis that
 if, in a second-level analysis, an effect is detected on a connection
-that lies in a network of strongly connected nodes, the whole network is
+that lies in a network of strongly connected nodes, a large sub-network is
 likely to carry an effect. Thus, they adapt cluster-level inference to
 connectivity analysis, in order to mitigate the curse of multiple
 comparisons.
@@ -1154,9 +1166,9 @@ based on the Neyman-Pearson lemma, cross-validation is less powerful than
 likelihood ratio tests using the full dataset. However, it is
 important to keep in mind that these approaches only test for
 self-consistence, as the Neyman-Pearson lemma is established under the
-hypothesis that model used to define the test is indeed the 
+hypothesis that the model used to define the test is indeed the 
 data-generating process
-\cite{neyman1933}, while in practice it is often the case that the model
+\cite{neyman1933}, while in practice it is often the case that this model
 gives poor fits to the data \cite{lohmann2012}. Applying test procedures
 on different data than that used to fit the model, as in
 cross-validation, is much more resilient to modeling errors.}.
