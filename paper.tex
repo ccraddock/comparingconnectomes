@@ -69,7 +69,7 @@
 	Methods of estimating functional connectomes from the imaging signal
 	have undergone rapid developments and the literature is full of diverse
 	strategies for comparing them. This review aims to clarify links across
-	functional-connectivity methods and to expose different steps 
+	functional-connectivity methods as well as to expose different steps 
 	to perform a group study of functional connectomes.
 \end{abstract}
 
@@ -122,7 +122,7 @@ as the inference of functional connectivity requires important statistical
 modeling considerations that are vastly different from the complications involved
 with estimating structural connectivity.
 While the notion of functional
-connectomics is often associated with the study of resting-state
+connectomics is often associated with the study of resting state
 \cite{biswal2010}, the methods presented in this paper are also relevant
 for task-based studies. On the other hand, the paper has a focus on fMRI;
 although the core concepts presented can be applied to 
@@ -142,7 +142,7 @@ graph can be weighted or not, and is completely equivalent to its
 between each pair of nodes.  Functional-connectivity graphs are used to
 represent evoked activity, as in task-response studies \cite{mcintosh2000}, as
 well as ongoing activity, present in the absence of specific tasks or in the
-background during task and often studied in so-called \emph{resting-state}
+background during task and often studied in so-called \emph{resting state}
 experiments \cite{raichle2010}. Another important notion that arises from the
 study of distributed modes of brain function is that of specialized functional
 networks\footnote{In neuroimaging, the term network is sometimes used to denote
@@ -176,9 +176,9 @@ signal extraction, and the estimation of graphs.
 %------------------------------------------------------------------------------
 \subsection{Preprocessing considerations}
 
-In addition to standard preprocessing performed for task based analysis
+In addition to standard preprocessing performed for task-based analysis
 (slice-timing correction, realignment, spatial normalization, and possibly
-smoothing), connectivity based analysis require additional denoising 
+smoothing), connectivity-based analysis require additional denoising 
 to separate intrinsic activity from confounding signals. This process involves
 regressing time series capturing sources of structured noise from the fMRI data.
 Physiological noise due to cardiac and respiration are two important
@@ -190,7 +190,7 @@ signal fluctuations \cite{fox2005, lund2006}. More complex models account for
 spatial variation in noise by incorporating voxel-specific regressors of
 neighboring WM (ANATICOR \cite{jo2010}) or the top components from a
 principal
-components analysis of WM signal (CompCor \cite{behzadi2007}). Head motion
+components analysis of high-variance signals (CompCor \cite{behzadi2007}). Head motion
 induced signal fluctuations are accounted for by incorporating movement
 parameters \cite{friston1996, fox2005, lund2006}. The global mean time series
 has been proposed as an additional noise regressor that appears to improve the
@@ -203,7 +203,7 @@ correlation matrices that improve the delineation of functional structures
 (fig.\,\ref{fig:correlation_matrices}). 
 
 Filtering to remove high frequencies is often performed, based on the initial
-observation that fluctuations implicated in resting state functional
+observation that fluctuations implicated in resting-state functional
 connectivity are predominately slower than 0.1\,Hz \cite{cordes2001,biswal1995}.
 While high-pass and low-pass filtering decrease the impact of some confounds,
 recent studies have shown that connectivity is present across the
@@ -213,6 +213,10 @@ filtering,
 and in our experience gives more contrasted correlation matrices\footnote{Note
 	that naive use of filtering can induce spurious correlations
 	\cite{davey2012}.}.
+In addition, the recent developments of very rapid acquisition 
+protocols prevent aliasing of the physiological noise with the neural 
+signal and give access to more specific noise confounds than traditional
+low-TR sequences \cite{boyaciouglu2012}.
 
 
 It is important to keep in mind that the proposed correction strategies
@@ -1014,7 +1018,8 @@ Technically, predictive modeling is a supervised machine learning problem where
 a target to be predicted --\emph{e.g.}\ age, disease state, cognitive state-- is
 available for each observation of the data. In the context of comparing
 connectomes, features used in the predictive model correspond to bivariate
-measures of connectivity, or any of the previously discussed graph summary metrics.  
+measures of connectivity \cite{richiardi2011,dosenbach2010,shirer2012}, or any of the previously discussed graph
+summary metrics \cite{cecchi2009,ekman2012}.  
 %
 The quality of a predictive model is determined by its prediction accuracy (or
 generalization ability) which is measured using one or more iterations of
@@ -1143,14 +1148,18 @@ for the data available will fit noise in the data, and thus generalize
 poorly. The main benefit of cross-validation is that it is a
 non-parametric method which does not rely strongly on modeling
 assumptions\footnote{This is to be contrasted to Bayesian model
-comparison, which will give correct results only if the true generative
+comparison, which will give well-controlled results only if the true generative
 model is in the list of models compared. \cite{friston2012} argues that,
 based on the Neyman-Pearson lemma, cross-validation is less powerful than
 likelihood ratio tests using the full dataset. However, it is
 important to keep in mind that these approaches only test for
-self-consistence, as the Neyman-Pearson lemma requires that 
-the model likelihood describes the data well, which may not always be the
-case \cite{lohmann2012}.}.
+self-consistence, as the Neyman-Pearson lemma is established under the
+hypothesis that model used to define the test is indeed the 
+data-generating process
+\cite{neyman1933}, while in practice it is often the case that the model
+gives poor fits to the data \cite{lohmann2012}. Applying test procedures
+on different data than that used to fit the model, as in
+cross-validation, is much more resilient to modeling errors.}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

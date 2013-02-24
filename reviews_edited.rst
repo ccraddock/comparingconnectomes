@@ -7,57 +7,9 @@ Page 1:
 
 It would be good to start the introduction with a definition of functional connectivity.
 
-Section 2.1:
-
-It would make sense to discuss in this context recent developments in
-very rapid acquisition protocols as they prevent aliasing and can be used
-to better regress out physiological confounds, e.g.:
-
-1.	Boyacioglu R, Barth M. Generalized iNverse imaging (GIN): Ultrafast fMRI with physiological noise correction. Magnetic Resonance Medicine. 2012
-
 Section 2.2
 
 Related to "separate out overlapping spatial maps that capture functional networks":  This is somewhat incongruent with a previous statement: "care must be taken not to define too many regions that would overlap and lead to mixing of the signal." Please clarify.
-
-Page 5:
-
-On the opposite [end of the spectrum]
-
-Page 7:
-
-.. as well as to classify mental operations:
-
-please refer to the following relevant papers:
-
-Shows how to use graph-topological metrics together with decoding:
-
-1.	Ekman M, Derrfuss J, Tittgemeyer M, Fiebach CJ. Predicting errors from reconfiguration patterns in human brain networks. PNAS. 2012 Oct 9;109(41):16714-9. 
-
-Illustrates how changes in connectivity underly learning:
-
-1.	Bassett DS, Wymbs NF, Porter MA, Mucha PJ, Carlson JM, Grafton ST. Dynamic reconfiguration of human brain networks during learning. Proc Natl Acad Sci USA. 2011;108(18):7641-6. 
-
- .. feature selection [47] can be performed... => it makes sense to
-    mention sparsifying regularization approaches here as an alternative
-    to select variables of interest
-
-Page 8: 
-
-I would appreciate a reference which supports the following statement in
-footnote 8: "This is to be contrasted to Bayesian model comparison, which
-will give correct results only if the true generative model is in the
-list of models compared."
-
-References: double check; missing capitals, page numbers, reference [22]
-following [104], journal names both abbreviated and in full, vanOort =>
-van Oort, etc.)
-
-General statement: the authors sometimes use hyphenation (e.g.
-inverse-covariance matrix) and something they don't (e.g. graph
-theoretical approaches, connectivity based biomarker, domain specific
-knowledge, second level cross validation). Please make sure this use is
-consistent throughout. Also double-check for typos/grammatical errors
-since there were quite a few scattered throughout the paper.
 
 
 Reviewer #2:
