@@ -131,6 +131,9 @@ magnetoencephalography (MEG) or electroencephalography (EEG)
 reconstruction must be considered \cite{schoffelen2009}.
 
 % Define terms
+``Functional connectivity'' is defined as a measure of synchronization in 
+brain signals \cite{friston1994}. More generally, it is interesting as a 
+window on underlying synchrony in neural processes \cite{lee2003}.
 By ``functional connectome'', here we specifically denote a graph representing
 functional interactions in the brain, where the term ``graph'' is taken in its
 mathematical sense: a set of \emph{nodes} connected together by \emph{edges}.
@@ -335,17 +338,17 @@ activation mapping \cite{varoquaux2012a}, may also be considered.
 
 %{{{------ Parcellation figure -----------------------------------------------
 \begin{figure}
-\includegraphics[width=.5\linewidth]{aal_atlas.pdf}%
+\includegraphics[width=.5\linewidth]{aal_atlas}%
 \hfill%
-\includegraphics[width=.5\linewidth]{ho_atlas.pdf}%
+\includegraphics[width=.5\linewidth]{ho_atlas}%
 
-\includegraphics[width=.5\linewidth]{sulci_atlas.pdf}%
+\includegraphics[width=.5\linewidth]{sulci_atlas}%
 \hfill%
-\includegraphics[width=.5\linewidth]{ncuts_atlas.pdf}%
+\includegraphics[width=.5\linewidth]{ncuts_atlas}%
 
-\includegraphics[width=.5\linewidth]{smith_atlas.pdf}%
+\includegraphics[width=.5\linewidth]{smith_atlas}%
 \hfill%
-\includegraphics[width=.5\linewidth]{msdl_atlas.pdf}%
+\includegraphics[width=.5\linewidth]{msdl_atlas}%
 
 \caption{
 Different full-brain parcellations: the AAL atlas
@@ -376,7 +379,7 @@ correlation matrix of the signals of the different ROIs.
 \newcommand{\photoframe}[1]{\setlength\fboxsep{0pt}%
 {\color{black!70}\fbox{#1}\color{black}}}%
 \begin{minipage}{.666\linewidth}%
-    \includegraphics[width=\linewidth]{group_emp_cov.pdf}%
+    \includegraphics[width=\linewidth]{group_emp_cov}%
     \raisebox{.606\linewidth}{%
 	\hspace*{-.462\linewidth}%
 	\photoframe{%
@@ -390,9 +393,9 @@ correlation matrix of the signals of the different ROIs.
 \end{minipage}%
 \hspace*{1pt}%
 \begin{minipage}{.33\linewidth}%
-    \includegraphics[width=\linewidth]{group_emp_cov_no_confounds.pdf}%
+    \includegraphics[width=\linewidth]{group_emp_cov_no_confounds}%
 
-    \includegraphics[width=\linewidth]{group_emp_cov_global_mean.pdf}%
+    \includegraphics[width=\linewidth]{group_emp_cov_global_mean}%
 \end{minipage}%
 
 \caption{
@@ -449,7 +452,7 @@ designs, using multiple GLMs to optimize deconvolution of each trial
 \newcommand{\photoframe}[1]{\setlength\fboxsep{0pt}%
 {\color{black!70}\fbox{#1}\color{black}}}%
 \begin{minipage}{.666\linewidth}%
-    \includegraphics[width=\linewidth]{group_l21_prec.pdf}%
+    \includegraphics[width=\linewidth]{group_l21_prec}%
     \raisebox{.606\linewidth}{%
 	\hspace*{-.462\linewidth}%
 	\photoframe{%
@@ -463,9 +466,9 @@ designs, using multiple GLMs to optimize deconvolution of each trial
 \end{minipage}%
 \hspace*{1pt}%
 \begin{minipage}{.33\linewidth}%
-    \includegraphics[width=\linewidth]{group_emp_prec.pdf}%
+    \includegraphics[width=\linewidth]{group_emp_prec}%
 
-    \includegraphics[width=\linewidth]{group_l1_prec.pdf}%
+    \includegraphics[width=\linewidth]{group_l1_prec}%
 \end{minipage}%
 
 \caption{
@@ -516,9 +519,9 @@ uniformly better than the sample correlation matrix
 
 %{{{------ Regressor in precision matrix -------------------------------------
 \begin{figure}
-\includegraphics[height=.499\linewidth]{group_l21_prec_no_confounds.pdf}%
+\includegraphics[height=.499\linewidth]{group_l21_prec_no_confounds}%
 \hfill%
-\includegraphics[height=.499\linewidth]{group_l21_prec_global_mean.pdf}%
+\includegraphics[height=.499\linewidth]{group_l21_prec_global_mean}%
 
 \caption{Inverse-covariance matrices for different choice of
 confound regressors --
@@ -668,18 +671,18 @@ controlling for multiple comparison in family-wise error rate.
 %{{{------ Inter subject fluctuations ----------------------------------------
 \begin{figure}
 \hspace*{.5ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/cov_sub00.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/cov_sub00}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/cov_sub29.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/cov_sub29}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/cov_sub01.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/cov_sub01}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/cov_sub07.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/cov_sub07}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/cov_sub53.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/cov_sub53}%
 \hspace*{.1ex}%
 \raisebox{.005\linewidth}{%
-    \includegraphics[width=.0186\linewidth]{cmap_00.pdf}%
+    \includegraphics[width=.0186\linewidth]{cmap_00}%
     \llap{
 	\raisebox{.003\linewidth}{%
 	    \bfseries\tiny\color{white} -\!1\hspace*{-.2ex}}%
@@ -700,18 +703,18 @@ controlling for multiple comparison in family-wise error rate.
 
 
 \hspace*{.5ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub00.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub00}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub29.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub29}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub01.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub01}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub07.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub07}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub53.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub53}%
 \hspace*{.1ex}%
 \raisebox{.005\linewidth}{%
-    \includegraphics[width=.0186\linewidth]{cmap_01.pdf}%
+    \includegraphics[width=.0186\linewidth]{cmap_01}%
     \llap{
 	\raisebox{.003\linewidth}{%
 	    \bfseries\tiny -\!\hspace*{-.1ex}4\hspace*{-.1ex}}%
@@ -731,18 +734,18 @@ controlling for multiple comparison in family-wise error rate.
 }
 
 \hspace*{.5ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/prec_sub00.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/prec_sub00}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/prec_sub29.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/prec_sub29}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/prec_sub01.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/prec_sub01}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/prec_sub07.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/prec_sub07}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/prec_sub53.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/prec_sub53}%
 \hspace*{.1ex}%
 \raisebox{.005\linewidth}{%
-    \includegraphics[width=.0186\linewidth]{cmap_00.pdf}%
+    \includegraphics[width=.0186\linewidth]{cmap_00}%
     \llap{
 	\raisebox{.003\linewidth}{%
 	    \bfseries\tiny\color{white} -\!1\hspace*{-.2ex}}%
@@ -762,18 +765,18 @@ controlling for multiple comparison in family-wise error rate.
 }
 
 \hspace*{.5ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub00.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub00}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub29.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub29}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub01.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub01}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub07.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub07}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub53.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub53}%
 \hspace*{.1ex}%
 \raisebox{.005\linewidth}{%
-    \includegraphics[width=.0186\linewidth]{cmap_01.pdf}%
+    \includegraphics[width=.0186\linewidth]{cmap_01}%
     \llap{
 	\raisebox{.003\linewidth}{%
 	    \bfseries\tiny -\!\hspace*{-.1ex}4\hspace*{-.1ex}}%
@@ -795,18 +798,18 @@ controlling for multiple comparison in family-wise error rate.
 
 
 \hspace*{.5ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/res_sub00.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/res_sub00}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/res_sub29.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/res_sub29}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/res_sub01.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/res_sub01}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/res_sub07.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/res_sub07}%
 \hspace*{-.2ex}%
-\includegraphics[width=.196\linewidth]{inter_subj/res_sub53.pdf}%
+\includegraphics[width=.196\linewidth]{inter_subj/res_sub53}%
 \hspace*{.1ex}%
 \raisebox{.005\linewidth}{%
-    \includegraphics[width=.0186\linewidth]{cmap_01.pdf}%
+    \includegraphics[width=.0186\linewidth]{cmap_01}%
     \llap{
 	\raisebox{.003\linewidth}{%
 	    \bfseries\tiny -\!\hspace*{-.1ex}4\hspace*{-.1ex}}%
@@ -913,12 +916,12 @@ be compared across subjects.
     0.554
 \end{minipage}%
 \begin{minipage}{.2\linewidth}
-    \includegraphics[width=1.07\linewidth]{correlation_ex1.pdf}
+    \includegraphics[width=1.07\linewidth]{correlation_ex1}
 \end{minipage}%
 \hfill%
 \begin{minipage}{.033\linewidth}
     \rule{0pt}{6.487\linewidth}%
-    \includegraphics[width=\linewidth]{correlation_cmap.pdf}%
+    \includegraphics[width=\linewidth]{correlation_cmap}%
     \llap{\raisebox{.4ex}{\scriptsize\sffamily\bfseries 0}\hspace*{.54ex}}%
     \llap{\raisebox{10.1ex}{\scriptsize\sffamily\bfseries\color{white} 1}%
 	    \hspace*{.54ex}}
@@ -926,7 +929,7 @@ be compared across subjects.
 \hfill%
 \begin{minipage}{.2\linewidth}
     \hspace*{-.07\linewidth}%
-    \includegraphics[width=1.07\linewidth]{correlation_ex2.pdf}
+    \includegraphics[width=1.07\linewidth]{correlation_ex2}
 \end{minipage}%
 \begin{minipage}{.19\linewidth}
     \center\sffamily
