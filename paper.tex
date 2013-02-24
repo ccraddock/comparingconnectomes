@@ -14,6 +14,10 @@
 \usepackage[breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
 \usepackage[table]{xcolor}
 
+% For review: line numbers
+\usepackage[pagewise]{lineno}
+
+
 \biboptions{sort}
 
 \definecolor{deep_blue}{rgb}{0,.2,.5}
@@ -41,8 +45,27 @@
 % A compact fraction
 \def\slantfrac#1#2{\kern.1em^{#1}\kern-.1em/\kern-.1em_{#2}}
 
+% Modification tracking
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+\newcommand{\ADDED}[1]{\textcolor{blue}{\uline{#1}}}
+\newcommand{\DELETED}[1]{\textcolor{red}{\sout{#1}}}
+
+% Show the old version
+%\renewcommand{\ADDED}[1]{}
+%\renewcommand{\DELETED}[1]{#1}
+
+% Show the new version
+%\renewcommand{\ADDED}[1]{#1}
+%\renewcommand{\DELETED}[1]{}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+% Show line numbers
+\linenumbers
+\linenumbersep 3pt\relax
+\renewcommand\linenumberfont{\normalfont\tiny\sffamily\color{black!50}}
+
 
 \title{Learning and comparing functional connectomes across subjects}
 
@@ -1222,9 +1245,11 @@ on-going activity versus activity related to specific tasks.
 
 \subsection*{Acknowledgments}
 
-GV acknowledges funding from the NiConnect grant, as well as many
-insightful discussions with Andreas Kleinschmidt on on-going activity and
-Bertrand Thirion on statistical data processing.
+GV acknowledges funding from the NiConnect grant and the Dynamic
+Diaschisis project DEQ20100318254 from \emph{Fondation pour la Recherche
+M\'edicale}, as well as many insightful discussions with Andreas
+Kleinschmidt on on-going activity and Bertrand Thirion on statistical
+data processing.
 
 
 {
