@@ -1,6 +1,6 @@
 We would like thank the reviewers for their careful reading of the
-manuscript and their suggestions that helped us improve the manuscript.
-We have address the different comments. The major changes in the
+manuscript and their suggestions that helped us improve it.
+We have addressed the different comments. The major changes in the
 manuscript have been highlighted in purple with a triangle in the margin
 on the left.
 
@@ -9,7 +9,7 @@ Reviewer 1
 
   **It would be good to start the introduction with a definition of functional connectivity.**
 
-Indeed, we added two lines at the beginning of the paragraph on the
+We thank the reviewer for point out this oversight, we added two lines at the beginning of the paragraph on the
 bottom of page 1.
 
   **It would make sense to discuss in this context recent developments in very rapid acquisition protocols as they prevent aliasing and can be used to better regress out physiological confounds, e.g.:**
@@ -37,7 +37,7 @@ column).
 
     **1.	Ekman M, Derrfuss J, Tittgemeyer M, Fiebach CJ. Predicting errors from reconfiguration patterns in human brain networks. PNAS. 2012 Oct 9;109(41):16714-9.**
 
-We have added a reference (bottom of second column, page 7).
+We have added the reference (bottom of second column, page 7).
 
    **I would appreciate a reference which supports the following statement in footnote 8: "This is to be contrasted to Bayesian model comparison, which will give correct results only if the true generative model is in the list of models compared."**
 
@@ -45,7 +45,7 @@ We have reformulated the corresponding remark (footnote bottom of page 8
 and 9), to give a better explaination, with references.
 
 We thank the reviewer for pointing out many typos and misformulations,
-that have we corrected.
+we have corrected them.
 
 Reviewer 2
 ============
@@ -65,8 +65,8 @@ Reviewer 2
 
 We thank the review for these suggestions. We have expended the paragraph
 on these issues (page 4, bottom of first column). However, we do not
-wish to discuss PPI or DCM, as they are a bit on the side of the scope of
-the review and we do not have first-hand experience with these methods.
+wish to discuss PPI or DCM, as we consider them to be outside of the scope of
+the review and we do have limited first-hand experience with these methods.
 
   **2.	I agree with most of the sentiments that have been
   discussed with respect to node definition (i.e. regional
@@ -89,7 +89,7 @@ the review and we do not have first-hand experience with these methods.
   spatially compact (surface area to volume ratio maximised) and yield
   more uniform SNR across nodes (due to uniformity in node volume).**
 
-We agree with the review that multiple scales are necessary to describe
+We agree with the reviewer that multiple scales are necessary to describe
 functional connectivity. We have added remarks on this, on page 3,
 bottom of second column. Similarly, we think that randomized
 parcellations are a good idea, and have mentionned them in the above
@@ -112,8 +112,14 @@ remarks.
   discussing Cholesky decomposition with regards to structure recovery
   (e.g. Ferguson et al, 2012)?**
 
+<-- Comment from Cameron, Should we add something to the manuscript to
+address this issue? Maybe explicitly mention the Cholesky decomposition
+and its deficiencies? I am worried that the reviewer might feel like his
+comment was dismissed out of hand.
+
 We agree that the best approaches to perform structure recovery are still
-open questions, however based on our personnal experience (a lot being
+open questions, however based on our personnal experience (a lot of which
+is
 unpublished, but Varoquaux 2012 compares a variety of estimators), the
 sparse penalization approaches give a very good compromise, and with good
 implementations their computational cost is not a major problem. Cholesky
@@ -136,7 +142,7 @@ with our knowledge of brain functional organization.
     synchronization in large scale cortical networks predicts perception;
     Zalesky et al 2012, Connectivity differences in brain networks).**
 
-Indeed, we have corrected our description of NBS (page 6, middle of
+We thank the reviewer for the suggestion, we have corrected our description of NBS (page 6, middle of
 second column).
 
    **1.	Using "the connectome" is probably a misnomer, particularly in
