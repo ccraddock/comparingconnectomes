@@ -112,11 +112,6 @@ remarks.
   discussing Cholesky decomposition with regards to structure recovery
   (e.g. Ferguson et al, 2012)?**
 
-<-- Comment from Cameron, Should we add something to the manuscript to
-address this issue? Maybe explicitly mention the Cholesky decomposition
-and its deficiencies? I am worried that the reviewer might feel like his
-comment was dismissed out of hand.
-
 We agree that the best approaches to perform structure recovery are still
 open questions, however based on our personnal experience (a lot of which
 is
