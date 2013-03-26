@@ -1,5 +1,18 @@
-To build the figures: uncomment the 'preview' lines, compile the
-paper.tex, and run pdftk on it to split the pages:
+#!/usr/bin/zsh
 
-    pdftk paper.pdf burst
+# To build the figures: uncomment the 'preview' lines, compile the
+# paper.tex, and run the following to split the pages and generate EPS
+# files
+
+pdftk paper.pdf burst
+
+# Use acroread (print to file) to convert pg_00*.pdf to postscript: all the
+# other solutions give crap results
+
+#for file in pg_000*.pdf
+#do
+##pdf2ps -dLanguageLevel=3 -eps $file
+#pdftops -level3 -eps -r 600 $file
+##inkscape --file=$file --export-eps=$(basename $file .pdf).eps --export-background=white --export-dpi=600 --export-text-to-path -z
+#done
 

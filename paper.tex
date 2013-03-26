@@ -6,6 +6,7 @@
 %\usepackage{geometry}
 %\geometry{a6paper,hmargin={.2cm,.2cm},vmargin={1cm,1cm}}
 % End kindle
+\usepackage{graphicx}
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{bm}
 \usepackage{algorithm}
@@ -16,7 +17,6 @@
 
 % For review: line numbers
 \usepackage[pagewise]{lineno}
-
 
 \biboptions{sort}
 
@@ -47,7 +47,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % For the final version: to output PDF figures from latex
-%\usepackage[tightpage,active]{preview}
+\newif\iffinal
+\finaltrue
+%\finalfalse
+\iffinal\else
+\usepackage[tightpage,active]{preview}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Modification tracking
@@ -382,20 +387,25 @@ activation mapping \cite{varoquaux2012a}, may also be considered.
 
 %{{{------ Parcellation figure -----------------------------------------------
 \begin{figure}
-%PRE%\begin{preview}
-%PRE%\includegraphics[width=.5\linewidth]{aal_atlas}%
-%PRE%\hfill%
-%PRE%\includegraphics[width=.5\linewidth]{ho_atlas}%
-%PRE%
-%PRE%\includegraphics[width=.5\linewidth]{sulci_atlas}%
-%PRE%\hfill%
-%PRE%\includegraphics[width=.5\linewidth]{ncuts_atlas}%
-%PRE%
-%PRE%\includegraphics[width=.5\linewidth]{smith_atlas}%
-%PRE%\hfill%
-%PRE%\includegraphics[width=.5\linewidth]{msdl_atlas}%
-%PRE%\end{preview}
-\includegraphics[width=\linewidth]{pg_0001}%
+\iffinal
+    % Final version
+    \includegraphics[width=\linewidth]{pg_0001}%
+\else
+    % Commented on figure generation
+    \begin{preview}
+    \includegraphics[width=.5\linewidth]{aal_atlas}%
+    \hfill%
+    \includegraphics[width=.5\linewidth]{ho_atlas}%
+
+    \includegraphics[width=.5\linewidth]{sulci_atlas}%
+    \hfill%
+    \includegraphics[width=.5\linewidth]{ncuts_atlas}%
+
+    \includegraphics[width=.5\linewidth]{smith_atlas}%
+    \hfill%
+    \includegraphics[width=.5\linewidth]{msdl_atlas}%
+    \end{preview}
+\fi
 
 \caption{
 Different full-brain parcellations: the AAL atlas
@@ -423,30 +433,35 @@ correlation matrix of the signals of the different ROIs.
 
 %{{{------ Correlation matrices figure ---------------------------------------
 \begin{figure}
-%PRE%\begin{preview}
-%PRE%\newcommand{\photoframe}[1]{\setlength\fboxsep{0pt}%
-%PRE%{\color{black!70}\fbox{#1}\color{black}}}%
-%PRE%\begin{minipage}{.666\linewidth}%
-%PRE%    \includegraphics[width=\linewidth]{group_emp_cov}%
-%PRE%    \raisebox{.606\linewidth}{%
-%PRE%	\hspace*{-.462\linewidth}%
-%PRE%	\photoframe{%
-%PRE%	%\setlength\fboxsep{1pt}%
-%PRE%	\colorbox{white}{%
-%PRE%	\raisebox{.003\linewidth}{%
-%PRE%	    \includegraphics[width=.455\linewidth]{group_emp_cov_3d_labels}}%
-%PRE%	\rule{0pt}{.387\linewidth}%
-%PRE%	}}%
-%PRE%    }
-%PRE%\end{minipage}%
-%PRE%\hspace*{1pt}%
-%PRE%\begin{minipage}{.33\linewidth}%
-%PRE%    \includegraphics[width=\linewidth]{group_emp_cov_no_confounds}%
-%PRE%
-%PRE%    \includegraphics[width=\linewidth]{group_emp_cov_global_mean}%
-%PRE%\end{minipage}%
-%PRE%\end{preview}
-\includegraphics[width=\linewidth]{pg_0002}%
+\iffinal
+    % Final version
+    \includegraphics[width=\linewidth]{pg_0002}%
+\else
+    % Commented out figure generation
+    \begin{preview}
+    \newcommand{\photoframe}[1]{\setlength\fboxsep{0pt}%
+    {\color{black!70}\fbox{#1}\color{black}}}%
+    \begin{minipage}{.666\linewidth}%
+	\includegraphics[width=\linewidth]{group_emp_cov}%
+	\raisebox{.606\linewidth}{%
+	    \hspace*{-.462\linewidth}%
+	    \photoframe{%
+	    %\setlength\fboxsep{1pt}%
+	    \colorbox{white}{%
+	    \raisebox{.003\linewidth}{%
+	       \includegraphics[width=.455\linewidth]{group_emp_cov_3d_labels}}%
+	    \rule{0pt}{.387\linewidth}%
+	    }}%
+	}
+    \end{minipage}%
+    \hspace*{1pt}%
+    \begin{minipage}{.33\linewidth}%
+	\includegraphics[width=\linewidth]{group_emp_cov_no_confounds}%
+
+	\includegraphics[width=\linewidth]{group_emp_cov_global_mean}%
+    \end{minipage}%
+    \end{preview}
+\fi
 
 \caption{
 Correlation matrices of rest time-series extracted from the 39 main
@@ -499,30 +514,35 @@ designs, using multiple GLMs to optimize deconvolution of each trial
 
 %{{{------ Precision matrices figure -----------------------------------------
 \begin{figure}
-%PRE%\begin{preview}
-%PRE%\newcommand{\photoframe}[1]{\setlength\fboxsep{0pt}%
-%PRE%{\color{black!70}\fbox{#1}\color{black}}}%
-%PRE%\begin{minipage}{.666\linewidth}%
-%PRE%    \includegraphics[width=\linewidth]{group_l21_prec}%
-%PRE%    \raisebox{.606\linewidth}{%
-%PRE%	\hspace*{-.462\linewidth}%
-%PRE%	\photoframe{%
-%PRE%	%\setlength\fboxsep{1pt}%
-%PRE%	\colorbox{white}{%
-%PRE%	\raisebox{.003\linewidth}{%
-%PRE%	    \includegraphics[width=.455\linewidth]{group_l21_prec_3d_labels}}%
-%PRE%	\rule{0pt}{.387\linewidth}%
-%PRE%	}}%
-%PRE%    }
-%PRE%\end{minipage}%
-%PRE%\hspace*{1pt}%
-%PRE%\begin{minipage}{.33\linewidth}%
-%PRE%    \includegraphics[width=\linewidth]{group_emp_prec}%
-%PRE%
-%PRE%    \includegraphics[width=\linewidth]{group_l1_prec}%
-%PRE%\end{minipage}%
-%PRE%\end{preview}
-\includegraphics[width=\linewidth]{pg_0003}%
+\iffinal
+    % Final version
+    \includegraphics[width=\linewidth]{pg_0003}%
+\else
+    % Commented out figure generation
+    \begin{preview}
+    \newcommand{\photoframe}[1]{\setlength\fboxsep{0pt}%
+    {\color{black!70}\fbox{#1}\color{black}}}%
+    \begin{minipage}{.666\linewidth}%
+	\includegraphics[width=\linewidth]{group_l21_prec}%
+	\raisebox{.606\linewidth}{%
+	    \hspace*{-.462\linewidth}%
+	    \photoframe{%
+	    %\setlength\fboxsep{1pt}%
+	    \colorbox{white}{%
+	    \raisebox{.003\linewidth}{%
+	      \includegraphics[width=.455\linewidth]{group_l21_prec_3d_labels}}%
+	    \rule{0pt}{.387\linewidth}%
+	    }}%
+	}
+    \end{minipage}%
+    \hspace*{1pt}%
+    \begin{minipage}{.33\linewidth}%
+	\includegraphics[width=\linewidth]{group_emp_prec}%
+
+	\includegraphics[width=\linewidth]{group_l1_prec}%
+    \end{minipage}%
+    \end{preview}
+\fi
 
 \caption{
 Different inverse-covariance matrices estimates corresponding to
@@ -572,12 +592,17 @@ uniformly better than the sample correlation matrix
 
 %{{{------ Regressor in precision matrix -------------------------------------
 \begin{figure}
-%PRE%\begin{preview}
-%PRE%\includegraphics[height=.499\linewidth]{group_l21_prec_no_confounds}%
-%PRE%\hfill%
-%PRE%\includegraphics[height=.499\linewidth]{group_l21_prec_global_mean}%
-%PRE%\end{preview}
-\includegraphics[width=\linewidth]{pg_0004}%
+\iffinal
+    % Final version
+    \includegraphics[width=\linewidth]{pg_0004}%
+\else
+    % Commented out figure generation
+    \begin{preview}
+    \includegraphics[height=.499\linewidth]{group_l21_prec_no_confounds}%
+    \hfill%
+    \includegraphics[height=.499\linewidth]{group_l21_prec_global_mean}%
+    \end{preview}
+\fi
 
 \caption{Inverse-covariance matrices for different choice of
 confound regressors --
@@ -724,168 +749,172 @@ controlling for multiple comparison in family-wise error rate.
 
 %{{{------ Inter subject fluctuations ----------------------------------------
 \begin{figure}
-%PRE%\begin{preview}
-%PRE%\hspace*{.5ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/cov_sub00}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/cov_sub29}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/cov_sub01}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/cov_sub07}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/cov_sub53}%
-%PRE%\hspace*{.1ex}%
-%PRE%\raisebox{.005\linewidth}{%
-%PRE%    \includegraphics[width=.0186\linewidth]{cmap_00}%
-%PRE%    \llap{
-%PRE%	\raisebox{.003\linewidth}{%
-%PRE%	    \bfseries\tiny\color{white} -\!1\hspace*{-.2ex}}%
-%PRE%    }%
-%PRE%    \llap{
-%PRE%	\raisebox{.17\linewidth}{%
-%PRE%	    \bfseries\tiny\color{white} 1\hspace*{.1ex}}%
-%PRE%    }%
-%PRE%}%
-%PRE%\llap{\rlap{
-%PRE%    \setlength\fboxsep{1pt}%
-%PRE%    \raisebox{.16\linewidth}{%
-%PRE%	\colorbox{black!10}{%
-%PRE%	    \sffamily\small\textbf{a}. Correlation matrices}}%
-%PRE%	}%
-%PRE%    \hspace*{.993\linewidth}%
-%PRE%}
-%PRE%
-%PRE%
-%PRE%\hspace*{.5ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub00}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub29}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub01}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub07}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/z_score_sub53}%
-%PRE%\hspace*{.1ex}%
-%PRE%\raisebox{.005\linewidth}{%
-%PRE%    \includegraphics[width=.0186\linewidth]{cmap_01}%
-%PRE%    \llap{
-%PRE%	\raisebox{.003\linewidth}{%
-%PRE%	    \bfseries\tiny -\!\hspace*{-.1ex}4\hspace*{-.1ex}}%
-%PRE%    }%
-%PRE%    \llap{
-%PRE%	\raisebox{.168\linewidth}{%
-%PRE%	    \bfseries\tiny 4\hspace*{.1ex}}%
-%PRE%    }%
-%PRE%}%
-%PRE%\llap{\rlap{
-%PRE%    \setlength\fboxsep{1pt}%
-%PRE%    \raisebox{.16\linewidth}{%
-%PRE%	\colorbox{black!10}{%
-%PRE%	    \sffamily\small\textbf{b}. Z score on difference}}%
-%PRE%	}%
-%PRE%    \hspace*{.993\linewidth}%
-%PRE%}
-%PRE%
-%PRE%\hspace*{.5ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/prec_sub00}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/prec_sub29}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/prec_sub01}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/prec_sub07}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/prec_sub53}%
-%PRE%\hspace*{.1ex}%
-%PRE%\raisebox{.005\linewidth}{%
-%PRE%    \includegraphics[width=.0186\linewidth]{cmap_00}%
-%PRE%    \llap{
-%PRE%	\raisebox{.003\linewidth}{%
-%PRE%	    \bfseries\tiny\color{white} -\!1\hspace*{-.2ex}}%
-%PRE%    }%
-%PRE%    \llap{
-%PRE%	\raisebox{.17\linewidth}{%
-%PRE%	    \bfseries\tiny\color{white} 1\hspace*{.1ex}}%
-%PRE%    }%
-%PRE%}%
-%PRE%\llap{\rlap{
-%PRE%    \setlength\fboxsep{1pt}%
-%PRE%    \raisebox{.16\linewidth}{%
-%PRE%	\colorbox{black!10}{%
-%PRE%	    \sffamily\small\textbf{c}. Inverse-covariance matrices}}%
-%PRE%	}%
-%PRE%    \hspace*{.993\linewidth}%
-%PRE%}
-%PRE%
-%PRE%\hspace*{.5ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub00}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub29}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub01}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub07}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub53}%
-%PRE%\hspace*{.1ex}%
-%PRE%\raisebox{.005\linewidth}{%
-%PRE%    \includegraphics[width=.0186\linewidth]{cmap_01}%
-%PRE%    \llap{
-%PRE%	\raisebox{.003\linewidth}{%
-%PRE%	    \bfseries\tiny -\!\hspace*{-.1ex}4\hspace*{-.1ex}}%
-%PRE%    }%
-%PRE%    \llap{
-%PRE%	\raisebox{.168\linewidth}{%
-%PRE%	    \bfseries\tiny 4\hspace*{.1ex}}%
-%PRE%    }%
-%PRE%}%
-%PRE%\llap{\rlap{
-%PRE%    \setlength\fboxsep{1pt}%
-%PRE%    \raisebox{.16\linewidth}{%
-%PRE%	\colorbox{black!10}{%
-%PRE%	    \sffamily\small\textbf{d}. Z score on inverse-covariance}}%
-%PRE%	}%
-%PRE%    \hspace*{.993\linewidth}%
-%PRE%}
-%PRE%
-%PRE%
-%PRE%
-%PRE%\hspace*{.5ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/res_sub00}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/res_sub29}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/res_sub01}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/res_sub07}%
-%PRE%\hspace*{-.2ex}%
-%PRE%\includegraphics[width=.196\linewidth]{inter_subj/res_sub53}%
-%PRE%\hspace*{.1ex}%
-%PRE%\raisebox{.005\linewidth}{%
-%PRE%    \includegraphics[width=.0186\linewidth]{cmap_01}%
-%PRE%    \llap{
-%PRE%	\raisebox{.003\linewidth}{%
-%PRE%	    \bfseries\tiny -\!\hspace*{-.1ex}4\hspace*{-.1ex}}%
-%PRE%    }%
-%PRE%    \llap{
-%PRE%	\raisebox{.168\linewidth}{%
-%PRE%	    \bfseries\tiny 4\hspace*{.1ex}}%
-%PRE%    }%
-%PRE%}%
-%PRE%\llap{\rlap{
-%PRE%    \setlength\fboxsep{1pt}%
-%PRE%    \raisebox{.16\linewidth}{%
-%PRE%	\colorbox{black!10}{%
-%PRE%	    \sffamily\small\textbf{e}. Z score on residuals \scriptsize
-%PRE%		\raisebox{.2ex}{\cite{varoquaux2010b}}}}%
-%PRE%	}%
-%PRE%    \hspace*{.993\linewidth}%
-%PRE%}
-%PRE%\end{preview}
-\includegraphics[width=\linewidth]{pg_0005}%
+\iffinal
+    % Final version
+    \includegraphics[width=\linewidth]{pg_0005}%
+\else
+    % Commented out figure generation
+    \begin{preview}
+    \hspace*{.5ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/cov_sub00}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/cov_sub29}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/cov_sub01}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/cov_sub07}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/cov_sub53}%
+    \hspace*{.1ex}%
+    \raisebox{.005\linewidth}{%
+	\includegraphics[width=.0186\linewidth]{cmap_00}%
+	\llap{
+	    \raisebox{.003\linewidth}{%
+		\bfseries\tiny\color{white} -\!1\hspace*{-.2ex}}%
+	}%
+	\llap{
+	    \raisebox{.17\linewidth}{%
+		\bfseries\tiny\color{white} 1\hspace*{.1ex}}%
+	}%
+    }%
+    \llap{\rlap{
+	\setlength\fboxsep{1pt}%
+	\raisebox{.16\linewidth}{%
+	    \colorbox{black!10}{%
+		\sffamily\small\textbf{a}. Correlation matrices}}%
+	    }%
+	\hspace*{.993\linewidth}%
+    }
 
+
+    \hspace*{.5ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/z_score_sub00}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/z_score_sub29}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/z_score_sub01}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/z_score_sub07}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/z_score_sub53}%
+    \hspace*{.1ex}%
+    \raisebox{.005\linewidth}{%
+	\includegraphics[width=.0186\linewidth]{cmap_01}%
+	\llap{
+	    \raisebox{.003\linewidth}{%
+		\bfseries\tiny -\!\hspace*{-.1ex}4\hspace*{-.1ex}}%
+	}%
+	\llap{
+	    \raisebox{.168\linewidth}{%
+		\bfseries\tiny 4\hspace*{.1ex}}%
+	}%
+    }%
+    \llap{\rlap{
+	\setlength\fboxsep{1pt}%
+	\raisebox{.16\linewidth}{%
+	    \colorbox{black!10}{%
+		\sffamily\small\textbf{b}. Z score on difference}}%
+	    }%
+	\hspace*{.993\linewidth}%
+    }
+
+    \hspace*{.5ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/prec_sub00}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/prec_sub29}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/prec_sub01}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/prec_sub07}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/prec_sub53}%
+    \hspace*{.1ex}%
+    \raisebox{.005\linewidth}{%
+	\includegraphics[width=.0186\linewidth]{cmap_00}%
+	\llap{
+	    \raisebox{.003\linewidth}{%
+		\bfseries\tiny\color{white} -\!1\hspace*{-.2ex}}%
+	}%
+	\llap{
+	    \raisebox{.17\linewidth}{%
+		\bfseries\tiny\color{white} 1\hspace*{.1ex}}%
+	}%
+    }%
+    \llap{\rlap{
+	\setlength\fboxsep{1pt}%
+	\raisebox{.16\linewidth}{%
+	    \colorbox{black!10}{%
+		\sffamily\small\textbf{c}. Inverse-covariance matrices}}%
+	    }%
+	\hspace*{.993\linewidth}%
+    }
+
+    \hspace*{.5ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub00}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub29}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub01}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub07}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/z_score_prec_sub53}%
+    \hspace*{.1ex}%
+    \raisebox{.005\linewidth}{%
+	\includegraphics[width=.0186\linewidth]{cmap_01}%
+	\llap{
+	    \raisebox{.003\linewidth}{%
+		\bfseries\tiny -\!\hspace*{-.1ex}4\hspace*{-.1ex}}%
+	}%
+	\llap{
+	    \raisebox{.168\linewidth}{%
+		\bfseries\tiny 4\hspace*{.1ex}}%
+	}%
+    }%
+    \llap{\rlap{
+	\setlength\fboxsep{1pt}%
+	\raisebox{.16\linewidth}{%
+	    \colorbox{black!10}{%
+		\sffamily\small\textbf{d}. Z score on inverse-covariance}}%
+	    }%
+	\hspace*{.993\linewidth}%
+    }
+
+
+
+    \hspace*{.5ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/res_sub00}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/res_sub29}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/res_sub01}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/res_sub07}%
+    \hspace*{-.2ex}%
+    \includegraphics[width=.196\linewidth]{inter_subj/res_sub53}%
+    \hspace*{.1ex}%
+    \raisebox{.005\linewidth}{%
+	\includegraphics[width=.0186\linewidth]{cmap_01}%
+	\llap{
+	    \raisebox{.003\linewidth}{%
+		\bfseries\tiny -\!\hspace*{-.1ex}4\hspace*{-.1ex}}%
+	}%
+	\llap{
+	    \raisebox{.168\linewidth}{%
+		\bfseries\tiny 4\hspace*{.1ex}}%
+	}%
+    }%
+    \llap{\rlap{
+	\setlength\fboxsep{1pt}%
+	\raisebox{.16\linewidth}{%
+	    \colorbox{black!10}{%
+		\sffamily\small\textbf{e}. Z score on residuals \scriptsize
+		    \raisebox{.2ex}{\cite{varoquaux2010b}}}}%
+	    }%
+	\hspace*{.993\linewidth}%
+    }
+    \end{preview}
+\fi
 
 \caption{Inter subject variability. Note that this is variability
 occurring in a healthy population at rest, in other words it is non specific
@@ -967,39 +996,44 @@ be compared across subjects.
 
 %{{{------ Integration measure -----------------------------------------------
 \begin{figure}
-%PRE%\begin{preview}
-%PRE%\hspace*{2ex}%
-%PRE%\begin{minipage}{.19\linewidth}
-%PRE%    \center\sffamily
-%PRE%    {\small Integration:}
-%PRE%
-%PRE%    0.554
-%PRE%\end{minipage}%
-%PRE%\begin{minipage}{.2\linewidth}
-%PRE%    \includegraphics[width=1.07\linewidth]{correlation_ex1}
-%PRE%\end{minipage}%
-%PRE%\hfill%
-%PRE%\begin{minipage}{.033\linewidth}
-%PRE%    \rule{0pt}{6.487\linewidth}%
-%PRE%    \includegraphics[width=\linewidth]{correlation_cmap}%
-%PRE%    \llap{\raisebox{.4ex}{\scriptsize\sffamily\bfseries 0}\hspace*{.54ex}}%
-%PRE%    \llap{\raisebox{10.1ex}{\scriptsize\sffamily\bfseries\color{white} 1}%
-%PRE%	    \hspace*{.54ex}}
-%PRE%\end{minipage}%
-%PRE%\hfill%
-%PRE%\begin{minipage}{.2\linewidth}
-%PRE%    \hspace*{-.07\linewidth}%
-%PRE%    \includegraphics[width=1.07\linewidth]{correlation_ex2}
-%PRE%\end{minipage}%
-%PRE%\begin{minipage}{.19\linewidth}
-%PRE%    \center\sffamily
-%PRE%    {\small Integration:}
-%PRE%
-%PRE%    2.422
-%PRE%\end{minipage}%
-%PRE%\hspace*{2ex}%
-%PRE%\end{preview}
-\includegraphics[width=\linewidth]{pg_0006}
+\iffinal
+    % Final version
+    \includegraphics[width=\linewidth]{pg_0006}
+\else
+    % Commented out figure generation
+    \begin{preview}
+    \hspace*{2ex}%
+    \begin{minipage}{.19\linewidth}
+	\center\sffamily
+	{\small Integration:}
+
+	0.554
+    \end{minipage}%
+    \begin{minipage}{.2\linewidth}
+	\includegraphics[width=1.07\linewidth]{correlation_ex1}
+    \end{minipage}%
+    \hfill%
+    \begin{minipage}{.033\linewidth}
+	\rule{0pt}{6.487\linewidth}%
+	\includegraphics[width=\linewidth]{correlation_cmap}%
+	\llap{\raisebox{.4ex}{\scriptsize\sffamily\bfseries 0}\hspace*{.54ex}}%
+	\llap{\raisebox{10.1ex}{\scriptsize\sffamily\bfseries\color{white} 1}%
+		\hspace*{.54ex}}
+    \end{minipage}%
+    \hfill%
+    \begin{minipage}{.2\linewidth}
+	\hspace*{-.07\linewidth}%
+	\includegraphics[width=1.07\linewidth]{correlation_ex2}
+    \end{minipage}%
+    \begin{minipage}{.19\linewidth}
+	\center\sffamily
+	{\small Integration:}
+
+	2.422
+    \end{minipage}%
+    \hspace*{2ex}%
+    \end{preview}
+\fi
 
 \caption{Two different correlation matrices with the same average
 correlation, but with very different integration values. Indeed, the
