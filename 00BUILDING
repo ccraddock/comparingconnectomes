@@ -1,0 +1,5 @@
+To build the figures: uncomment the 'preview' lines, compile the
+paper.tex, and run pdftk on it to split the pages:
+
+    pdftk paper.pdf burst
+
