@@ -171,9 +171,9 @@ magnetoencephalography (MEG) or electroencephalography (EEG)
 reconstruction must be considered \cite{schoffelen2009}.
 
 % Define terms
-\hl{``Functional connectivity'' is defined as a measure of synchronization in 
+``Functional connectivity'' is defined as a measure of synchronization in 
 brain signals \cite{friston1994}. More generally, it is interesting as a 
-window on underlying synchrony on neural processes \cite{lee2003}.}
+window on underlying synchrony on neural processes \cite{lee2003}.
 By ``functional connectome'', here we specifically denote a graph representing
 functional interactions in the brain, where the term ``graph'' is taken in its
 mathematical sense: a set of \emph{nodes} connected together by \emph{edges}.
@@ -256,11 +256,10 @@ filtering,
 and in our experience gives more contrasted correlation matrices\footnote{Note
 	that naive use of filtering can induce spurious correlations
 	\cite{davey2012}.}.
-\hl{%
 In addition, the recent developments of very rapid acquisition 
 protocols prevent aliasing of the physiological noise with the neural 
 signal and give access to more specific noise confounds than traditional
-low-TR sequences \cite{boyaciouglu2012}.}
+low-TR sequences \cite{boyaciouglu2012}.
 
 
 It is important to keep in mind that the proposed correction strategies
@@ -343,8 +342,8 @@ structures from rest data. Alternatively, decomposition
 methods, such as ICA \cite{beckmann2004}, can unmix linear
 combinations of multiple effects and separate out partially-overlapping
 spatial maps
-that capture functional networks or confounding effects, \hl{as for instance
-with the presence of vascular structure in functional networks}. At high model
+that capture functional networks or confounding effects, as for instance
+with the presence of vascular structure in functional networks. At high model
 order, ICA maps define a functional parcellation \cite{kiviniemi2009}.
 Extracting regions from these maps requires additional effort as they can
 display fragmented spatial features and structured background noise, but
@@ -368,14 +367,14 @@ obtain the same parcellations from independent data
 \cite{craddock2012, blumensath2012}. In general these metrics do not result in an
 obvious peak at a ``best'' number of regions, but instead offer a range over
 which the number of regions can be chosen based on the needs of the analysis at
-hand. \hl{Finally, it is important to keep in mind that there is no
+hand. Finally, it is important to keep in mind that there is no
 universally better parcellation and associated number of regions. From a
 practical standpoint, these choices will depend on the task at hand, and
 more fundamentally, a good description of brain function should cover
 multiple scales. Given that it is not clear that an optimal parcellation
 can be identified from the sample size of a typical study, randomized
 parcellation, as used in structural connectomes \cite{zalesky2010a} or
-activation mapping \cite{varoquaux2012a}, may also be considered.}
+activation mapping \cite{varoquaux2012a}, may also be considered.
 
 %{{{------ Parcellation figure -----------------------------------------------
 \begin{figure}
@@ -475,10 +474,10 @@ weighted by the subject-specific gray matter probabilistic segmentation,
 as output by \emph{e.g.}\ SPM's segmentation tool \cite{ashburner2005} or
 FSL's FAST program \cite{zhang2001}.
 
-\hl{Studying connectivity from \emph{evoked} activity with task-driven studies 
+Studying connectivity from \emph{evoked} activity with task-driven studies 
 requires disambiguating task-specific connectivity effects from
 intrinsic connectivity mediated by shared neuromodulatory/task 
-inputs, anatomical pathways, \emph{etc}. In this regard,} it
+inputs, anatomical pathways, \emph{etc}. In this regard, it
 can be beneficial to run a GLM-based first-level analysis, enforcing specificity
 of the measure extracted to the task. With slow event-related designs,
 task-specific functional connectivity can be captured in trial-to-trial
@@ -587,7 +586,7 @@ $a$ and $b$. On the opposite, the inverse covariance\footnote{Covariance
 and correlation matrices differ simply by the fact that a covariance
 matrix captures the amplitude of a signal, via its variance, while a
 correlation matrix is computed on standardized (zero mean, unit variance) signals.}
-matrix \hl{(also called \emph{precision matrix})} captures
+matrix (also called \emph{precision matrix}) captures
 partial correlations, removing the effect of other variables
 \cite{marrelec2006a}. In the small sample limit, this removal is
 challenging from the statistical standpoint. This is why an assumption 
@@ -905,8 +904,8 @@ covariance matrix, as it can decouple effects and noise.
 Taking a different stance on distributed variability, the ``network-based
 statistics'' approach \cite{zalesky2010} draws from the hypothesis that
 if, in a second-level analysis, an effect is detected on a connection
-that lies in a network of strongly connected nodes, a \hl{large
-sub-network} is
+that lies in a network of strongly connected nodes, a large
+sub-network is
 likely to carry an effect. Thus, they adapt cluster-level inference to
 connectivity analysis, in order to mitigate the curse of multiple
 comparisons.
@@ -1073,8 +1072,8 @@ Technically, predictive modeling is a supervised machine learning problem where
 a target to be predicted --\emph{e.g.}\ age, disease state, cognitive state-- is
 available for each observation of the data. In the context of comparing
 connectomes, features used in the predictive model correspond to bivariate
-measures of connectivity \hl{\cite{richiardi2011,dosenbach2010,shirer2012}}, or any of the previously discussed graph
-summary metrics \hl{\cite{cecchi2009,ekman2012}}.
+measures of connectivity \cite{richiardi2011,dosenbach2010,shirer2012}, or any of the previously discussed graph
+summary metrics \cite{cecchi2009,ekman2012}.
 %
 The quality of a predictive model is determined by its prediction accuracy (or
 generalization ability) which is measured using one or more iterations of
@@ -1187,8 +1186,8 @@ are robust to violations of this assumption \cite{ravikumar2011}.
 It is tempting to favor more neurobiologically-inspired models that give
 descriptions close to our knowledge of the brain basic mechanisms,
 however, as George Box famously said, ``all models are wrong; some models
-are useful''. Depending on the question and the data at hand, \hl{a trade-off 
-should be chosen} between complex models based on a bio-physical description,
+are useful''. Depending on the question and the data at hand, a trade-off 
+should be chosen between complex models based on a bio-physical description,
 and simple phenomenological models such as correlation matrices. In
 particular to model interactions between a large number of regions, as in
 full-brain analysis, and learn a large \emph{connectome}, simple models
@@ -1203,18 +1202,18 @@ for the data available will fit noise in the data, and thus generalize
 poorly. The main benefit of cross-validation is that it is a
 non-parametric method which does not rely strongly on modeling
 assumptions\footnote{This is to be contrasted to Bayesian model
-comparison, which will give \hl{well-controlled} results only if the true generative
+comparison, which will give well-controlled results only if the true generative
 model is in the list of models compared. \cite{friston2012} argues that,
 based on the Neyman-Pearson lemma, cross-validation is less powerful than
 likelihood ratio tests using the full dataset. However, it is
 important to keep in mind that these approaches only test for
-self-consistence, \hl{as the Neyman-Pearson lemma is established under the
+self-consistence, as the Neyman-Pearson lemma is established under the
 hypothesis that the model used to define the test is indeed the 
 data-generating process
 \cite{neyman1933}, while in practice it is often the case that this model
 gives poor fits to the data \cite{lohmann2012}. Applying test procedures
 on different data than that used to fit the model, as in
-cross-validation, is much more resilient to modeling errors.}}.
+cross-validation, is much more resilient to modeling errors.}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1254,11 +1253,11 @@ same connectome modifications as a focal lesion. In statistical learning,
 can perform uniformly better in all situations. In practice, the key to a
 successful analysis is to understand well the assumptions and
 interpretation of each option, in order to match the method to the
-question. \hl{Similarly, the idealized notion of an unique \emph{functional
+question. Similarly, the idealized notion of an unique \emph{functional
 connectome} to describe connections in brain function is probably an
 utopia, and various connectomes should be considered in different
 settings, such as the study of varying phenotypic conditions, or that of
-on-going activity versus activity related to specific tasks.}
+on-going activity versus activity related to specific tasks.
 
 \subsection*{Acknowledgments}
 
