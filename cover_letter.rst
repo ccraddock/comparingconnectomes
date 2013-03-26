@@ -1,13 +1,11 @@
 Dear editor,
 
-Please consider for publication in the neuroimage special issue on the
-connectom the following manuscript *'Learning and comparing functional
-connectomes across subjects'*.
+Please find our revised version of the manuscript *'Learning and
+comparing functional connectomes across subjects'*.
 
-The manuscript combines a synthetic review of many different aspects of
-estimation and comparing of functional connectivity across subjects with
-practical aspects of data processing that have not yet been exposed
-together in a single consistent publication.
+The manuscript has been improved by taking in account the reviewers
+suggestions. Changes have been highlighted, and a detailed answer to the
+reviewers' comments is attached.
 
 Yours sincerely,
 
